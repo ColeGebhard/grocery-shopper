@@ -10,12 +10,18 @@ async function createUser({username, password, fullName, email}) {
     } = await client.query(`
       INSERT INTO users (username, password, "fullName", email)
       VALUES ($1, $2, $3, $4)
-      ON CONFLICT (username, email) DO NOTHING
-      RETURNING username, email
+      ON CONFLICT (email) DO NOTHING
+      RETURNING username, email, "fullName"
     `, [username, hashedPassword, fullName, email]);
+    // the on conflict should also include username, investigate later -AD
+
     return user;
   } catch (e) {
     console.error(e);
     throw e;
   }
 }
+
+module.exports = {
+  createUser
+};

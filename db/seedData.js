@@ -1,7 +1,4 @@
-// require in the database adapter functions as you write them (createUser, createActivity...)
-// const {
-
-// } = require('./');
+const { createUser } = require("./")
 const client = require("./client")
 
 async function dropTables() {
@@ -14,7 +11,7 @@ async function dropTables() {
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS reviews;
       DROP TABLE IF EXISTS products;
-      DROP TABLE IF EXISTS product_catagory;
+      DROP TABLE IF EXISTS product_category;
       DROP TABLE IF EXISTS users;
   `);
 
@@ -35,7 +32,7 @@ async function createTables() {
       username VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
       "fullName" VARCHAR(255) NOT NULL,
-      email VARCHAR(255) NOT NULL,
+      email VARCHAR(255) UNIQUE NOT NULL,
       "isActive" BOOLEAN default true,
       "isAdmin" BOOLEAN default false
   );
@@ -90,10 +87,29 @@ async function createTables() {
   }
 }
 
+async function createInitialUsers() {
+  console.log('Starting to create test users...');
+  try {
+    const usersToCreate = [
+      {username: "wineGlass1", password: "rose1", fullName: "Test One", email: "email1@gmail.com"},
+      {username: "wineGlass2", password: "rose2", fullName: "Test Two", email: "email2@gmail.com"},
+      {username: "wineGlass3", password: "rose3", fullName: "Test Three", email: "email3@gmail.com"}
+    ]
+    const users = await Promise.all(usersToCreate.map(createUser))
+
+    console.log('Users created:', users);
+    console.log('Finished creating users!');
+  } catch (e) {
+    console.error("Error creating users");
+    throw e;
+  }
+}
+
 async function rebuildDB() {
   try {
     await dropTables()
     await createTables()
+    await createInitialUsers();
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error
