@@ -2,32 +2,6 @@
   "name": "ecommerce-app",
   "version": "0.1.0",
   "private": true,
-  "main": "server.js",
-
-  "scripts": {
-    "seed:dev": "nodemon ./db/seed.js",
-    "seed": "node ./db/seed.js",
-    "start:dev": "nodemon server.js",
-    "start": "node server.js",
-    "test:watch": "jest --runInBand --watchAll",
-    "start:script": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "keywords": [
-    "node",
-    "express",
-    "postgresql",
-    "jquery",
-    "javascript"
-  ],
-  "devDependencies": {
-    "eslint": "^8.2.0",
-    "eslint-plugin-jest": "^25.2.4",
-    "nodemon": "^2.0.4",
-    "supertest": "^6.1.6"
-  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -35,20 +9,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
-    "web-vitals": "^2.1.4",
-    "axios": "^0.19.2",
-    "bcrypt": "^4.0.1",
-    "chalk": "^4.0.0",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "faker": "^4.1.0",
-    "jest": "^26.0.1",
-    "jsonwebtoken": "^8.5.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.2.1"
+    "web-vitals": "^2.1.4"
   },
-
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

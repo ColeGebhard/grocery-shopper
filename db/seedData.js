@@ -40,7 +40,7 @@ async function createTables() {
       "isAdmin" BOOLEAN default false
   );
 
-    CREATE TABLE product_catagory (
+    CREATE TABLE product_category (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL
     );
@@ -51,9 +51,9 @@ async function createTables() {
       description VARCHAR(255) UNIQUE NOT NULL,
       price INTEGER NOT NULL,
       photos BYTEA,
-      "catagoryId" INTEGER REFERENCES product_catagory ( id ),
+      "categoryId" INTEGER REFERENCES product_category ( id ),
       isAvailible BOOLEAN default true,
-      quanity INTEGER
+      quantity INTEGER
     );
 
     CREATE TABLE reviews (
