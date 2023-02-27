@@ -8,6 +8,7 @@ async function dropTables() {
     await client.query(`
       DROP TABLE IF EXISTS order_items;
       DROP TABLE IF EXISTS orders;
+      DROP TABLE IF EXISTS cart_items;
       DROP TABLE IF EXISTS cart;
       DROP TABLE IF EXISTS reviews;
       DROP TABLE IF EXISTS products;
@@ -61,9 +62,19 @@ async function createTables() {
     );
 
     CREATE TABLE cart (
+      id SERIAL PRIMARY KEY,
       "userId" INT REFERENCES users ( id ),
       "productId" INT REFERENCES products ( id ),
-      quantity INT
+      quantity INT,
+      STATUS SMALLINT
+    );
+
+    CREATE TABLE cart_items (
+      id SERIAL PRIMARY KEY,
+      "cartId" INT REFERENCES cart ( id ),
+      "productId" INT REFERENCES products ( id ),
+      quanity INT,
+      price INT
     );
 
     CREATE TABLE orders (
