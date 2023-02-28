@@ -66,7 +66,7 @@ async function createTables() {
       "userId" INT REFERENCES users ( id ),
       "productId" INT REFERENCES products ( id ),
       quantity INT,
-      STATUS SMALLINT
+      status SMALLINT
     );
 
     CREATE TABLE cart_items (
@@ -85,6 +85,7 @@ async function createTables() {
     );
 
     CREATE TABLE order_items (
+      id SERIAL PRIMARY KEY,
       "orderId" INT REFERENCES orders ( id ),
       "productId" INT REFERENCES products ( id ),
       quantity INT

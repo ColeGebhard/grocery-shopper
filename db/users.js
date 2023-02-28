@@ -10,7 +10,7 @@ async function createUser({username, password, fullName, email}) {
     } = await client.query(`
       INSERT INTO users (username, password, "fullName", email)
       VALUES ($1, $2, $3, $4)
-      ON CONFLICT (email) DO NOTHING
+      ON CONFLICT DO NOTHING
       RETURNING username, email, "fullName"
     `, [username, hashedPassword, fullName, email]);
     // the on conflict should also include username, investigate later -AD
