@@ -1,7 +1,8 @@
 const { 
   createUser,
+  createCategory,
   createProduct
- } = require("./")
+ } = require("./");
 const client = require("./client");
 
 async function dropTables() {
@@ -111,6 +112,7 @@ async function createInitialUsers() {
       {username: "wineGlass2", password: "rose2", fullName: "Test Two", email: "email2@gmail.com"},
       {username: "wineGlass3", password: "rose3", fullName: "Test Three", email: "email3@gmail.com"}
     ]
+
     const users = await Promise.all(usersToCreate.map(createUser))
 
     console.log('Users created:', users);
@@ -122,21 +124,22 @@ async function createInitialUsers() {
 }
 
 async function createInitialProductCatagories() {
-  console.log('Starting to create test users...');
+  console.log('Starting to create test catagory...');
   try {
-    const usersToCreate = [
+    const catagoryToCreate = [
       {name: 'Dairy'},
       {name: 'Veggies'},
       {name: 'Meat'},
       {name: 'Snacks'},
       {name: 'Fruit'}
     ]
-    const users = await Promise.all(usersToCreate.map(createUser))
 
-    console.log('Users created:', users);
-    console.log('Finished creating users!');
+    const catagory = await Promise.all(catagoryToCreate.map(createCategory))
+
+    console.log('Catagories created:', catagory);
+    console.log('Finished creating catagories!');
   } catch (e) {
-    console.error("Error creating users");
+    console.error("Error creating catagories");
     throw e;
   }
 }
@@ -166,6 +169,7 @@ async function rebuildDB() {
     await dropTables()
     await createTables()
     await createInitialUsers();
+    await createInitialProductCatagories()
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error
