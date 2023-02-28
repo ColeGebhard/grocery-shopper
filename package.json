@@ -2,6 +2,12 @@
   "name": "ecommerce-app",
   "version": "0.1.0",
   "private": true,
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-plugin-jest": "^25.2.4",
+    "nodemon": "^2.0.4",
+    "supertest": "^6.1.6"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -20,7 +26,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "seed:dev": "nodemon ./db/seed.js",
+    "seed:dev": "nodemon ./src/db/seed.js",
+    "seed": "node ./src/db/seed.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
