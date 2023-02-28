@@ -8,7 +8,8 @@ async function createProduct({
     categoryId, 
     isAvailible, 
     creatorId,
-    quanity }) {
+    quantity 
+  }) {
     try {
       const { rows: [product] } = await client.query(`
       INSERT INTO products(
@@ -19,19 +20,19 @@ async function createProduct({
         description, 
         price, 
         photos, 
-        quanity
+        quantity
         )
       VALUES($1,$2,$3,$4,$5,$6,$7,$8)
       RETURNING *;
       `, [
+        categoryId, 
+        creatorId, 
+        isAvailible,
         name,
         description,
         price,
         photos, 
-        categoryId, 
-        isAvailible, 
-        creatorId,
-        quanity
+        quantity
      ])
       return product;
     } catch (error) {

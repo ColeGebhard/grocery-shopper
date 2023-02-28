@@ -8,7 +8,7 @@ async function createCategory({name}) {
         INSERT INTO product_category (name)
         VALUES ($1)
         ON CONFLICT DO NOTHING
-        RETURNING name
+        RETURNING *
       `, [name]);
 
       return category;

@@ -1,8 +1,8 @@
-const { 
+const {
   createUser,
   createCategory,
   createProduct
- } = require("./");
+} = require("./");
 const client = require("./client");
 
 async function dropTables() {
@@ -49,14 +49,14 @@ async function createTables() {
 
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
+      "categoryId" INTEGER REFERENCES product_category ( id ),
+      "creatorId" INT REFERENCES users ( id ),
+      "isAvailible" BOOLEAN default true,
       name VARCHAR(255) UNIQUE NOT NULL,
       description VARCHAR(255) NOT NULL,
       price INTEGER NOT NULL,
       photos BYTEA,
-      "categoryId" INTEGER REFERENCES product_category ( id ),
-      "isAvailible" BOOLEAN default true,
-      "creatorId" INT REFERENCES users ( id ),
-      quantity INTEGER
+      quantity INT
     );
 
     CREATE TABLE reviews (
@@ -106,14 +106,32 @@ async function createTables() {
 
 async function createInitialUsers() {
   console.log('Starting to create test users...');
+
   try {
     const usersToCreate = [
-      {username: "wineGlass1", password: "rose1", fullName: "Test One", email: "email1@gmail.com"},
-      {username: "wineGlass2", password: "rose2", fullName: "Test Two", email: "email2@gmail.com"},
-      {username: "wineGlass3", password: "rose3", fullName: "Test Three", email: "email3@gmail.com"}
+      {
+        username: "wineGlass1",
+        password: "rose1",
+        fullName: "Test One",
+        email: "email1@gmail.com"
+      },
+      {
+        username: "wineGlass2",
+        password: "rose2",
+        fullName: "Test Two",
+        email: "email2@gmail.com"
+      },
+      {
+        username: "wineGlass3",
+        password: "rose3",
+        fullName: "Test Three",
+        email: "email3@gmail.com"
+      }
     ]
 
-    const users = await Promise.all(usersToCreate.map(createUser))
+    const users = await Promise.all(
+      usersToCreate.map((user) => createUser(user))
+    )
 
     console.log('Users created:', users);
     console.log('Finished creating users!');
@@ -127,11 +145,11 @@ async function createInitialProductCatagories() {
   console.log('Starting to create test catagory...');
   try {
     const catagoryToCreate = [
-      {name: 'Dairy'},
-      {name: 'Veggies'},
-      {name: 'Meat'},
-      {name: 'Snacks'},
-      {name: 'Fruit'}
+      { name: 'Dairy' },
+      { name: 'Veggies' },
+      { name: 'Meat' },
+      { name: 'Snacks' },
+      { name: 'Fruit' }
     ]
 
     const catagory = await Promise.all(catagoryToCreate.map(createCategory))
@@ -147,21 +165,30 @@ async function createInitialProductCatagories() {
 async function createInitialProducts() {
   console.log("starting to create products...")
 
+  try {
   const productsToCreate = [
     {
-      categoryId: 1,
+      categoryId: 5,
       creatorId: 2,
       isAvailible: true,
       name: "Apple",
       description: "Taste of summer",
+      price: 20,
+      quantity: 4,
     },
 
   ]
+
   const products = await Promise.all(
     productsToCreate.map((product) => createProduct(product))
   )
+
   console.log("Products Created: ", products)
   console.log("Finished creating products.")
+} catch (e) {
+  console.error("Error creating users");
+  throw e;
+}
 }
 
 async function rebuildDB() {
@@ -170,6 +197,7 @@ async function rebuildDB() {
     await createTables()
     await createInitialUsers();
     await createInitialProductCatagories()
+    await createInitialProducts()
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error
