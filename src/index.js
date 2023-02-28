@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
 import {
-  Register
+  Register,
+  Login
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token"
@@ -40,7 +41,7 @@ const App = () => {
             />
           }
         />
-        {/* <Route
+        <Route
           exact path="/login"
           element={
             <Login 
@@ -52,7 +53,7 @@ const App = () => {
             setToken={setToken}
             />
           }
-        /> */}
+        />
       </Routes>
     </BrowserRouter>
   )
