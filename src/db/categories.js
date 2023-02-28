@@ -1,9 +1,9 @@
 const client = require("./client");
 
-async function createCatagory(name) {
+async function createCategory(name) {
     try {
       const {
-        rows: [catagory]
+        rows: [category]
       } = await client.query(`
         INSERT INTO product_category (name)
         VALUES ($1)
@@ -12,7 +12,7 @@ async function createCatagory(name) {
       `, [name]);
       // the on conflict should also include username, investigate later -AD
   
-      return catagory;
+      return category;
     } catch (e) {
       console.error(e);
       throw e;
@@ -20,5 +20,5 @@ async function createCatagory(name) {
   }
 
 module.exports = {
-    createCatagory
+    createCategory
 }
