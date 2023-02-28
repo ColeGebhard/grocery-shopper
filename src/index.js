@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
+import {
+  Register
+} from "./Components"
 
-const TOKEN_STORAGE_KEY = "user-token"
+export const TOKEN_STORAGE_KEY = "user-token"
 const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY);
-const USER_STORAGE_KEY = "user-username";
+export const USER_STORAGE_KEY = "user-username";
 const storedUser = localStorage.getItem(USER_STORAGE_KEY);
 
 const App = () => {
