@@ -1,5 +1,8 @@
-const { createUser } = require("./")
-const client = require("./client")
+const { 
+  createUser,
+  createProduct
+ } = require("./")
+const client = require("./client");
 
 async function dropTables() {
   try {
@@ -46,11 +49,12 @@ async function createTables() {
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       name VARCHAR(255) UNIQUE NOT NULL,
-      description VARCHAR(255) UNIQUE NOT NULL,
+      description VARCHAR(255) NOT NULL,
       price INTEGER NOT NULL,
       photos BYTEA,
       "categoryId" INTEGER REFERENCES product_category ( id ),
-      isAvailible BOOLEAN default true,
+      "isAvailible" BOOLEAN default true,
+      "creatorId" INT REFERENCES users ( id ),
       quantity INTEGER
     );
 
@@ -115,6 +119,30 @@ async function createInitialUsers() {
     console.error("Error creating users");
     throw e;
   }
+}
+
+async function createInitialProductCatagories() {
+
+}
+
+async function createInitialProducts() {
+  console.log("starting to create products...")
+
+  const productsToCreate = [
+    {
+      categoryId: 1,
+      creatorId: 2,
+      isAvailible: true,
+      name: "Apple",
+      description: "Taste of summer",
+    },
+
+  ]
+  const products = await Promise.all(
+    productsToCreate.map((product) => createProduct(product))
+  )
+  console.log("Products Created: ", products)
+  console.log("Finished creating products.")
 }
 
 async function rebuildDB() {
