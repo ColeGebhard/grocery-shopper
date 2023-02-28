@@ -122,7 +122,23 @@ async function createInitialUsers() {
 }
 
 async function createInitialProductCatagories() {
+  console.log('Starting to create test users...');
+  try {
+    const usersToCreate = [
+      {name: 'Dairy'},
+      {name: 'Veggies'},
+      {name: 'Meat'},
+      {name: 'Snacks'},
+      {name: 'Fruit'}
+    ]
+    const users = await Promise.all(usersToCreate.map(createUser))
 
+    console.log('Users created:', users);
+    console.log('Finished creating users!');
+  } catch (e) {
+    console.error("Error creating users");
+    throw e;
+  }
 }
 
 async function createInitialProducts() {
