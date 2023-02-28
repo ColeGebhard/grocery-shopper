@@ -1,6 +1,6 @@
 const client = require("./client");
 
-async function createCategory(name) {
+async function createCategory({name}) {
     try {
       const {
         rows: [category]
@@ -10,8 +10,7 @@ async function createCategory(name) {
         ON CONFLICT DO NOTHING
         RETURNING name
       `, [name]);
-      // the on conflict should also include username, investigate later -AD
-  
+
       return category;
     } catch (e) {
       console.error(e);
@@ -20,5 +19,5 @@ async function createCategory(name) {
   }
 
 module.exports = {
-    createCategory
+    createCategory,
 }
