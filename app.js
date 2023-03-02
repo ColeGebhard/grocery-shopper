@@ -3,6 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
+const apiRouter = require('./src/api')
 // const apiRouter = require("./api"); --> for later
 
 const client = require("./src/db/client");
@@ -13,7 +14,7 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 // 404 handler
-// app.use("/api", apiRouter);
+app.use("/api", apiRouter);
 
 app.get('/message', (req, res) => {
   res.json({ message: "Hello from server!" });
