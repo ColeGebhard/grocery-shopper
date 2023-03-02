@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 const { createUser, getUserByUsername } = require("../db");
 
+usersRouter.get('/health', async (req, res, next) => {
+  res.send({message: "All is well."});
+  next();
+});
+
 usersRouter.post("/register", async (req, res, next) => {
   try {
     const { username, password, fullName, email } = req.body;
@@ -41,3 +46,5 @@ usersRouter.post("/register", async (req, res, next) => {
     next(e);
   }
 })
+
+module.exports = usersRouter

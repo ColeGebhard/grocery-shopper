@@ -2,7 +2,7 @@ import { USER_STORAGE_KEY } from "..";
 
 export async function fetchRegisterResults(username, password, fullName, email) {
   try {
-    const response = await fetch("http://localhost:3000/register", {
+    const response = await fetch("http://localhost:8000/api/users/register", {
       method: "POST", 
       headers: {
         "Content-Type": "application/json"
