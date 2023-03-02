@@ -1,19 +1,19 @@
 import React from "react";
 import { TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from "..";
+import { fetchRegisterResults } from "../api/helpers";
 
 
 const Register = (props) => {
-  const { username, setUsername, token, setToken, password, setPassword } = props;
+  const { username, setUsername, token, setToken, password, setPassword, email, setEmail, fullName, setFullName } = props;
 
   const registerSubmit = async (e) => {
     e.preventDefault();
     try{
-      // Something similar to this:
-
-      // const result = await REGISTER-HELPER-FUNCTION-HERE
-      // if(result.success) {
-      //   localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
-        console.log("This is a filler to prevent errors. Delete later")
+      const result = await fetchRegisterResults(username, password, fullName, email)
+      if(result.success) {
+        localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
+        console.log("Officially registered");
+      }
       } catch (e) {
         console.error(e);
         throw e;

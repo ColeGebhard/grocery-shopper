@@ -16,6 +16,8 @@ const App = () => {
   const [token, setToken] = useState(storedToken);
   const [username, setUsername] = useState(storedUser);
   const [password, setPassword] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <BrowserRouter>
@@ -38,6 +40,10 @@ const App = () => {
             setPassword={setPassword}
             token={token}
             setToken={setToken}
+            email={email}
+            setEmail={setEmail}
+            fullName={fullName}
+            setFullName={setFullName}
             />
           }
         />
