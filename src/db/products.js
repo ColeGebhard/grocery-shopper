@@ -48,7 +48,6 @@ async function createReview({ productId, userId, reviewRating, description}) {
       "userId",
       "reviewRating",
       description
-      
     )
     VALUES($1,$2,$3,$4)
     RETURNING *;
