@@ -331,7 +331,7 @@ async function createInitialOrderItems() {
 
     const orderItems = await Promise.all(orderItemsToCreate.map(createOrderItems))
 
-    console.log('Carts created:', orderItems);
+    console.log('Order items created:', orderItems);
     console.log('Finished creating order items!');
   } catch (e) {
     console.error("Error creating order items");
