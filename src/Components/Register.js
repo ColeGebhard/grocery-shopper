@@ -3,8 +3,12 @@ import { TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from "..";
 import { fetchRegisterResults } from "../api/helpers";
 
 
+
 const Register = (props) => {
   const { username, setUsername, token, setToken, password, setPassword, email, setEmail, fullName, setFullName } = props;
+  let firstName;
+  let lastName;
+
 
   const registerSubmit = async (e) => {
     e.preventDefault();
@@ -38,6 +42,24 @@ const Register = (props) => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="First name"
+          value={firstName}
+          onChange={(e) => setFullName(e.target.value + lastName)}
+        />
+        <input
+          type="text"
+          placeholder="Last name"
+          value={lastName}
+          onChange={(e) => setFullName(firstName + e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Email address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <button type="submit">Sign up!</button>
       </form>
