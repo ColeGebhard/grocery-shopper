@@ -1,7 +1,8 @@
 const {
   createUser,
   createCategory,
-  createProduct
+  createProduct,
+  createReview
 } = require("./");
 const client = require("./client");
 
@@ -62,8 +63,9 @@ async function createTables() {
     CREATE TABLE reviews (
       id SERIAL PRIMARY KEY,
       "productId" INT REFERENCES products ( id ),
-      "userName" VARCHAR(255) REFERENCES users ( username ),
-      "reviewRating" INTEGER
+      "userId" INT REFERENCES users ( id ),
+      "reviewRating" INTEGER,
+      description VARCHAR(255) 
     );
 
     CREATE TABLE cart (
@@ -176,6 +178,24 @@ async function createInitialProducts() {
       price: 20,
       quantity: 4,
     },
+    {
+      categoryId: 2,
+      creatorId: 2,
+      isAvailible: true,
+      name: "Broccolli",
+      description: "Taste of summer",
+      price: 25,
+      quantity: 10,
+    },
+    {
+      categoryId: 1,
+      creatorId: 2,
+      isAvailible: true,
+      name: "Milk",
+      description: "Freshest of cows",
+      price: 50,
+      quantity: 2,
+    },
 
   ]
 
@@ -191,13 +211,48 @@ async function createInitialProducts() {
 }
 }
 
+async function createInitialReviews() {
+  console.log('Starting to create test reviews...');
+  try {
+    const reviewsToCreate = [
+      { 
+        productId: 3,
+        userId: 1,
+        reviewRating: 4,
+        description: "Kinda moldy"
+      },
+      { 
+        productId: 2,
+        userId: 1,
+        reviewRating: 1,
+        description: "Horrendus"
+      },
+      { 
+        productId: 1,
+        userId: 1,
+        reviewRating: 5,
+        description: "Kinda amazing"
+      },
+    ]
+
+    const review = await Promise.all(reviewsToCreate.map(createReview))
+
+    console.log('Reviews created:', review);
+    console.log('Finished creating reviews!');
+  } catch (e) {
+    console.error("Error creating reviews");
+    throw e;
+  }
+}
+
 async function rebuildDB() {
   try {
     await dropTables()
     await createTables()
     await createInitialUsers();
-    await createInitialProductCatagories()
-    await createInitialProducts()
+    await createInitialProductCatagories();
+    await createInitialProducts();
+    await createInitialReviews()
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error
