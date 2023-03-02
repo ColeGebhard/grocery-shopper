@@ -4,7 +4,9 @@ const {
   createProduct,
   createReview,
   createCarts,
-  createCartItems
+  createCartItems,
+  createOrders,
+  createOrderItems
 } = require("./");
 const client = require("./client");
 
@@ -88,8 +90,7 @@ async function createTables() {
     CREATE TABLE orders (
       id SERIAL PRIMARY KEY,
       "userId" INT REFERENCES users ( id ),
-      status VARCHAR(255),
-      "createdAt" VARCHAR(255)  
+      status VARCHAR(255)
     );
 
     CREATE TABLE order_items (
@@ -293,6 +294,51 @@ async function createInitialCartItems() {
   }
 }
 
+async function createInitialOrders() {
+  console.log('Starting to create test orders...');
+  try {
+    const ordersToCreate = [
+      { 
+        userId: 2,
+        status: 2,
+      }
+    ]
+
+    console.log(createOrders)
+
+    const order = await Promise.all(ordersToCreate.map(createOrders))
+
+    console.log('Orders created:', order);
+    console.log('Finished creating order!');
+  } catch (e) {
+    console.error("Error creating order");
+    throw e;
+  }
+}
+
+async function createInitialOrderItems() {
+  console.log('Starting to create test order items...');
+  try {
+    const orderItemsToCreate = [
+      { 
+        orderId: 1,
+        productId: 2,
+        quantity: 3
+      }
+    ]
+
+    console.log(createOrderItems)
+
+    const orderItems = await Promise.all(orderItemsToCreate.map(createOrderItems))
+
+    console.log('Carts created:', orderItems);
+    console.log('Finished creating order items!');
+  } catch (e) {
+    console.error("Error creating order items");
+    throw e;
+  }
+}
+
 async function rebuildDB() {
   try {
     await dropTables()
@@ -303,6 +349,8 @@ async function rebuildDB() {
     await createInitialReviews();
     await createInitialCarts();
     await createInitialCartItems();
+    await createInitialOrders();
+    await createInitialOrderItems();
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error
