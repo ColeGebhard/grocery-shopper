@@ -41,7 +41,8 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       username VARCHAR(255) UNIQUE NOT NULL,
       password VARCHAR(255) NOT NULL,
-      "fullName" VARCHAR(255) NOT NULL,
+      "firstName" VARCHAR(255) NOT NULL,
+      "lastName" VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
       "isActive" BOOLEAN default true,
       "isAdmin" BOOLEAN default false
@@ -116,19 +117,22 @@ async function createInitialUsers() {
       {
         username: "wineGlass1",
         password: "rose1",
-        fullName: "Test One",
+        firstName: "Test One",
+        lastName: "Testing",
         email: "email1@gmail.com"
       },
       {
         username: "wineGlass2",
         password: "rose2",
-        fullName: "Test Two",
+        firstName: "Test One",
+        lastName: "Testing",
         email: "email2@gmail.com"
       },
       {
         username: "wineGlass3",
         password: "rose3",
-        fullName: "Test Three",
+        firstName: "Test One",
+        lastName: "Testing",
         email: "email3@gmail.com"
       }
     ]
