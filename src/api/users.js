@@ -11,7 +11,7 @@ usersRouter.get('/health', async (req, res, next) => {
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password, fullName, email } = req.body;
+    const { username, password, firstName, lastName, email } = req.body;
 
     const queriedUser = await getUserByUsername(username);
     
@@ -27,7 +27,7 @@ usersRouter.post("/register", async (req, res, next) => {
       );
     } else {
       const user = await createUser({
-        username, password, fullName, email
+        username, password, firstName, lastName, email
       });
       if (!user) {
         next(
@@ -39,7 +39,7 @@ usersRouter.post("/register", async (req, res, next) => {
           JWT_SECRET,
           {expiresIn: "1w" }
         );
-        res.send(`${username}, you have successfully registered!`);
+        res.json(`${username}, you have successfully registered!`);
       }
     }
   } catch (e) {

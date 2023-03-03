@@ -13,9 +13,9 @@ export async function fetchRegisterResults(username, password, firstName, lastNa
         firstName: firstName,
         lastName: lastName,
         email: email
-      }),
+      })
     }
-    ).then(response => response.json());
+    ).then(result => result.json());
     console.log(response);
 
     return response
