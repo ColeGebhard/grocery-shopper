@@ -14,7 +14,6 @@ app.use(bodyParser.json())
 app.use(morgan("dev"));
 app.use(express.json());
 
-// 404 handler
 app.use("/api", apiRouter);
 
 app.get('/message', (req, res) => {
@@ -30,10 +29,6 @@ app.use((req, res, next) => {
 
 app.use((req, res) => {
   res.status(404).send("Not found");
-});
-
-app.listen(8000, () => {
-  console.log(`Server is running on port 8000.`);
 });
 
 module.exports = app;
