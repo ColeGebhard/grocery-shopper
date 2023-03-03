@@ -16,8 +16,9 @@ const App = () => {
   const [token, setToken] = useState(storedToken);
   const [username, setUsername] = useState(storedUser);
   const [password, setPassword] = useState("");
-  const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   return (
     <BrowserRouter>
@@ -42,8 +43,10 @@ const App = () => {
             setToken={setToken}
             email={email}
             setEmail={setEmail}
-            fullName={fullName}
-            setFullName={setFullName}
+            firstName={firstName}
+            setFirstName={setFirstName}
+            lastName={lastName}
+            setLastName={setLastName}
             />
           }
         />
