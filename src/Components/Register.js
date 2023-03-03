@@ -5,19 +5,19 @@ import { fetchRegisterResults } from "../api/helpers";
 
 
 const Register = (props) => {
-  const { username, setUsername, token, setToken, password, setPassword, email, setEmail, fullName, setFullName } = props;
-  let firstName;
-  let lastName;
+  const { username, setUsername, token, setToken, password, setPassword, email, setEmail, firstName, setFirstName, lastName, setLastName } = props;
 
 
   const registerSubmit = async (e) => {
     e.preventDefault();
     try{
-      const result = await fetchRegisterResults(username, password, fullName, email)
-      if(result.success) {
-        localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
-        console.log("Officially registered");
-      }
+      const result = await fetchRegisterResults(username, password, firstName, lastName, email)
+      // if(result.success) {
+      //   localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
+      //   console.log("Officially registered");
+      //   console.log(token);
+      // }
+      console.log(result)
       } catch (e) {
         console.error(e);
         throw e;
@@ -34,31 +34,31 @@ const Register = (props) => {
         <input
           type="text"
           placeholder="Username"
-          value={username}
+          value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           type="password"
           placeholder="Password"
-          value={password}
+          value={password || ""}
           onChange={(e) => setPassword(e.target.value)}
         />
         <input
           type="text"
           placeholder="First name"
-          value={firstName}
-          onChange={(e) => setFullName(e.target.value + lastName)}
+          value={firstName || ""}
+          onChange={(e) => setFirstName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Last name"
-          value={lastName}
-          onChange={(e) => setFullName(firstName + e.target.value)}
+          value={lastName || ""}
+          onChange={(e) => setLastName(e.target.value)}
         />
         <input
           type="text"
           placeholder="Email address"
-          value={email}
+          value={email || ""}
           onChange={(e) => setEmail(e.target.value)}
         />
         <button type="submit">Sign up!</button>
