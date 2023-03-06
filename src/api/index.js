@@ -43,4 +43,3 @@ const productsRouter = require("./products");
 apiRouter.use("/category", productsRouter)
 
 module.exports = apiRouter
-// ROUTER: /api/users
