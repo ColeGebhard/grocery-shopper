@@ -17,29 +17,54 @@ usersRouter.post("/register", async (req, res, next) => {
     
     if (queriedUser) {
       res.status(401);
-      next(
-        `User Exists Error: Username ${queriedUser.username} is already taken.`
-      );
+      next({
+        success: false,
+        token: null,
+        user: {},
+        message: `User Exists: Username ${queriedUser.username} is already taken.`
+
+      }
+      )
     } else if (password.length < 8) {
-      res.status(401);
-      next(
-        `Password Length Error: This password is too short. A longer password is required.` 
-      );
+        res.status(401);
+        next({
+          success: false,
+          token: null,
+          user: {},
+          message: `This password is too short. A longer password is required.` 
+
+        }
+      )
     } else {
       const user = await createUser({
         username, password, firstName, lastName, email
       });
       if (!user) {
-        next(
-          `Registration Error: We encountered a problem registering your account. Please try again`
+        res.status(401);
+        next({
+          success: false,
+          token: null,
+          user: {},
+          message: `We encountered a problem registering your account. Please try again`
+
+        }
         );
       } else {
-        jwt.sign(
+        const token = jwt.sign(
           { id: user.id, username: user.username },
           JWT_SECRET,
           {expiresIn: "1w" }
-        );
-        res.json(`${username}, you have successfully registered!`);
+        ); 
+        res.json({data: {
+          success: true,
+          token: token,
+          user: {
+            id: user.id,
+            username: username
+          },
+          message: `Congratulations, ${username}, you have successfully registered!`
+
+        }});
       }
     }
   } catch (e) {

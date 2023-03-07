@@ -1,6 +1,7 @@
 import React from "react";
 import { TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from "..";
 import { fetchRegisterResults } from "../api/helpers";
+import "../index.css"
 
 
 
@@ -12,14 +13,18 @@ const Register = (props) => {
     e.preventDefault();
     try{
       const result = await fetchRegisterResults(username, password, firstName, lastName, email)
-      // if(result.success) {
-      //   localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
-      //   console.log("Officially registered");
-      //   console.log(token);
-      // }
-      console.log(result)
+      if(result.data.success) {
+        localStorage.setItem(TOKEN_STORAGE_KEY, result.data.token);
+        console.log("Officially registered");
+        setToken(result.data.token);
+
+        // Hide form and show completion message with button to navigate to home page
+        const registrationForm = document.getElementById("registerForm");
+        const completionMessage = document.getElementById("completionMessage")
+        registrationForm.classList.add("noDisplay");
+        completionMessage.classList.remove("noDisplay");
+      } 
       } catch (e) {
-        console.error(e);
         throw e;
       } finally {
         setUsername("");
@@ -63,6 +68,13 @@ const Register = (props) => {
         />
         <button type="submit">Sign up!</button>
       </form>
+
+      <div id="completionMessage" className="noDisplay">
+        Congrats! You registered! Here is a button that takes you to the home page, add functionality later
+        <button>
+          Home
+        </button>
+      </div>
     </>
   )
 
