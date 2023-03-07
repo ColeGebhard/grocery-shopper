@@ -1,14 +1,14 @@
 const client = require("./client");
 
 async function createProduct({ 
+    categoryId, 
+    creatorId, 
+    isAvailible,
     name,
     description,
     price,
     photos, 
-    categoryId, 
-    isAvailible, 
-    creatorId,
-    quantity 
+    quantity
   }) {
     try {
       const { rows: [product] } = await client.query(`
@@ -79,6 +79,14 @@ async function getAllProducts() {
   }
 }
 
+async function attachProductsToCategory(catagory) {
+  try {
+    const { rows: product } = await client.query(`
+    SELECT product.*`)
+  } catch (error) {
+    throw Error(error)
+  }
+}
 
 module.exports = {
     createProduct,
