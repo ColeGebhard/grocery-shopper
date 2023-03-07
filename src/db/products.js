@@ -1,14 +1,14 @@
 const client = require("./client");
 
 async function createProduct({ 
-    categoryId, 
-    creatorId, 
-    isAvailible,
     name,
     description,
     price,
     photos, 
-    quantity
+    categoryId, 
+    isAvailible, 
+    creatorId,
+    quantity 
   }) {
     try {
       const { rows: [product] } = await client.query(`
@@ -79,10 +79,26 @@ async function getAllProducts() {
   }
 }
 
+async function getAllProductsWithCategoryId() {
+    try {
+        const { rows } = await client.query(`
+        SELECT products.*,
+        product_category.name AS "categoryName"
+        FROM products
+        JOIN product_category ON products."categoryId" = product_category.id
+        `)
+
+        console.log(rows)
+
+        return rows;
+    } catch (error) {
+        throw Error('Cannot get products')
+    }
+}
+
 async function attachProductsToCategory(catagory) {
   try {
-    const { rows: product } = await client.query(`
-    SELECT product.*`)
+    const { rows: product } = await client.query(``)
   } catch (error) {
     throw Error(error)
   }
@@ -91,5 +107,6 @@ async function attachProductsToCategory(catagory) {
 module.exports = {
     createProduct,
     createReview,
-    getAllProducts
+    getAllProducts,
+    getAllProductsWithCategoryId
 }

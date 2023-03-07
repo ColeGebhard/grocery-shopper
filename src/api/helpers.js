@@ -82,3 +82,20 @@ export async function createCategory(name) {
     throw Error(error);
   }
 }
+
+export async function getAllProducts() {
+  try {
+    const response = await fetch ("http://localhost:8000/api/category/products", {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    throw Error(error);
+  }
+}

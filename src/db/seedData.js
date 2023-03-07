@@ -6,7 +6,8 @@ const {
   createCarts,
   createCartItems,
   createOrders,
-  createOrderItems
+  createOrderItems,
+  getAllProductsWithCategoryId
 } = require("./");
 const client = require("./client");
 
@@ -203,6 +204,15 @@ async function createInitialProducts() {
       price: 50,
       quantity: 2,
     },
+    {
+      categoryId: 1,
+      creatorId: 2,
+      isAvailible: true,
+      name: "Cheese",
+      description: "Freshest of cows",
+      price: 50,
+      quantity: 2,
+    },
 
   ]
 
@@ -216,6 +226,12 @@ async function createInitialProducts() {
   console.error("Error creating users");
   throw e;
 }
+}
+
+async function filterByCategory() {
+  const filteredProduct = await getAllProductsWithCategoryId(1)
+
+  console.log(filteredProduct)
 }
 
 async function createInitialReviews() {
@@ -351,11 +367,12 @@ async function rebuildDB() {
     await createInitialUsers();
     await createInitialProductCatagories();
     await createInitialProducts();
-    await createInitialReviews();
-    await createInitialCarts();
-    await createInitialCartItems();
-    await createInitialOrders();
-    await createInitialOrderItems();
+    await filterByCategory();
+    // await createInitialReviews();
+    // await createInitialCarts();
+    // await createInitialCartItems();
+    // await createInitialOrders();
+    // await createInitialOrderItems();
   } catch (error) {
     console.log("Error during rebuildDB")
     throw error

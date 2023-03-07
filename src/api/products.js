@@ -5,7 +5,8 @@ const {
     getAllCategorys,
     createCategory,
     getAllProducts,
-    createProduct
+    createProduct,
+    getAllProductsWithCategoryId
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -34,7 +35,7 @@ productsRouter.get('/', async (req, res, next) => {
 productsRouter.get('/products', async (req, res, next) => {
 
     try {
-        const products = await getAllProducts()
+        const products = await getAllProductsWithCategoryId()
 
         res.send(
             products
