@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getAllProducts, createProducts } from "../api/helpers";
+import { getAllProducts, createProducts, getAllCategories } from "../api/helpers";
 
 const Products = (props) => {
-    const { products, setProducts } = props;
+    const { products, setProducts, categories, setCategories } = props;
 
+    const [categoryList, setCategoryList] = useState('any');
     const [availible, setAvailible] = useState(true);
     const [name, setName] = useState("");
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState(0);
     const [quanity, setQuanity] = useState(5);
     const [photos, setPhotos] = useState(null);
+    const [categoryId, setCategoryId] = useState(0)
 
 
     useEffect(() => {
@@ -23,19 +25,30 @@ const Products = (props) => {
             });
     }, [setProducts])
 
+    useEffect(() => {
+        getAllCategories()
+            .then((categories) => {
+                setCategories(categories);
+            })
+            .catch((e) => {
+                console.error('Failed to get category')
+            });
+    }, [setCategories])
+
     const productSubmit = async (e) => {
         e.preventDefault();
         try {
-              const result = await createProducts({
+            const result = await createProducts({
+                categoryId,
                 name,
                 description,
                 price,
                 photos,
                 quanity,
-              });
+            });
 
-              console.log(result)
-              return result;
+            console.log(result)
+            return result;
         } catch (e) {
             console.error(e);
             throw e;
@@ -44,14 +57,27 @@ const Products = (props) => {
         }
     }
 
+    console.log(categories)
+
     const { categoryName } = useParams();
 
-    console.log(JSON.stringify(categoryName))
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
     console.log(filteredProducts)
     return (
         <>
             <form id="loginForm" onSubmit={productSubmit}>
+
+                <select name="categoryDrop" id="categoryDrop"
+                    value={categoryList}
+                    onSelect={(e) => {
+                        setCategoryList(e.target.value)
+                    }}
+                >
+                    <option value="any">Any</option>
+                    {categories.map((category) =>
+                        <option value={category.name} key={category.name}>{category.name}</option>
+                    )};
+                </select>
                 <input
                     type="text"
                     placeholder="Name"
@@ -82,7 +108,7 @@ const Products = (props) => {
                     value={photos}
                     onChange={(e) => setPhotos(e.target.value)}
                 />
-                <button type="submit">Make Category</button>
+                <button type="submit">Make a Product</button>
             </form>
 
             <h1>{categoryName}</h1>

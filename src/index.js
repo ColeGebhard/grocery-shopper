@@ -78,7 +78,9 @@ const App = () => {
             categories={categories}
             setCategories={setCategories}
             name={name}
-            setName={setName}/>
+            setName={setName}
+            products={products}
+            setProducts={setProducts}/>      
           }
         />
         <Route 
@@ -87,6 +89,8 @@ const App = () => {
             <Products
             products={products}
             setProducts={setProducts}
+            categories={categories}
+            setCategories={setCategories}
           />
           }
         />
