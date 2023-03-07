@@ -46,14 +46,14 @@ productsRouter.get('/products', async (req, res, next) => {
 
 productsRouter.post('/', async (req, res, next) => {
     try {
-        if (req.isAdmin) {
+        // if (req.isAdmin) {
             
             const { name } = req.body
 
             const catagory = await createCategory({ name })
 
             res.send(catagory)
-        }
+        // }
     } catch (error) {
         next(error)
     }
@@ -69,9 +69,6 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
     price,
     photos,
     quanity } = req.body;
-    const id = categoryId; 
-
-
 
     try {
         const productToCategory = await createProduct({ 

@@ -1,5 +1,6 @@
 import { USER_STORAGE_KEY } from "..";
 
+
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {
     const response = await fetch("http://localhost:8000/api/users/register", {
@@ -42,5 +43,42 @@ export async function fetchLoginResults(username, password) {
     return response
   } catch (e) {
     throw e;
+  }
+}
+
+export async function getAllCategories() {
+  try {
+    const response = await fetch ("http://localhost:8000/api/category", {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+export async function createCategory(name) {
+  try {
+    const response = await fetch ("http://localhost:8000/api/category", {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name
+      })
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    throw Error(error);
   }
 }

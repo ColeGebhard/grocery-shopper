@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
 import {
   Register,
-  Login
+  Login,
+  Catagories
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -61,6 +62,12 @@ const App = () => {
             setToken={setToken}
             />
           }
+        />
+        <Route
+        exact path="/category"
+        element={
+          <Catagories/>
+        }
         />
       </Routes>
     </BrowserRouter>
