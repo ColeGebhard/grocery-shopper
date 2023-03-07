@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getAllCategorys, createCategory } from "../api/helpers";
+import { getAllCategories, createCategory } from "../api/helpers";
 
 const Catagories = (props) => {
   const { token } = props;
@@ -12,7 +12,7 @@ const Catagories = (props) => {
 
 
   useEffect(() => {
-    getAllCategorys()
+    getAllCategories()
       .then((categories) => {
         setCategories(categories);
       })
