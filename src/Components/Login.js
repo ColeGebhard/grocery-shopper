@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from "..";
+import { fetchLoginResults } from "../api/helpers";
 
 
 const Login = (props) => {
@@ -11,20 +12,29 @@ const Login = (props) => {
   const loginSubmit = async (e) => {
     e.preventDefault();
     try{
-      // Something similar to this. Set token in local storage and go back to main page:
-
-      // const result = await REGISTER-HELPER-FUNCTION-HERE
-      // if(result.success) {
-      //   localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
-      //   navigate("/")
-        console.log("This is a filler to prevent errors. Delete later")
-      } catch (e) {
-        console.error(e);
-        throw e;
-      } finally {
+      const result = await fetchLoginResults(username, password)
+      if(result.data.success) {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+        localStorage.setItem(TOKEN_STORAGE_KEY, result.data.token)
+        setToken(result.data.token)
+        navigate("/")
+      } else if (!result.data.success) {
         setUsername("");
         setPassword("");
+        // LOGIN NOT COMPLETE. UNDEFINED ERROR IF USER LOGS IN WITHOUT PASSWORD AND USERNAME
+        // The following lines show the error message to the user
+        const addP = document.createElement("p");
+        const errorContainer = document.getElementById("errorContainer");
+        while (errorContainer.firstChild) {
+          errorContainer.removeChild(errorContainer.firstChild);
+        };
+        const newContent = document.createTextNode(result.data.message)
+        addP.appendChild(newContent);
+        errorContainer.appendChild(addP);
       }
+    } catch (e) {
+        throw e;
+      } 
   }
 
 
@@ -34,17 +44,20 @@ const Login = (props) => {
         <input 
           type="text"
           placeholder="Username"
-          value={username}
+          value={username || ""}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input 
           type="password"
           placeholder="Password"
-          value={password}
+          value={password || ""}
           onChange={(e) => setPassword(e.target.value)}
         />
         <button type="submit">Log in!</button>
       </form>
+      <div id="errorContainer">
+
+      </div>
     </>
   )
 }

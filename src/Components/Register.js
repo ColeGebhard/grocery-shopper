@@ -1,13 +1,14 @@
 import React from "react";
-import { TOKEN_STORAGE_KEY, USER_STORAGE_KEY } from "..";
+import { TOKEN_STORAGE_KEY } from "..";
 import { fetchRegisterResults } from "../api/helpers";
 import "../index.css"
+import { useNavigate } from "react-router-dom";
 
 
 
 const Register = (props) => {
-  const { username, setUsername, token, setToken, password, setPassword, email, setEmail, firstName, setFirstName, lastName, setLastName } = props;
-
+  const { username, setUsername, setToken, password, setPassword, email, setEmail, firstName, setFirstName, lastName, setLastName } = props;
+  const navigate = useNavigate();
 
   const registerSubmit = async (e) => {
     e.preventDefault();
@@ -35,7 +36,6 @@ const Register = (props) => {
   return (
     <>
       <form id="registerForm" onSubmit={registerSubmit}>
-        {/* Create the register handler function */}
         <input
           type="text"
           placeholder="Username"
@@ -71,8 +71,18 @@ const Register = (props) => {
 
       <div id="completionMessage" className="noDisplay">
         Congrats! You registered! Here is a button that takes you to the home page, add functionality later
-        <button>
+        <button
+          onClick={(e) => {
+            navigate("/")
+          }}
+        >
           Home
+        </button>
+        <button
+          onClick={(e) => {
+            navigate("/login")
+          }}
+        > Login. This button is for testing. Delete before deployment.
         </button>
       </div>
     </>

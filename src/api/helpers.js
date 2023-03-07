@@ -20,16 +20,33 @@ export async function fetchRegisterResults(username, password, firstName, lastNa
     console.log(response);
 
     return response
-    // if (results.token) {
-    //   localStorage.setItem(USER_STORAGE_KEY, results.token);
-    //   return localStorage.getItem(USER_STORAGE_KEY);
-    // }
   } catch (e) {
     throw e;
   }
 }
 
-export async function getAllCategorys() {
+export async function fetchLoginResults(username, password) {
+  try {
+    const response = await fetch("http://localhost:8000/api/users/login", {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+      body: JSON.stringify({
+        username: username,
+        password: password
+      })
+    }
+    ).then(result => result.json());
+    console.log(response);
+
+    return response
+  } catch (e) {
+    throw e;
+  }
+}
+
+export async function getAllCategories() {
   try {
     const response = await fetch ("http://localhost:8000/api/category", {
       method: "GET", 
