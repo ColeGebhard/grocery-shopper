@@ -39,7 +39,6 @@ const App = () => {
             setUsername={setUsername}
             password={password}
             setPassword={setPassword}
-            token={token}
             setToken={setToken}
             email={email}
             setEmail={setEmail}

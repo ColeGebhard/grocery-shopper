@@ -2,7 +2,7 @@ const express = require("express");
 const usersRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { createUser, getUserByUsername } = require("../db");
+const { createUser, getUserByUsername, getUser } = require("../db");
 
 usersRouter.get('/health', async (req, res, next) => {
   res.send({message: "All is well."});
@@ -71,5 +71,46 @@ usersRouter.post("/register", async (req, res, next) => {
     next(e);
   }
 })
+
+usersRouter.post("/login", async (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    next({
+      success: false,
+      token: null,
+      user: {},
+      message: `Missing credentials. Please supply both a username and a password.` 
+
+    });
+  }
+  try {
+    const user = await getUser({ username, password });
+    if (!user) {
+      next({
+        success: false,
+        token: null,
+        user: {},
+        message: `Username or password is incorrect. Please try again` 
+      });
+    } else {
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        JWT_SECRET,
+        { expiresIn: "1w" }
+      );
+      res.json({data: {
+        success: true,
+        token: token,
+        user: {
+          id: user.id,
+          username: user.username
+        },
+        message: `You're logged in!` 
+      }})
+    }
+  } catch (e) {
+    next(e);
+  }
+});
 
 module.exports = usersRouter
