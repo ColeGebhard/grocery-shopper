@@ -46,14 +46,14 @@ productsRouter.get('/products', async (req, res, next) => {
 
 productsRouter.post('/', async (req, res, next) => {
     try {
-        // if (req.isAdmin) {
+        if (req.isAdmin) {
             
             const { name } = req.body
 
-            const catagory = await createCategory({ name })
+            const category = await createCategory({ name })
 
-            res.send(catagory)
-        // }
+            res.send(category)
+        }
     } catch (error) {
         next(error)
     }
