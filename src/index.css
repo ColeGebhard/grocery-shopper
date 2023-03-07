@@ -15,3 +15,26 @@ code {
 .noDisplay {
   display:none;
 }
+
+/* Styleing for Category Page */
+
+.mainProductPage {
+  display: flex;
+  justify-content:space-between;
+}
+
+.categoryLinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.productCard {
+  background-color: darkblue;
+}
+
+.productCards {
+  color: #eee;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}

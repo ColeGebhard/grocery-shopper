@@ -60,8 +60,8 @@ productsRouter.post('/', async (req, res, next) => {
     }
 })
 
-productsRouter.post('/:categoryName/products', async (req, res, next) => {
-    const { categoryName } = req.params;
+productsRouter.post('/:categoryId/products', async (req, res, next) => {
+    const { categoryId } = req.params;
     const { 
     name,
     description,
@@ -71,7 +71,7 @@ productsRouter.post('/:categoryName/products', async (req, res, next) => {
 
     try {
         const productToCategory = await createProduct({ 
-            categoryName,
+            categoryId,
             name,
             description,
             price,
