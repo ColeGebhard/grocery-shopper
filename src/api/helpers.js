@@ -4,10 +4,10 @@ import { USER_STORAGE_KEY } from "..";
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {
     const response = await fetch("http://localhost:8000/api/users/register", {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
-      }, 
+      },
       body: JSON.stringify({
         username: username,
         password: password,
@@ -28,10 +28,10 @@ export async function fetchRegisterResults(username, password, firstName, lastNa
 export async function fetchLoginResults(username, password) {
   try {
     const response = await fetch("http://localhost:8000/api/users/login", {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
-      }, 
+      },
       body: JSON.stringify({
         username: username,
         password: password
@@ -48,11 +48,11 @@ export async function fetchLoginResults(username, password) {
 
 export async function getAllCategories() {
   try {
-    const response = await fetch ("http://localhost:8000/api/category", {
-      method: "GET", 
+    const response = await fetch("http://localhost:8000/api/category", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json"
-      }, 
+      },
     });
     const data = await response.json();
 
@@ -65,8 +65,8 @@ export async function getAllCategories() {
 
 export async function createCategory(name) {
   try {
-    const response = await fetch ("http://localhost:8000/api/category", {
-      method: "POST", 
+    const response = await fetch("http://localhost:8000/api/category", {
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -85,14 +85,47 @@ export async function createCategory(name) {
 
 export async function getAllProducts() {
   try {
-    const response = await fetch ("http://localhost:8000/api/category/products", {
-      method: "GET", 
+    const response = await fetch("http://localhost:8000/api/category/products", {
+      method: "GET",
       headers: {
         "Content-Type": "application/json"
-      }, 
+      },
     });
     const data = await response.json();
 
+
+    return data
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+export async function createProducts({
+  name,
+  description,
+  price,
+  photos,
+  quanity,
+  categoryId
+}) {
+  try {
+    const response = await fetch(`http://localhost:8000/api/category/${categoryId}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        price,
+        photos,
+        quanity,
+        categoryId: 1
+      })
+    });
+    const data = await response.json();
+
+    console.log(data)
 
     return data
   } catch (error) {
