@@ -44,8 +44,8 @@ async function createTables() {
       "firstName" VARCHAR(255) NOT NULL,
       "lastName" VARCHAR(255) NOT NULL,
       email VARCHAR(255) UNIQUE NOT NULL,
-      "isActive" BOOLEAN default true,
-      "isAdmin" BOOLEAN default false
+      "isAdmin" BOOLEAN default false,
+      "isActive" BOOLEAN default true
   );
 
     CREATE TABLE product_category (
@@ -115,11 +115,12 @@ async function createInitialUsers() {
   try {
     const usersToCreate = [
       {
-        username: "wineGlass1",
-        password: "rose1",
-        firstName: "Test One",
-        lastName: "Testing",
-        email: "email1@gmail.com"
+        username: "Admin",
+        password: "Secret123",
+        firstName: "Admin",
+        lastName: "Test",
+        email: "admin@gmail.com",
+        isAdmin: true
       },
       {
         username: "wineGlass2",
