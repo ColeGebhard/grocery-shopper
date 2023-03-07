@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAllCategorys } from "../api/helpers";
+import { getAllCategorys, createCategory } from "../api/helpers";
 
 const Catagories = (props) => {
   const { token } = props;
-  const [categories, setCatagory] = useState('');
+  const [categories, setCategories] = useState([]);
   const [availible, setAvailible] = useState(true);
   const [name, setName] = useState("");
   const [description, setDesciption] = useState("");
@@ -13,39 +13,36 @@ const Catagories = (props) => {
 
   useEffect(() => {
     getAllCategorys()
-    .then((categories) => {
-        setCatagory(categories);
-    })
-    .catch((e) => {
-        console.error('Failed to get catagory')
-    });
-}, [ setCatagory ])
+      .then((categories) => {
+        setCategories(categories);
+      })
+      .catch((e) => {
+        console.error('Failed to get category')
+      });
+  }, [setCategories])
 
-console.log(categories)
+  console.log(categories)
 
   const productSubmit = async (e) => {
     e.preventDefault();
-    try{
-      // Something similar to this. Set token in local storage and go back to main page:
+    try {
+      const result = await createCategory(name);
 
-      // const result = await REGISTER-HELPER-FUNCTION-HERE
-      // if(result.success) {
-      //   localStorage.setItem({TOKEN_STORAGE_KEY}, result.token);
-      //   navigate("/")
-        console.log("This is a filler to prevent errors. Delete later")
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }finally {
- 
-      }
+      console.log(result)
+      return result;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    } finally {
+
+    }
   }
 
 
   return (
     <>
       <form id="loginForm" onSubmit={productSubmit}>
-        <input 
+        <input
           type="text"
           placeholder="Username"
           value={name}
@@ -55,10 +52,10 @@ console.log(categories)
       </form>
 
       <h1>Categories</h1>
-      { categories.map((category) => {
+      {categories.map((category) => {
         return (
           <div>
-            <h2>{ category.name }</h2>
+            <h2>{category.name}</h2>
           </div>
         )
       })}
