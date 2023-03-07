@@ -42,4 +42,12 @@ apiRouter.use("/users", usersRouter);
 const productsRouter = require("./products");
 apiRouter.use("/category", productsRouter)
 
+
+//Error handler
+apiRouter.use((error, req, res, next) => {
+  res.json({
+    error: error.message,
+    data: error
+  })
+})
 module.exports = apiRouter

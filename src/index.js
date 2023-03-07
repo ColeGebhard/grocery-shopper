@@ -7,7 +7,7 @@ import {
   Login
 } from "./Components"
 
-export const TOKEN_STORAGE_KEY = "user-token"
+export const TOKEN_STORAGE_KEY = "user-token";
 const storedToken = localStorage.getItem(TOKEN_STORAGE_KEY);
 export const USER_STORAGE_KEY = "user-username";
 const storedUser = localStorage.getItem(USER_STORAGE_KEY);
