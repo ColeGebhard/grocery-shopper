@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getAllCategories, createCategory } from "../api/helpers";
 
 const Catagories = (props) => {
-  const { token } = props;
-  const [categories, setCategories] = useState([]);
-  const [availible, setAvailible] = useState(true);
-  const [name, setName] = useState("");
-  const [description, setDesciption] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quanity, setQuanity] = useState(5);
+  const { categories, setCategories, name, setName } = props;
 
 
   useEffect(() => {
@@ -44,23 +38,24 @@ const Catagories = (props) => {
       <form id="loginForm" onSubmit={productSubmit}>
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Category"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <button type="submit">Log in!</button>
+        <button type="submit">Make Category</button>
       </form>
 
       <h1>Categories</h1>
       {categories.map((category) => {
         return (
           <div>
-            <h2>{category.name}</h2>
+            <h2><a id="catergoryClick" href={`category/${category.name}`}>{category.name}</a></h2>
           </div>
-        )
+         )
       })}
     </>
   )
+
 }
 
 export default Catagories;

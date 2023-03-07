@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useEffect, useState } from 'react';
-import { Route, Routes, BrowserRouter, Link} from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
 import {
   Register,
   Login,
-  Categories
+  Categories,
+  Products
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -20,6 +21,13 @@ const App = () => {
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [availible, setAvailible] = useState(true);
+  const [name, setName] = useState("");
+  const [description, setDesciption] = useState("");
+  const [price, setPrice] = useState(0);
+  const [quanity, setQuanity] = useState(5);
 
   return (
     <BrowserRouter>
@@ -35,39 +43,52 @@ const App = () => {
         <Route
           exact path="/register"
           element={
-            <Register 
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            setToken={setToken}
-            email={email}
-            setEmail={setEmail}
-            firstName={firstName}
-            setFirstName={setFirstName}
-            lastName={lastName}
-            setLastName={setLastName}
+            <Register
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              setToken={setToken}
+              email={email}
+              setEmail={setEmail}
+              firstName={firstName}
+              setFirstName={setFirstName}
+              lastName={lastName}
+              setLastName={setLastName}
             />
           }
         />
         <Route
           exact path="/login"
           element={
-            <Login 
-            username={username}
-            setUsername={setUsername}
-            password={password}
-            setPassword={setPassword}
-            token={token}
-            setToken={setToken}
+            <Login
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              token={token}
+              setToken={setToken}
             />
           }
         />
         <Route
-        exact path="/category"
-        element={
-          <Categories/>
-        }
+          exact path="/category"
+          element={
+            <Categories 
+            categories={categories}
+            setCategories={setCategories}
+            name={name}
+            setName={setName}/>
+          }
+        />
+        <Route 
+          path='/category/:categoryName'
+          element={
+            <Products
+            products={products}
+            setProducts={setProducts}
+          />
+          }
         />
       </Routes>
     </BrowserRouter>
