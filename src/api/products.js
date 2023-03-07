@@ -4,7 +4,8 @@ const productsRouter = express.Router();
 const {
     getAllCategorys,
     createCategory,
-    getAllProducts
+    getAllProducts,
+    createProduct
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -40,6 +41,52 @@ productsRouter.get('/products', async (req, res, next) => {
         )
     } catch (error) {
         next(error);
+    }
+})
+
+productsRouter.post('/', async (req, res, next) => {
+    try {
+        if (req.isAdmin) {
+            
+            const { name } = req.body
+
+            const catagory = await createCategory({ name })
+
+            res.send(catagory)
+        }
+    } catch (error) {
+        next(error)
+    }
+})
+
+productsRouter.post('/:categoryId/products', async (req, res, next) => {
+    const { categoryId } = req.params;
+    const { 
+    creatorId,
+    isAvailible,
+    name,
+    description,
+    price,
+    photos,
+    quanity } = req.body;
+    const id = categoryId; 
+
+
+
+    try {
+        const productToCategory = await createProduct({ 
+            categoryId,
+            creatorId,
+            isAvailible,
+            name,
+            description,
+            price,
+            photos,
+            quanity })
+
+        res.send(productToCategory)
+    } catch ({name, message}) {
+        next({ name, message})
     }
 })
 
