@@ -69,9 +69,6 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
     price,
     photos,
     quanity } = req.body;
-    const id = categoryId; 
-
-
 
     try {
         const productToCategory = await createProduct({ 

@@ -1,5 +1,6 @@
 import { USER_STORAGE_KEY } from "..";
 
+
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {
     const response = await fetch("http://localhost:8000/api/users/register", {
@@ -25,5 +26,22 @@ export async function fetchRegisterResults(username, password, firstName, lastNa
     // }
   } catch (e) {
     throw e;
+  }
+}
+
+export async function getAllCategorys() {
+  try {
+    const response = await fetch ("http://localhost:8000/api/category", {
+      method: "GET", 
+      headers: {
+        "Content-Type": "application/json"
+      }, 
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    throw Error(error);
   }
 }
