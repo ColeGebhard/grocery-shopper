@@ -37,6 +37,19 @@ const Products = (props) => {
 
     const productSubmit = async (e) => {
         e.preventDefault();
+
+        const filteredCategory = categories.filter(category => category.name === categoryList)
+        console.log(filteredCategory[0].name)
+        console.log(categoryList)
+
+        if (filteredCategory[0].name !== categoryList) {
+            window.alert('Error')
+        }
+
+        if (filteredCategory[0].name === categoryList) {
+            window.alert('Success')
+        }
+        setCategoryId(filteredCategory[0].id)
         try {
             const result = await createProducts({
                 categoryId,
@@ -69,7 +82,7 @@ const Products = (props) => {
 
                 <select name="categoryDrop" id="categoryDrop"
                     value={categoryList}
-                    onSelect={(e) => {
+                    onChange={(e) => {
                         setCategoryList(e.target.value)
                     }}
                 >
