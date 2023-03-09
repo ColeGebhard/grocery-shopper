@@ -15,6 +15,10 @@ async function createUser({username, password, firstName, lastName, email, isAdm
     `, [username, hashedPassword, firstName, lastName, email, isAdmin]);
     // the on conflict should also include username, investigate later -AD
     delete user.password
+    if (isAdmin === null){
+      return isAdmin.false
+    }
+
 
     return user;
   } catch (e) {
