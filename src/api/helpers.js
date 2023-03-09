@@ -133,3 +133,35 @@ export async function createProducts({
     throw Error(error);
   }
 }
+
+export async function getAllCarts() {
+  try {
+    const response = await fetch("http://localhost:8000/api/carts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+    const data = await response.json();
+
+    return data
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+export async function getAllCartItems() {
+  try {
+    const response = await fetch("http://localhost:8000/api/carts/items", {
+      method: "GET", 
+      headers: {
+        "Content-Type:": "application/json"
+      }
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (e) {
+    throw e;
+  }
+}

@@ -6,7 +6,8 @@ import {
   Register,
   Login,
   Categories,
-  Products
+  Products, 
+  Carts
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -28,6 +29,8 @@ const App = () => {
   const [description, setDesciption] = useState("");
   const [price, setPrice] = useState(0);
   const [quanity, setQuanity] = useState(5);
+  const [currentCart, setCurrentCart] = useState({})
+  const [allCarts, setAllCarts] = useState([]);
 
   return (
     <BrowserRouter>
@@ -91,6 +94,20 @@ const App = () => {
             setProducts={setProducts}
             categories={categories}
             setCategories={setCategories}
+          />
+          }
+        />
+        <Route 
+          path='/carts'
+          element={
+            <Carts
+            products={products}
+            categories={categories}
+            currentCart={currentCart}
+            setCurrentCart={setCurrentCart}
+            allCarts={allCarts}
+            setAllCarts={setAllCarts}
+
           />
           }
         />

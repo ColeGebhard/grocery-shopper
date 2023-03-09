@@ -273,8 +273,16 @@ async function createInitialCarts() {
   try {
     const cartsToCreate = [
       { 
-        userId: 2,
+        userId: 1,
         status: 2,
+      },
+      { 
+        userId: 2,
+        status: 0,
+      }, 
+      { 
+        userId: 3,
+        status: 1,
       }
     ]
 
@@ -300,6 +308,27 @@ async function createInitialCartItems() {
         quantity: 3,
         price: 40,
         isActive: true
+      },
+      { 
+        cartId: 2,
+        productId: 4,
+        quantity: 4,
+        price: 20,
+        isActive: true
+      },
+      { 
+        cartId: 3,
+        productId: 1,
+        quantity: 3,
+        price: 25,
+        isActive: true
+      },     
+      { 
+        cartId: 3,
+        productId: 2,
+        quantity: 2,
+        price: 10,
+        isActive: true
       }
     ]
 
@@ -307,7 +336,7 @@ async function createInitialCartItems() {
 
     const cartItems = await Promise.all(cartItemsToCreate.map(createCartItems))
 
-    console.log('Carts created:', cartItems);
+    console.log('Cart Items created:', cartItems);
     console.log('Finished creating cart items!');
   } catch (e) {
     console.error("Error creating cart");
@@ -369,8 +398,8 @@ async function rebuildDB() {
     await createInitialProducts();
     await filterByCategory();
     // await createInitialReviews();
-    // await createInitialCarts();
-    // await createInitialCartItems();
+    await createInitialCarts();
+    await createInitialCartItems();
     // await createInitialOrders();
     // await createInitialOrderItems();
   } catch (error) {

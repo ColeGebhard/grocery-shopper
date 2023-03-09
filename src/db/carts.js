@@ -46,7 +46,37 @@ async function createCartItems({
     }
 }
 
+async function getAllCarts() {
+
+    try {
+      const { rows } = await client.query(`
+      SELECT *
+      FROM carts;
+      `);
+  
+      return rows;
+    } catch (error) {
+      throw Error('Cannot get carts')
+    }
+  }
+
+async function getAllCartItems() {
+
+    try {
+      const { rows } = await client.query(`
+      SELECT *
+      FROM cart_items;
+      `);
+  
+      return rows;
+    } catch (error) {
+      throw Error('Cannot get carts')
+    }
+  }
+
 module.exports = {
     createCarts,
-    createCartItems
+    createCartItems, 
+    getAllCarts, 
+    getAllCartItems
 }

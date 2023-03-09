@@ -40,7 +40,10 @@ const usersRouter = require("./users");
 apiRouter.use("/users", usersRouter);
 
 const productsRouter = require("./products");
-apiRouter.use("/category", productsRouter)
+apiRouter.use("/category", productsRouter);
+
+const cartsRouter = require("./carts");
+apiRouter.use("/carts", cartsRouter);
 
 
 //Error handler

@@ -21,7 +21,7 @@ const Login = (props) => {
       } else if (!result.data.success) {
         setUsername("");
         setPassword("");
-        // LOGIN NOT COMPLETE. UNDEFINED ERROR IF USER LOGS IN WITHOUT PASSWORD AND USERNAME
+        // LOGIN NOT COMPLETE. UNDEFINED ERROR IF NO USER IS REGISTERED
         // The following lines show the error message to the user
         const addP = document.createElement("p");
         const errorContainer = document.getElementById("errorContainer");
