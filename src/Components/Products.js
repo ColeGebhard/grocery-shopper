@@ -11,7 +11,7 @@ const Products = (props) => {
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState(0);
     const [quanity, setQuanity] = useState(5);
-    const [photos, setPhotos] = useState(null);
+    const [photos, setPhotos] = useState([]);
     const [categoryId, setCategoryId] = useState(0)
 
 
@@ -34,6 +34,8 @@ const Products = (props) => {
                 console.error('Failed to get category')
             });
     }, [setCategories])
+
+    console.log(photos)
 
     const productSubmit = async (e) => {
         e.preventDefault();
@@ -86,7 +88,7 @@ const Products = (props) => {
                         setCategoryList(e.target.value)
                     }}
                 >
-                    <option value="any">Any</option>
+                    <option value="any">Select A Category</option>
                     {categories.map((category) =>
                         <option value={category.name} key={category.name}>{category.name}</option>
                     )};
@@ -118,8 +120,9 @@ const Products = (props) => {
                 <input
                     type="file"
                     placeholder="Category"
-                    value={photos}
-                    onChange={(e) => setPhotos(e.target.value)}
+                    accept="image/*"
+                    onChange={(e) => setPhotos(e.target.files[0])}
+                    
                 />
                 <button type="submit">Make a Product</button>
             </form>
@@ -131,7 +134,10 @@ const Products = (props) => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
-                        <img alt="Stuff">{product.photos}</img>
+                        {product.photos === null ?
+                        <p>placeholder</p>
+                        : <img alt="Stuff">{product.photos}</img>
+                        }
                     </div>
                 )
             })}

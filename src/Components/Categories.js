@@ -69,16 +69,19 @@ const Catagories = (props) => {
         <span>
           <h1>Products</h1>
           <span className="productCards">
-          {products.map((product) => {
-            return (
-              <div className="productCard">
-                <h2>{product.name}</h2>
-                <p>{product.description}</p>
-                <p>{product.price}</p>
-                <img alt="Stuff">{product.photos}</img>
-              </div>
-            )
-          })}
+            {products.map((product) => {
+              return (
+                <div className="productCard">
+                  <h2>{product.name}</h2>
+                  <p>{product.description}</p>
+                  <p>{product.price}</p>
+                  {product.photos === null ?
+                    <p>placeholder</p>
+                    : <img alt="Stuff">{product.photos}</img>
+                  }
+                </div>
+              )
+            })}
           </span>
         </span>
       </div>

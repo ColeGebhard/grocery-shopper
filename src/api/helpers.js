@@ -112,7 +112,8 @@ export async function createProducts({
     const response = await fetch(`http://localhost:8000/api/category/${categoryId}/products`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        // "Content-type": "image"
       },
       body: JSON.stringify({
         name,
@@ -120,7 +121,7 @@ export async function createProducts({
         price,
         photos,
         quanity,
-        categoryId: 1
+        categoryId
       })
     });
     const data = await response.json();
