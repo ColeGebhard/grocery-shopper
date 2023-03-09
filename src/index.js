@@ -6,7 +6,8 @@ import {
   Register,
   Login,
   Categories,
-  Products
+  Products,
+  Home
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -93,6 +94,10 @@ const App = () => {
             setCategories={setCategories}
           />
           }
+        />
+        <Route
+          path='/home'
+        
         />
       </Routes>
     </BrowserRouter>
