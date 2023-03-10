@@ -23,13 +23,49 @@ code {
   justify-content:space-between;
 }
 
-.categoryLinks {
+.categoryCards {
   display: flex;
   flex-direction: column;
+  gap: 1px;
+  padding: 0px;
+  margin:0px;
+}
+
+#catergoryClick {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    background-color: cadetblue;
+    font-size: 4vw;
+    padding: 10px;
+}
+
+#catergoryClick:hover {
+  background-color: rgb(76, 126, 128);
+  text-decoration: none;
+}
+
+.categoryLinks h2 {
+  margin:0px;
+  padding: 0px;
+}
+
+.categoryLinks {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  flex-direction: column;
+  background-color: cadetblue;
+  font-style: none;
 }
 
 .productCard {
+  font-size: 1.5vw;
   background-color: darkblue;
+  border-radius: 8%;
+  padding: 5px;
+  padding-top: 0px;
+  text-align: center;
 }
 
 .productCards {
@@ -37,4 +73,6 @@ code {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
+  gap:20px
+
 }
