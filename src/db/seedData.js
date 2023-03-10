@@ -339,7 +339,7 @@ async function createInitialCartItems() {
     console.log('Cart Items created:', cartItems);
     console.log('Finished creating cart items!');
   } catch (e) {
-    console.error("Error creating cart");
+    console.error("Error creating cart items");
     throw e;
   }
 }

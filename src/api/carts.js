@@ -2,7 +2,7 @@ const express = require("express");
 const cartsRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { createCartItems, createCarts, getAllCarts, getAllCartItems } = require("../db");
+const { createCartItems, createCarts, getAllCarts, getAllCartsWithItems } = require("../db");
 
 cartsRouter.get('/health', async (req, res, next) => {
   res.send({message: "All is well."});
@@ -24,12 +24,13 @@ cartsRouter.get('/', async (req, res, next) => {
 
 cartsRouter.get('/items', async (req, res, next) => {
   try {
-    const cartItems = await getAllCartItems();
-    console.log(cartItems)
-    // res.json(cartItems)
+    const cartItems = await getAllCartsWithItems();
+    res.json(cartItems);
   } catch (e) {
     next(e);
   }
 })
+
+// Cart work paused until products are further along
 
 module.exports = cartsRouter;
