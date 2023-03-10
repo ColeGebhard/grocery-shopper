@@ -56,8 +56,8 @@ const Catagories = (props) => {
         <button type="submit">Make Category</button>
       </form>
       <div className="mainProductPage">
-        <span>
-          <h1>Categories</h1>
+      <span className="categoryCards">
+      <h1>Categories</h1>
           {categories.map((category) => {
             return (
               <div className="categoryLinks">

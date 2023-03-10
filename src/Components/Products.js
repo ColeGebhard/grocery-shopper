@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import {Buffer} from 'buffer';
 import { getAllProducts, createProducts, getAllCategories } from "../api/helpers";
 
 const Products = (props) => {
@@ -80,7 +81,7 @@ const Products = (props) => {
     console.log(filteredProducts)
     return (
         <>
-            <form id="loginForm" onSubmit={productSubmit}>
+            <form id="loginForm" onSubmit={(e) => {productSubmit(e)}}>
 
                 <select name="categoryDrop" id="categoryDrop"
                     value={categoryList}
@@ -129,6 +130,13 @@ const Products = (props) => {
 
             <h1>{categoryName}</h1>
             {filteredProducts.map((product) => {
+                const photo = product.photos
+                console.log(photo)
+                function generateImageFromBuffer(photo) {
+                    const test = new Buffer.from(photo, 'base64')
+                    console.log(test.toString('base64'))
+                    return test.toString('base64')
+                }
                 return (
                     <div>
                         <h2>{product.name}</h2>
@@ -136,7 +144,7 @@ const Products = (props) => {
                         <p>{product.price}</p>
                         {product.photos === null ?
                         <p>placeholder</p>
-                        : <img alt="Stuff">{product.photos}</img>
+                        : <img alt="Stuff" src={generateImageFromBuffer(photo)}></img>
                         }
                     </div>
                 )
