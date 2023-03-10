@@ -46,37 +46,59 @@ async function createCartItems({
     }
 }
 
-async function getAllCarts() {
+// Ignore the next two for now. Replace by getAllCartsWithItems
 
-    try {
-      const { rows } = await client.query(`
-      SELECT *
-      FROM carts;
-      `);
+// async function getAllCarts() {
+
+//     try {
+//       const { rows } = await client.query(`
+//       SELECT *
+//       FROM carts;
+//       `);
   
-      return rows;
-    } catch (error) {
-      throw Error('Cannot get carts')
-    }
-  }
+//       return rows;
+//     } catch (error) {
+//       throw Error('Cannot get carts')
+//     }
+//   }
 
-async function getAllCartItems() {
+// async function getAllCartItems() {
 
-    try {
-      const { rows } = await client.query(`
-      SELECT *
-      FROM cart_items;
-      `);
+//     try {
+//       const { rows } = await client.query(`
+//       SELECT *
+//       FROM cart_items;
+//       `);
   
-      return rows;
+//       return rows;
+//     } catch (error) {
+//       throw Error('Cannot get cart items')
+//     }
+//   }
+
+
+
+async function getAllCartsWithItems() {
+    try {
+        const { rows } = await client.query(`
+        SELECT carts.*,
+        id 
+        FROM cart_items
+        JOIN carts ON cart_items."cartId" = carts.id
+        `)
+
+        console.log(rows)
+
+        return rows;
     } catch (error) {
-      throw Error('Cannot get carts')
+        throw Error('Cannot get carts with items')
     }
-  }
+}
 
 module.exports = {
     createCarts,
     createCartItems, 
-    getAllCarts, 
-    getAllCartItems
+    getAllCartsWithItems
 }
+
+// Cart work suspended until products finished
