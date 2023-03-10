@@ -12,8 +12,11 @@ const Products = (props) => {
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState(0);
     const [quanity, setQuanity] = useState(5);
-    const [photos, setPhotos] = useState([]);
+    const [photos, setPhotos] = useState(null);
     const [categoryId, setCategoryId] = useState(0)
+
+    // console.log(photos)
+    
 
 
     useEffect(() => {
@@ -36,12 +39,12 @@ const Products = (props) => {
             });
     }, [setCategories])
 
-    console.log(photos)
+    // console.log(photos)
 
     const productSubmit = async (e) => {
         e.preventDefault();
 
-        const filteredCategory = categories.filter(category => category.name === categoryList)
+        if (e) {const filteredCategory = await categories.filter(category => category.name === categoryList)
         console.log(filteredCategory[0].name)
         console.log(categoryList)
 
@@ -52,7 +55,9 @@ const Products = (props) => {
         if (filteredCategory[0].name === categoryList) {
             window.alert('Success')
         }
-        setCategoryId(filteredCategory[0].id)
+        setCategoryId(filteredCategory[0].id)}
+
+        console.log(photos)
         try {
             const result = await createProducts({
                 categoryId,
@@ -73,15 +78,28 @@ const Products = (props) => {
         }
     }
 
-    console.log(categories)
+    const onChangePicture = e => {
+        console.log('picture: ', photos);
+        console.log(e.target.files[0])
+        setPhotos(e.target.files[0]);
+        console.log('picture: ', photos);
+    };
+
+    const generateImageFromBuffer = (photos) => {
+        const test = new Buffer.from(photos, 'base64')
+        console.log(test.toString('base64'))
+        return test.toString('base64')
+    }
+
+    // console.log(categories)
 
     const { categoryName } = useParams();
 
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
-    console.log(filteredProducts)
+    // console.log(filteredProducts)
     return (
         <>
-            <form id="loginForm" onSubmit={(e) => {productSubmit(e)}}>
+            <form id="loginForm" onSubmit={productSubmit}>
 
                 <select name="categoryDrop" id="categoryDrop"
                     value={categoryList}
@@ -122,7 +140,7 @@ const Products = (props) => {
                     type="file"
                     placeholder="Category"
                     accept="image/*"
-                    onChange={(e) => setPhotos(e.target.files[0])}
+                    onChange={onChangePicture}
                     
                 />
                 <button type="submit">Make a Product</button>
@@ -130,12 +148,8 @@ const Products = (props) => {
 
             <h1>{categoryName}</h1>
             {filteredProducts.map((product) => {
-                const photo = product.photos
-                console.log(photo)
-                function generateImageFromBuffer(photo) {
-                    const test = new Buffer.from(photo, 'base64')
-                    console.log(test.toString('base64'))
-                    return test.toString('base64')
+                if (product.photos !== null) {
+                    generateImageFromBuffer(product.photos)
                 }
                 return (
                     <div>
@@ -144,7 +158,7 @@ const Products = (props) => {
                         <p>{product.price}</p>
                         {product.photos === null ?
                         <p>placeholder</p>
-                        : <img alt="Stuff" src={generateImageFromBuffer(photo)}></img>
+                        : <img alt="Product Img" src={product.photos}></img>
                         }
                     </div>
                 )

@@ -77,7 +77,7 @@ const Catagories = (props) => {
                   <p>{product.price}</p>
                   {product.photos === null ?
                     <p>placeholder</p>
-                    : <img alt="Stuff">{product.photos}</img>
+                    : <img alt="Stuff" src={product.photos.data}></img>
                   }
                 </div>
               )
