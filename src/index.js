@@ -7,7 +7,8 @@ import {
   Login,
   Categories,
   Products, 
-  Carts
+  Carts,
+  Home
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -38,9 +39,13 @@ const App = () => {
         <Route
           exact path="/"
           element={
-            "Tada! This is a placeholder for the Home component"
-            // <Home />
-            // This is a placeholder, Home does not exist yet;
+            <Home 
+            username={username}
+            token={token}
+            setToken={setToken}
+            products={products}
+            setProducts={setProducts}
+            />
           }
         />
         <Route
