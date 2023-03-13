@@ -79,6 +79,25 @@ async function getAllProducts() {
   }
 }
 
+async function getProductById(id) {
+
+  try {
+    const { rows: [product] } = await client.query(`
+    SELECT *
+    FROM products
+    WHERE id=${id};
+    `);
+
+    if (!product) {
+      return null
+    }
+
+    return product;
+  } catch (error) {
+    throw Error('Cannot get products')
+  }
+}
+
 async function getAllProductsWithCategoryId() {
     try {
         const { rows } = await client.query(`
@@ -108,5 +127,6 @@ module.exports = {
     createProduct,
     createReview,
     getAllProducts,
-    getAllProductsWithCategoryId
+    getAllProductsWithCategoryId,
+    getProductById
 }

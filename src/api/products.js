@@ -6,7 +6,8 @@ const {
     createCategory,
     getAllProducts,
     createProduct,
-    getAllProductsWithCategoryId
+    getAllProductsWithCategoryId,
+    getProductById
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -83,6 +84,25 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
         res.send(productToCategory)
     } catch ({name, message}) {
         next({ name, message})
+    }
+})
+
+productsRouter.get('/:prodId', async (req, res, next) => {
+    try {
+        const product = req.params.prodId
+
+        const singleProduct = await getProductById(product)
+
+        console.log(singleProduct)
+
+        if(singleProduct) {
+            res.send(singleProduct);
+        } else {
+            res.send({name:"No id", message:"Nothing to display"})
+        }
+
+    } catch (error) {
+        next({error})
     }
 })
 

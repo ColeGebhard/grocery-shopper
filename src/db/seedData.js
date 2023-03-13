@@ -77,16 +77,15 @@ async function createTables() {
     CREATE TABLE carts (
       id SERIAL PRIMARY KEY,
       "userId" INT REFERENCES users ( id ),
-      status SMALLINT
+      "isActive" BOOLEAN DEFAULT TRUE
     );
 
     CREATE TABLE cart_items (
       id SERIAL PRIMARY KEY,
       "cartId" INT REFERENCES carts ( id ),
       "productId" INT REFERENCES products ( id ),
-      quantity INT,
-      price INT,
-      "isActive" BOOLEAN default true
+      quantity INTEGER NOT NULL,
+      UNIQUE("cartId", "productId")
     );
 
     CREATE TABLE orders (
@@ -339,7 +338,7 @@ async function createInitialCartItems() {
     console.log('Cart Items created:', cartItems);
     console.log('Finished creating cart items!');
   } catch (e) {
-    console.error("Error creating cart items");
+    console.error("Error creating cart");
     throw e;
   }
 }

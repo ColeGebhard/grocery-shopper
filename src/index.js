@@ -6,7 +6,7 @@ import {
   Register,
   Login,
   Categories,
-  Products, 
+  Products,
   Carts,
   Home
 } from "./Components"
@@ -39,12 +39,12 @@ const App = () => {
         <Route
           exact path="/"
           element={
-            <Home 
-            username={username}
-            token={token}
-            setToken={setToken}
-            products={products}
-            setProducts={setProducts}
+            <Home
+              username={username}
+              token={token}
+              setToken={setToken}
+              products={products}
+              setProducts={setProducts}
             />
           }
         />
@@ -82,38 +82,48 @@ const App = () => {
         <Route
           exact path="/category"
           element={
-            <Categories 
-            categories={categories}
-            setCategories={setCategories}
-            name={name}
-            setName={setName}
-            products={products}
-            setProducts={setProducts}/>      
+            <Categories
+              categories={categories}
+              setCategories={setCategories}
+              name={name}
+              setName={setName}
+              products={products}
+              setProducts={setProducts} />
           }
         />
-        <Route 
+        <Route
           path='/category/:categoryName'
           element={
             <Products
-            products={products}
-            setProducts={setProducts}
-            categories={categories}
-            setCategories={setCategories}
-          />
+              products={products}
+              setProducts={setProducts}
+              categories={categories}
+              setCategories={setCategories}
+            />
           }
         />
-        <Route 
+        <Route
+          path='/product/:prodId'
+          element={
+            <Products
+              products={products}
+              setProducts={setProducts}
+
+            />
+          }
+        />
+        <Route
           path='/carts'
           element={
             <Carts
-            products={products}
-            categories={categories}
-            currentCart={currentCart}
-            setCurrentCart={setCurrentCart}
-            allCarts={allCarts}
-            setAllCarts={setAllCarts}
+              products={products}
+              categories={categories}
+              currentCart={currentCart}
+              setCurrentCart={setCurrentCart}
+              allCarts={allCarts}
+              setAllCarts={setAllCarts}
 
-          />
+            />
           }
         />
       </Routes>
