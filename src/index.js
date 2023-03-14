@@ -8,7 +8,8 @@ import {
   Categories,
   Products,
   Carts,
-  Home
+  Home,
+  SingleProduct
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -103,12 +104,11 @@ const App = () => {
           }
         />
         <Route
-          path='/product/:prodId'
+          path='/category/product/:prodId'
           element={
-            <Products
+            <SingleProduct
               products={products}
               setProducts={setProducts}
-
             />
           }
         />

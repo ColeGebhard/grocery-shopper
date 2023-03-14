@@ -91,6 +91,8 @@ productsRouter.get('/:prodId', async (req, res, next) => {
     try {
         const product = req.params.prodId
 
+        console.log(product)
+
         const singleProduct = await getProductById(product)
 
         console.log(singleProduct)
