@@ -156,6 +156,7 @@ const Products = (props) => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
+                        <h2><a id="catergoryClick" href={`./product/${product.id}`}>{product.name}</a></h2>
                         {product.photos === null ?
                         <p>placeholder</p>
                         : <img alt="Product Img" src={product.photos}></img>

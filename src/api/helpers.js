@@ -100,6 +100,25 @@ export async function getAllProducts() {
   }
 }
 
+export async function getSingleProduct(id) {
+  try {
+    const response = await fetch(`http://localhost:8000/api/category/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    console.error('Cannot get product')
+    throw Error(error);
+  }
+}
+
+
 export async function createProducts({
   name,
   description,
