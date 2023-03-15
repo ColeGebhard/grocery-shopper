@@ -1,5 +1,11 @@
 const client = require("./client")
 
+// async function getCartByUserId(userId) {
+//     try {
+
+//     }
+// }
+
 async function createCarts({
     userId,
     status
@@ -45,6 +51,9 @@ async function createCartItems({
         throw Error(error)
     }
 }
+
+
+
 
 // Ignore the next two for now. Replace by getAllCartsWithItems
 

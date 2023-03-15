@@ -4,11 +4,13 @@ import { getSingleProduct } from "../api/helpers";
 
 
 const SingleProduct = (props) => {
-    const { products, setProducts, currentCart, setCurrentCart } = props;
+    const { products, setProducts, currentCart, setCurrentCart, me } = props;
 
     const [cartItems, setCartItems] = useState([])
 
     const { prodId } = useParams()
+
+    
 
     useEffect(() => {
         getSingleProduct(prodId)
@@ -20,9 +22,12 @@ const SingleProduct = (props) => {
             });
     }, [setProducts, prodId])
 
-    console.log(products)
+    console.log(me)
 
-
+    function createCartItems() {
+        const prodId = products.id;
+        console.log(prodId)
+    }
 
     return (
         products ?
@@ -33,12 +38,15 @@ const SingleProduct = (props) => {
                 <p>{products.price}</p>
                 {products.photos ?
                     <img
-                        className="productPhoto"
+                        className="productPhotoSingleView"
                         src={products.photos}
                         alt='food'
                     /> :
                     null}
-                <button className="button">
+                <button 
+                className="button"
+                onClick={createCartItems}
+               >
                     <span>Add to cart</span>
                 </button>
             </div>
