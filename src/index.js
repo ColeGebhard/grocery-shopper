@@ -109,6 +109,8 @@ const App = () => {
             <SingleProduct
               products={products}
               setProducts={setProducts}
+              currentCart={currentCart}
+              setCurrentCart={setCurrentCart}
             />
           }
         />
