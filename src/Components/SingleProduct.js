@@ -4,7 +4,9 @@ import { getSingleProduct } from "../api/helpers";
 
 
 const SingleProduct = (props) => {
-    const { products, setProducts } = props;
+    const { products, setProducts, currentCart, setCurrentCart } = props;
+
+    const [cartItems, setCartItems] = useState([])
 
     const { prodId } = useParams()
 
@@ -20,16 +22,28 @@ const SingleProduct = (props) => {
 
     console.log(products)
 
-    return(
-       products ?
-       
-       <div>
-            <h2>{products.name}</h2>
-            <p>{products.description}</p>
-            <p>{products.price}</p>
-        </div>
-        :null
-    
+
+
+    return (
+        products ?
+
+            <div>
+                <h2>{products.name}</h2>
+                <p>{products.description}</p>
+                <p>{products.price}</p>
+                {products.photos ?
+                    <img
+                        className="productPhoto"
+                        src={products.photos}
+                        alt='food'
+                    /> :
+                    null}
+                <button className="button">
+                    <span>Add to cart</span>
+                </button>
+            </div>
+            : null
+
     )
 }
 

@@ -62,7 +62,7 @@ async function createTables() {
       name VARCHAR(255) UNIQUE NOT NULL,
       description VARCHAR(255) NOT NULL,
       price INTEGER NOT NULL,
-      photos BYTEA,
+      photos VARCHAR(255),
       quantity INT
     );
 
@@ -183,6 +183,7 @@ async function createInitialProducts() {
       name: "Apple",
       description: "Taste of summer",
       price: 20,
+      photos: 'https://usapple.org/wp-content/uploads/2019/10/apple-pink-lady.png',
       quantity: 4,
     },
     {
@@ -397,8 +398,8 @@ async function rebuildDB() {
     await createInitialProducts();
     await filterByCategory();
     // await createInitialReviews();
-    await createInitialCarts();
-    await createInitialCartItems();
+    // await createInitialCarts();
+    // await createInitialCartItems();
     // await createInitialOrders();
     // await createInitialOrderItems();
   } catch (error) {
