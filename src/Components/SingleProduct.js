@@ -1,3 +1,4 @@
+import { create } from "domain";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getSingleProduct } from "../api/helpers";
@@ -21,8 +22,11 @@ const SingleProduct = (props) => {
     }, [setProducts, prodId])
 
     console.log(products)
+    console.log(cartItems)
 
-
+    function createCartItems() {
+        // console.log(products)
+    }
 
     return (
         products ?
@@ -38,7 +42,9 @@ const SingleProduct = (props) => {
                         alt='food'
                     /> :
                     null}
-                <button className="button">
+                <button 
+                className="button"
+               >
                     <span>Add to cart</span>
                 </button>
             </div>
