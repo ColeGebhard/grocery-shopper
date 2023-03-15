@@ -31,6 +31,22 @@ cartsRouter.get('/items', async (req, res, next) => {
   }
 })
 
+cartsRouter.post('/cart/:productId', async (req, res, next) => {
+  const { productId } = req.params;
+
+  try {
+      const productToCart = await createCartItems({ 
+          productId,
+ })
+
+          console.log(productToCart)
+
+      res.send(productToCart)
+  } catch ({name, message}) {
+      next({ name, message})
+  }
+})
+
 // Cart work paused until products are further along
 
 module.exports = cartsRouter;

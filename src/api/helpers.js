@@ -1,5 +1,26 @@
 import { USER_STORAGE_KEY } from "..";
 
+export const isUser = async (token) => {
+
+  try {
+
+      const resp = await fetch(`http://localhost:8000/api/users/me`, {
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${token}`
+          },
+      });
+
+      const data = await resp.json();
+      if(data.username){
+      return data
+      }
+      return false
+  } catch (error) {
+      console.error(error)
+  }
+}
+
 
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {

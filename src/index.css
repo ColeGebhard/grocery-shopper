@@ -76,3 +76,10 @@ code {
   gap:20px
 
 }
+
+/*Single view style*/
+
+.productPhotoSingleView {
+  max-height: 20vw;
+  max-width: 20vw;
+}

@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useCallback } from 'react';
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
+import { isUser } from './api/helpers';
+
 import {
   Register,
   Login,
@@ -26,6 +28,7 @@ const App = () => {
   const [lastName, setLastName] = useState("");
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [me, setMe] = useState('');
   const [availible, setAvailible] = useState(true);
   const [name, setName] = useState("");
   const [description, setDesciption] = useState("");
@@ -34,6 +37,33 @@ const App = () => {
   const [currentCart, setCurrentCart] = useState({})
   const [allCarts, setAllCarts] = useState([]);
 
+  //Worked for me but can change
+
+  const logout = useCallback(() => {
+    localStorage.removeItem(TOKEN_STORAGE_KEY);
+    localStorage.removeItem(token);
+
+
+    setToken('');
+    setMe(null);
+    window.location.replace('http://localhost:3000/#/');
+    window.location.reload();
+    window.alert('Log out success');
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      isUser(token)
+        .then((me) => {
+          setMe(me);
+        })
+        .catch((e) => {
+          throw new Error(`Failed to fetch myself.`);
+        });
+    }
+
+  }, [token]);
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -111,6 +141,7 @@ const App = () => {
               setProducts={setProducts}
               currentCart={currentCart}
               setCurrentCart={setCurrentCart}
+              me={me}
             />
           }
         />
@@ -124,7 +155,6 @@ const App = () => {
               setCurrentCart={setCurrentCart}
               allCarts={allCarts}
               setAllCarts={setAllCarts}
-
             />
           }
         />

@@ -113,4 +113,26 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
+usersRouter.get('/me', async (req, res) => {
+  try {
+      if (req.headers.authorization) {
+          const userToken = req.headers.authorization
+          const token = userToken.split(' ');
+          const data = jwt.verify(token[1], JWT_SECRET);
+          res.send({
+              id: data.id, username: data.username
+          })
+      }
+      if (!req.headers.authorization) {
+          res.status(401).send({
+              error: "failed to getme",
+              message: "You must be logged in to perform this action",
+              name: "Please log in."
+          })
+      }
+  } catch (error) {
+      throw Error('no user');
+  }
+})
+
 module.exports = usersRouter
