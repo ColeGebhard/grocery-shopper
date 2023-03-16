@@ -84,7 +84,11 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       "cartId" INT REFERENCES carts ( id ),
       "productId" INT REFERENCES products ( id ),
-      quantity INTEGER NOT NULL,
+      name VARCHAR(255) UNIQUE NOT NULL,
+      description VARCHAR(255) NOT NULL,
+      price INTEGER NOT NULL,
+      photos VARCHAR(255),
+      quantity INT,
       UNIQUE("cartId", "productId")
     );
 
@@ -191,7 +195,8 @@ async function createInitialProducts() {
       creatorId: 2,
       isAvailible: true,
       name: "Broccolli",
-      description: "Taste of summer",
+      description: 'Earthy and green',
+      photos: "https://p7.hiclipart.com/preview/37/853/164/broccoli-organic-food-cauliflower-vegetable-broccoli.jpg",
       price: 25,
       quantity: 10,
     },
@@ -201,6 +206,7 @@ async function createInitialProducts() {
       isAvailible: true,
       name: "Milk",
       description: "Freshest of cows",
+      photos: 'https://banner2.cleanpng.com/20180313/uaw/kisspng-photo-on-a-milk-carton-photo-on-a-milk-carton-roya-vector-food-milk-5aa87557a12fa8.8677783115209895276602.jpg',
       price: 50,
       quantity: 2,
     },
@@ -210,6 +216,7 @@ async function createInitialProducts() {
       isAvailible: true,
       name: "Cheese",
       description: "Freshest of cows",
+      photos:"https://www.pngfind.com/pngs/m/55-551675_cheese-transparent-background-cheese-png-png-download.png",
       price: 50,
       quantity: 2,
     },

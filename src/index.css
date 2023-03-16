@@ -79,7 +79,65 @@ code {
 
 /*Single view style*/
 
-.productPhotoSingleView {
-  max-height: 20vw;
-  max-width: 20vw;
+.productView {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
 }
+
+.productImage {
+  flex: 1;
+  max-width: 50%;
+  margin-right: 2rem;
+}
+
+.productImage img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.productDetails {
+  flex: 1;
+  max-width: 50%;
+}
+
+.productDetails h2 {
+  font-size: 2rem;
+  margin: 0 0 1rem;
+}
+
+.productDetails .productDescription {
+  font-size: 1.2rem;
+  margin: 0 0 1rem;
+}
+
+.productDetails .productInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.productDetails .productPrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.productDetails .productAddToCart {
+  font-size: 1.5rem;
+  background-color: #0077c2;
+  color: #fff;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.productDetails .productAddToCart:hover {
+  background-color: #005ea8;
+}
+

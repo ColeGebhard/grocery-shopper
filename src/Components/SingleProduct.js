@@ -24,37 +24,84 @@ const SingleProduct = (props) => {
 
     console.log(me)
 
-  const handleAddToCart = async () => {
-    const cartId = currentCart.id; // Replace this with the actual cart ID
-    const productId = products.id;
-    const quantity = 1; // Replace this with the desired quantity
-    const cartItem = await createCartItem({ cartId, productId, quantity });
-    // Update the cart in your frontend with the added product
-    return cartItem;
-  };
+    console.log(products.name)
 
-  console.log(currentCart)
+    const handleAddToCart = async () => {
+        const cartId = currentCart.id; // Replace this with the actual cart ID
+        const productId = products.id;
+        const quantity = products.quantity; // Replace this with the desired quantity
+        const cartItem = await createCartItem({
+            cartId,
+            productId,
+            quantity
+        });
+        // Update the cart in your frontend with the added product
+        return cartItem;
+    };
+
+
+
+
+    console.log(currentCart)
 
     return (
         products ?
 
-            <div>
-                <h2>{products.name}</h2>
-                <p>{products.description}</p>
-                <p>{products.price}</p>
-                {products.photos ?
-                    <img
-                        className="productPhotoSingleView"
-                        src={products.photos}
-                        alt='food'
-                    /> :
-                    null}
-                <button 
-                className="button"
-                onClick={handleAddToCart}
-               >
-                    <span>Add to cart</span>
-                </button>
+            // <div className="productContainer">
+            //     <div className="productImageContainer">
+            //         {products.photos ?
+            //             <img
+            //                 className="productImageSingleView"
+            //                 src={products.photos}
+            //                 alt='food'
+            //             /> :
+            //             null
+            //         }
+            //     </div>
+            //     <div className="productDetailsContainer">
+            //         <h2 className="productName">{products.name}</h2>
+            //         <p className="productDescription">{products.description}</p>
+            //         <p className="productPrice">${products.price.toFixed(2)}</p>
+            //         <div className="productQuantityContainer">
+            //             <button
+            //                 className="quantityButton"
+            //                 disabled={products.quantity <= 1}
+            //                 // onClick={() => handleQuantityChange(-1)}
+            //             >
+            //                 -
+            //             </button>
+            //             {/* <span className="productQuantity">{quantity}</span> */}
+            //             <button
+            //                 className="quantityButton"
+            //                 disabled={products.quantity <= 0}
+            //                 // onClick={() => handleQuantityChange(1)}
+            //             >
+            //                 +
+            //             </button>
+            //         </div>
+            //         <button
+            //             className="addToCartButton"
+            //             onClick={handleAddToCart}
+            //             disabled={products.quantity <= 0}
+            //         >
+            //             Add to Cart
+            //         </button>
+            //     </div>
+            // </div>
+            <div className="productView">
+                <div className="productImage">
+                    <img src={products.photos} alt={products.name} />
+                </div>
+                <div className="productDetails">
+                    <h2>{products.name}</h2>
+                    <p className="productDescription">{products.description}</p>
+                    <div className="productInfo">
+                        {products.price &&
+                            <p>{products.price.toFixed(2)}</p>
+                        }
+                        <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
+                    </div>
+                </div>
             </div>
             : null
 
