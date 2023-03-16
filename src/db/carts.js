@@ -25,27 +25,44 @@ async function createCarts({
         throw Error(error);
     }
 }
-async function createCartItems({
-    cartId,
-    productId,
-    quantity,
-}) {
-    try {
-        const { rows: [cartItem] } = await client.query(`
-        INSERT INTO cart_items(
-            "cartId",
-            "productId",
-            quantity
-        )
-        VALUES ($1,$2,$3)
-        RETURNING *;
-        `, [ cartId, productId, quantity])
 
-        return cartItem;
-    } catch (error) {
-        throw Error(error)
-    }
+async function createCartItems({ cartId, productId, quantity }) {
+  try {
+    // Fetch the product details from the database
+    const { rows: [product] } = await client.query(`
+      SELECT * FROM products WHERE id=$1;
+    `, [productId]);
+
+    // Insert a new item into the cart_items table, using the product details
+    const { rows: [cartItem] } = await client.query(`
+      INSERT INTO cart_items (
+        "cartId", 
+        "productId", 
+        "name", 
+        "description", 
+        "price", 
+        "photos", 
+        "quantity"
+      ) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7) 
+      RETURNING *;
+    `, [
+      cartId,
+      productId,
+      product.name, // Set the name field using the product name
+      product.description,
+      product.price,
+      product.photos,
+      quantity,
+    ]);
+
+    return cartItem;
+  } catch (error) {
+    throw Error(error);
+  }
 }
+
+
 
 async function getCartById(cartId) {
     try {

@@ -51,27 +51,32 @@ const App = () => {
     window.alert('Log out success');
   }, [token]);
 
-  const createCartFunction = async() => {
-    const me = await isUser(token);
-    const userId = me.id;
-  
+  const createCartFunction = async () => {
     try {
-      let cartId = localStorage.getItem('cartId');
-      let cart;
+      const me = await isUser(token);
+
+      if (me) {
+        const userId = me.id;
+        let cartId = localStorage.getItem('cartId');
+        let cart;
   
-      if (cartId) {
-        cart = await getCart(cartId);
+        if (cartId) {
+          cart = await getCart(cartId);
+        } else {
+          cart = await createCart(userId);
+          localStorage.setItem('cartId', cart.id);
+        }
+  
+        setCurrentCart(cart);
       } else {
-        cart = await createCart(userId);
-        localStorage.setItem('cartId', cart.id);
+        localStorage.setItem('cartId', 'guest')
       }
-  
-      setCurrentCart(cart);
     } catch (e) {
       console.error(e);
       throw e;
     }
   };
+  
   
 
   console.log(currentCart)
