@@ -43,7 +43,7 @@ const Home = (props) => {
         </h3>
         {products.map((product) => {
                 return (
-                    <div className="individualProduct">
+                    <div className="individualProduct" key={product.id}>
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>{product.price}</p> 
