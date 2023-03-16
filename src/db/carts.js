@@ -8,49 +8,59 @@ const client = require("./client")
 
 async function createCarts({
     userId,
-    status
 }) {
     try {
+        console.log("Creating new cart for userId:", userId);
         const { rows: [cart] } = await client.query(`
-        INSERT INTO carts("userId",status)
-        VALUES ($1,$2)
+        INSERT INTO carts("userId")
+        VALUES ($1)
         RETURNING *
         `, [
             userId,
-            status
         ]);
-
+        console.log("New cart created:", cart);
         return cart
     } catch (error) {
+        console.error("Error creating new cart:", error);
         throw Error(error);
     }
 }
-
 async function createCartItems({
     cartId,
     productId,
     quantity,
-    price,
-    isActive
 }) {
     try {
         const { rows: [cartItem] } = await client.query(`
         INSERT INTO cart_items(
             "cartId",
             "productId",
-            quantity,
-            price,
-            "isActive"
+            quantity
         )
-        VALUES ($1,$2,$3,$4,$5)
+        VALUES ($1,$2,$3)
         RETURNING *;
-        `, [ cartId, productId, quantity, price, isActive ])
+        `, [ cartId, productId, quantity])
 
         return cartItem;
     } catch (error) {
         throw Error(error)
     }
 }
+
+async function getCartById(cartId) {
+    try {
+        const { rows: [cart] } = await client.query(`
+        SELECT *
+        FROM carts
+        WHERE id = $1;
+        `, [cartId]);
+  
+        return cart;
+    } catch (error) {
+        throw Error(error);
+    }
+  }
+  
 
 
 
@@ -107,7 +117,8 @@ async function getAllCartsWithItems() {
 module.exports = {
     createCarts,
     createCartItems, 
-    getAllCartsWithItems
+    getAllCartsWithItems,
+    getCartById
 }
 
 // Cart work suspended until products finished
