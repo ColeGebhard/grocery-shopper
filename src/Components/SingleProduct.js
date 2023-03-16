@@ -27,17 +27,23 @@ const SingleProduct = (props) => {
     console.log(products.name)
 
     const handleAddToCart = async () => {
-        const cartId = currentCart.id; // Replace this with the actual cart ID
-        const productId = products.id;
-        const quantity = products.quantity; // Replace this with the desired quantity
-        const cartItem = await createCartItem({
+        try {
+          const cartId = currentCart.id; // Replace this with the actual cart ID
+          const productId = products.id;
+          const quantity = products.quantity; // Replace this with the desired quantity
+          const cartItem = await createCartItem({
             cartId,
             productId,
-            quantity
-        });
-        // Update the cart in your frontend with the added product
-        return cartItem;
-    };
+            quantity,
+          });
+          // Update the cart in your frontend with the added product
+          return cartItem;
+        } catch (error) {
+          console.error(error);
+          // Handle the error in some way (e.g. show an error message to the user)
+        }
+      };
+      
 
 
 
@@ -97,7 +103,7 @@ const SingleProduct = (props) => {
                     <p className="productDescription">{products.description}</p>
                     <div className="productInfo">
                         {products.price &&
-                            <p>{products.price.toFixed(2)}</p>
+                            <p>${products.price.toFixed(2)}</p>
                         }
                         <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
                     </div>
