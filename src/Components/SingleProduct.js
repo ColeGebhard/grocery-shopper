@@ -33,6 +33,8 @@ const SingleProduct = (props) => {
     return cartItem;
   };
 
+  console.log(currentCart)
+
     return (
         products ?
 
