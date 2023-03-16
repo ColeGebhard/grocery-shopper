@@ -34,7 +34,7 @@ const App = () => {
   const [description, setDesciption] = useState("");
   const [price, setPrice] = useState(0);
   const [quanity, setQuanity] = useState(5);
-  const [currentCart, setCurrentCart] = useState([])
+  const [currentCart, setCurrentCart] = useState(null)
   const [allCarts, setAllCarts] = useState([]);
 
   //Worked for me but can change
@@ -54,28 +54,36 @@ const App = () => {
   const createCartFunction = async () => {
     try {
       const me = await isUser(token);
-
+  
       if (me) {
         const userId = me.id;
         let cartId = localStorage.getItem('cartId');
         let cart;
   
         if (cartId) {
-          cart = await getCart(cartId);
-        } else {
+          const existingCart = await getCart(cartId);
+          if (existingCart) {
+            cart = existingCart;
+          } else {
+            localStorage.removeItem('cartId');
+          }
+        }
+  
+        if (!cart) {
           cart = await createCart(userId);
           localStorage.setItem('cartId', cart.id);
         }
   
         setCurrentCart(cart);
       } else {
-        localStorage.setItem('cartId', 'guest')
+        localStorage.setItem('cartId', 'guest');
       }
     } catch (e) {
       console.error(e);
       throw e;
     }
   };
+  
   
   
 
