@@ -61,7 +61,34 @@ async function getCartById(cartId) {
     }
   }
   
+  async function attachCartItemsToCart(cartId, cartItemId) {
+    try {
+      const { rows: [updatedCartItem] } = await client.query(`
+        UPDATE cart_items
+        SET "cartId" = $1
+        WHERE id = $2
+        RETURNING *;
+      `, [cartId, cartItemId]);
+  
+      return updatedCartItem;
+    } catch (error) {
+      throw Error(error);
+    }
+  }
 
+  async function getCartItemsByCartId(cartId) {
+    try {
+      const { rows: cartItems } = await client.query(`
+        SELECT *
+        FROM cart_items
+        WHERE "cartId" = $1
+      `, [cartId]);
+  
+      return cartItems;
+    } catch (error) {
+      throw Error(error);
+    }
+  }
 
 
 
@@ -118,7 +145,9 @@ module.exports = {
     createCarts,
     createCartItems, 
     getAllCartsWithItems,
-    getCartById
+    getCartById,
+    attachCartItemsToCart,
+    getCartItemsByCartId
 }
 
 // Cart work suspended until products finished

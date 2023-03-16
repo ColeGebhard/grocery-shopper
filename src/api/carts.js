@@ -2,7 +2,16 @@ const express = require("express");
 const cartsRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { createCartItems, createCarts, getAllCarts, getAllCartsWithItems, getCartById } = require("../db");
+const { 
+  createCartItems, 
+  createCarts, 
+  getAllCarts, 
+  getAllCartsWithItems, 
+  getCartById, 
+  attachCartItemsToCart,
+  getCartItemsByCartId
+
+} = require("../db");
 
 cartsRouter.get('/health', async (req, res, next) => {
   res.send({message: "All is well."});
@@ -36,6 +45,9 @@ cartsRouter.get('/:cartId', async (req, res, next) => {
 
   try {
       const cart = await getCartById(cartId);
+      const cartItems = await getCartItemsByCartId(cartId)
+
+      cart.items = cartItems;
 
       res.send(cart);
   } catch ({name, message}) {
@@ -66,8 +78,13 @@ cartsRouter.post('/:cartId/items', async (req, res, next) => {
   try {
     const { cartId } = req.params;
     const { productId, quantity } = req.body;
+
     const cartItem = await createCartItems({ cartId, productId, quantity });
-    res.status(201).json(cartItem);
+    const updatedCartItem = await attachCartItemsToCart(cartId, cartItem.id);
+
+    console.log(updatedCartItem)
+
+    res.send(updatedCartItem);
   } catch (error) {
     next(error);
   }
