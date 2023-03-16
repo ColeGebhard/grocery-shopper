@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getSingleProduct } from "../api/helpers";
+import { getSingleProduct, createCartItem } from "../api/helpers";
 
 
 const SingleProduct = (props) => {
@@ -10,7 +10,7 @@ const SingleProduct = (props) => {
 
     const { prodId } = useParams()
 
-    
+
 
     useEffect(() => {
         getSingleProduct(prodId)
@@ -24,10 +24,14 @@ const SingleProduct = (props) => {
 
     console.log(me)
 
-    function createCartItems() {
-        const prodId = products.id;
-        console.log(prodId)
-    }
+  const handleAddToCart = async () => {
+    const cartId = currentCart.id; // Replace this with the actual cart ID
+    const productId = products.id;
+    const quantity = 1; // Replace this with the desired quantity
+    const cartItem = await createCartItem({ cartId, productId, quantity });
+    // Update the cart in your frontend with the added product
+    return cartItem;
+  };
 
     return (
         products ?
@@ -45,7 +49,7 @@ const SingleProduct = (props) => {
                     null}
                 <button 
                 className="button"
-                onClick={createCartItems}
+                onClick={handleAddToCart}
                >
                     <span>Add to cart</span>
                 </button>

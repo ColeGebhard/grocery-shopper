@@ -2,7 +2,7 @@ const express = require("express");
 const cartsRouter = express.Router();
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { createCartItems, createCarts, getAllCarts, getAllCartsWithItems } = require("../db");
+const { createCartItems, createCarts, getAllCarts, getAllCartsWithItems, getCartById } = require("../db");
 
 cartsRouter.get('/health', async (req, res, next) => {
   res.send({message: "All is well."});
@@ -31,21 +31,47 @@ cartsRouter.get('/items', async (req, res, next) => {
   }
 })
 
-cartsRouter.post('/cart/:productId', async (req, res, next) => {
-  const { productId } = req.params;
+cartsRouter.get('/:cartId', async (req, res, next) => {
+  const { cartId } = req.params;
 
   try {
-      const productToCart = await createCartItems({ 
-          productId,
+      const cart = await getCartById(cartId);
+
+      res.send(cart);
+  } catch ({name, message}) {
+      next({ name, message})
+  }
+})
+
+
+cartsRouter.post('/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+
+  console.log(userId)
+
+  try {
+      const productToCart = await createCarts({ 
+          userId
  })
 
-          console.log(productToCart)
+    console.log(productToCart)
 
       res.send(productToCart)
   } catch ({name, message}) {
       next({ name, message})
   }
 })
+
+cartsRouter.post('/:cartId/items', async (req, res, next) => {
+  try {
+    const { cartId } = req.params;
+    const { productId, quantity } = req.body;
+    const cartItem = await createCartItems({ cartId, productId, quantity });
+    res.status(201).json(cartItem);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // Cart work paused until products are further along
 

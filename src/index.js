@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { useEffect, useState,useCallback } from 'react';
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
-import { isUser } from './api/helpers';
+import { isUser, createCart, getAllCarts, getCart } from './api/helpers';
 
 import {
   Register,
@@ -34,7 +34,7 @@ const App = () => {
   const [description, setDesciption] = useState("");
   const [price, setPrice] = useState(0);
   const [quanity, setQuanity] = useState(5);
-  const [currentCart, setCurrentCart] = useState({})
+  const [currentCart, setCurrentCart] = useState([])
   const [allCarts, setAllCarts] = useState([]);
 
   //Worked for me but can change
@@ -51,6 +51,31 @@ const App = () => {
     window.alert('Log out success');
   }, [token]);
 
+  const createCartFunction = async() => {
+    const me = await isUser(token);
+    const userId = me.id;
+  
+    try {
+      let cartId = localStorage.getItem('cartId');
+      let cart;
+  
+      if (cartId) {
+        cart = await getCart(cartId);
+      } else {
+        cart = await createCart(userId);
+        localStorage.setItem('cartId', cart.id);
+      }
+  
+      setCurrentCart(cart);
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  };
+  
+
+  console.log(currentCart)
+
   useEffect(() => {
     if (token) {
       isUser(token)
@@ -63,6 +88,23 @@ const App = () => {
     }
 
   }, [token]);
+
+  // useEffect((me) => {
+  //   if (me) {
+  //     createCart(me.id)
+  //       .then((currentCart) => {
+  //         setCurrentCart(currentCart);
+  //       })
+  //       .catch((e) => {
+  //         throw new Error(`Failed to make cart`);
+  //       });
+  //   }
+
+  // }, [me]);
+
+  window.onload = function() {
+    createCartFunction()
+  };
   
   return (
     <BrowserRouter>

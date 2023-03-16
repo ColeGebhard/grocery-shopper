@@ -21,7 +21,6 @@ export const isUser = async (token) => {
   }
 }
 
-
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {
     const response = await fetch("http://localhost:8000/api/users/register", {
@@ -201,6 +200,63 @@ export async function getAllCartItems() {
     const data = await response.json();
 
     return data
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
+export const createCart = async (userId) => {
+
+  try {
+
+      const resp = await fetch(`http://localhost:8000/api/carts/${userId}`, {
+        method: "POST",
+          headers: {
+              'Content-Type': 'application/json',
+          },
+      });
+
+      const data = await resp.json();
+
+      console.log(data)
+
+      return data
+  } catch (error) {
+      console.error(error)
+  }
+}
+
+export const getCart = async (cartId) => {
+  try {
+    const response = await fetch(`http://localhost:8000/api/carts/${cartId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export async function createCartItem({
+  cartId,
+  productId,
+  quantity,
+}) {
+  try {
+    const response = await fetch(`http://localhost:8000/api/carts/${cartId}/items`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productId,
+        quantity,
+      })
+    });
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
   } catch (error) {
     throw Error(error);
   }
