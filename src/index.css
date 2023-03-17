@@ -20,12 +20,14 @@ code {
 
 .mainProductPage {
   display: flex;
+  flex-direction: column;
   justify-content:space-between;
+  align-items: center;
 }
 
 .categoryCards {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 1px;
   padding: 0px;
   margin:0px;
@@ -36,6 +38,8 @@ code {
     display: flex;
     flex-direction: column;
     background-color: cadetblue;
+    color:#fff;
+    transition: background-color 0.2s ease-in-out;
     font-size: 4vw;
     padding: 10px;
 }

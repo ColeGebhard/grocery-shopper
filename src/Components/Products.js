@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Buffer } from 'buffer';
 import { getAllProducts, createProducts, getAllCategories } from "../api/helpers";
 
 const Products = (props) => {
     const { products, setProducts, categories, setCategories } = props;
 
     const [categoryList, setCategoryList] = useState('any');
-    const [availible, setAvailible] = useState(true);
     const [name, setName] = useState("");
     const [description, setDesciption] = useState("");
-    const [price, setPrice] = useState(0);
-    const [quanity, setQuanity] = useState(5);
+    const [price, setPrice] = useState();
+    const [quanity, setQuanity] = useState();
     const [photos, setPhotos] = useState("");
-    const [categoryId, setCategoryId] = useState(0)
+    const [categoryId, setCategoryId] = useState();
 
     // console.log(photos)
 
@@ -44,20 +42,18 @@ const Products = (props) => {
     const productSubmit = async (e) => {
         e.preventDefault();
 
-        if (e) {
-            const filteredCategory = await categories.filter(category => category.name === categoryList)
-            console.log(filteredCategory[0].name)
-            console.log(categoryList)
-
-            if (filteredCategory[0].name !== categoryList) {
-                window.alert('Error')
-            }
-
-            if (filteredCategory[0].name === categoryList) {
-                window.alert('Success')
-            }
-            setCategoryId(filteredCategory[0].id)
+        if (!categoryList || categoryList === 'any') {
+            window.alert('Please select a category');
+            return;
         }
+
+        const filteredCategory = categories.find(category => category.name === categoryList);
+        if (!filteredCategory) {
+            window.alert('Invalid category');
+            return;
+        }
+
+        setCategoryId(filteredCategory.id);
 
         try {
             const result = await createProducts({
@@ -68,14 +64,11 @@ const Products = (props) => {
                 photos,
                 quanity,
             });
-
             console.log(result)
             return result;
         } catch (e) {
             console.error(e);
             throw e;
-        } finally {
-
         }
     }
 
@@ -85,7 +78,7 @@ const Products = (props) => {
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
     return (
         <>
-            <form id="loginForm" onSubmit={productSubmit}>
+            <form id="productForm" onSubmit={productSubmit}>
 
                 <select name="categoryDrop" id="categoryDrop"
                     value={categoryList}
@@ -124,7 +117,7 @@ const Products = (props) => {
                 />
                 <input
                     type="url"
-                    placeholder="Category"
+                    placeholder="imageURL"
                     accept="image/*"
                     value={photos}
                     onChange={(e) => setPhotos(e.target.value)}
@@ -137,15 +130,15 @@ const Products = (props) => {
             {filteredProducts.map((product) => {
 
                 return (
-                    <div>
-                        <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p>{product.price}</p>
-                        <div className="productImage">
-                            {product.photos &&
-                                <img src={require(`../img/${product.photos}`)} alt={product.name} />
-                            }                </div>
-                    </div>
+                    <a href={`product/${product.id}`} className="productCard">
+                        <div>
+                            <h2>{product.name}</h2>
+                            <p>{product.price}</p>
+                        </div>
+                        <div className="categoryImage">
+                            {product.photos && <img src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)} alt={product.name} />}
+                        </div>
+                    </a>
                 )
             })}
         </>
