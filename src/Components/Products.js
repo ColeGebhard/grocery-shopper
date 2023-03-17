@@ -12,7 +12,7 @@ const Products = (props) => {
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState(0);
     const [quanity, setQuanity] = useState(5);
-    const [photos, setPhotos] = useState(null);
+    const [photos, setPhotos] = useState("");
     const [categoryId, setCategoryId] = useState(0)
 
     // console.log(photos)
@@ -78,25 +78,10 @@ const Products = (props) => {
         }
     }
 
-    const onChangePicture = e => {
-        console.log('picture: ', photos);
-        console.log(e.target.files[0])
-        setPhotos(e.target.files[0]);
-        console.log('picture: ', photos);
-    };
-
-    const generateImageFromBuffer = (photos) => {
-        const test = new Buffer.from(photos, 'base64')
-        console.log(test.toString('base64'))
-        return test.toString('base64')
-    }
-
-    // console.log(categories)
 
     const { categoryName } = useParams();
 
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
-    // console.log(filteredProducts)
     return (
         <>
             <form id="loginForm" onSubmit={productSubmit}>
@@ -137,10 +122,11 @@ const Products = (props) => {
                     onChange={(e) => setQuanity(e.target.value)}
                 />
                 <input
-                    type="file"
+                    type="url"
                     placeholder="Category"
                     accept="image/*"
-                    onChange={onChangePicture}
+                    value={photos}
+                    onChange={(e) => setPhotos(e.target.value)}
                     
                 />
                 <button type="submit">Make a Product</button>
@@ -148,9 +134,7 @@ const Products = (props) => {
 
             <h1>{categoryName}</h1>
             {filteredProducts.map((product) => {
-                if (product.photos !== null) {
-                    generateImageFromBuffer(product.photos)
-                }
+
                 return (
                     <div>
                         <h2>{product.name}</h2>

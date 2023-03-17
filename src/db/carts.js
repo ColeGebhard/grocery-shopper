@@ -34,7 +34,7 @@ async function createCartItems({ cartId, productId, quantity }) {
       `, [productId]);
   
       // Generate a unique name for the cart item
-      const name = `${product.name}_${cartId}`;
+      const name = `${product.name}`;
   
       // Insert a new item into the cart_items table, using the product details and the generated name
       const { rows: [cartItem] } = await client.query(`
