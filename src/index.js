@@ -118,6 +118,7 @@ const App = () => {
         <Route
           exact path="/"
           element={
+            <>
             <Home
               username={username}
               token={token}
@@ -125,6 +126,14 @@ const App = () => {
               products={products}
               setProducts={setProducts}
             />
+            <Categories
+            categories={categories}
+            setCategories={setCategories}
+            name={name}
+            setName={setName}
+            products={products}
+            setProducts={setProducts} />
+            </>
           }
         />
         <Route

@@ -8,17 +8,19 @@ const Home = (props) => {
   const {token, setToken, username, products, setProducts} = props;
   const navigate = useNavigate();
 
-  useEffect(() => {
-    try {
-      getAllProducts()
-      .then((results) => {
-        setProducts(results);
-      })
-    } catch (e) {
-      console.error("Failed to fetch products on homepage");
-      throw e;
-    }
-  }, [])
+  //Uncomment if want different
+
+  // useEffect(() => {
+  //   try {
+  //     getAllProducts()
+  //     .then((results) => {
+  //       setProducts(results);
+  //     })
+  //   } catch (e) {
+  //     console.error("Failed to fetch products on homepage");
+  //     throw e;
+  //   }
+  // }, [])
 
   if (token) {
     // Remove the login/sign up buttons from display
@@ -36,8 +38,8 @@ const Home = (props) => {
           <button className="headerButton" id="registerButton" onClick={() => {navigate("/register")}}>Sign Up</button>
         </div>
       </div>
-
-      <div>
+      {/* {'I added the category page to home page, might be simple'} */}
+      {/* <div>
         <h3>
           Products
         </h3>
@@ -51,7 +53,7 @@ const Home = (props) => {
                     </div>
                 )
             })}
-      </div>
+      </div> */}
     </>
   )
 }
