@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 import { getAllProducts, createProducts, getAllCategories } from "../api/helpers";
 
 const Products = (props) => {
@@ -16,7 +16,7 @@ const Products = (props) => {
     const [categoryId, setCategoryId] = useState(0)
 
     // console.log(photos)
-    
+
 
 
     useEffect(() => {
@@ -39,25 +39,26 @@ const Products = (props) => {
             });
     }, [setCategories])
 
-    // console.log(photos)
+    console.log(categories)
 
     const productSubmit = async (e) => {
         e.preventDefault();
 
-        if (e) {const filteredCategory = await categories.filter(category => category.name === categoryList)
-        console.log(filteredCategory[0].name)
-        console.log(categoryList)
+        if (e) {
+            const filteredCategory = await categories.filter(category => category.name === categoryList)
+            console.log(filteredCategory[0].name)
+            console.log(categoryList)
 
-        if (filteredCategory[0].name !== categoryList) {
-            window.alert('Error')
+            if (filteredCategory[0].name !== categoryList) {
+                window.alert('Error')
+            }
+
+            if (filteredCategory[0].name === categoryList) {
+                window.alert('Success')
+            }
+            setCategoryId(filteredCategory[0].id)
         }
 
-        if (filteredCategory[0].name === categoryList) {
-            window.alert('Success')
-        }
-        setCategoryId(filteredCategory[0].id)}
-
-        console.log(photos)
         try {
             const result = await createProducts({
                 categoryId,
@@ -127,7 +128,7 @@ const Products = (props) => {
                     accept="image/*"
                     value={photos}
                     onChange={(e) => setPhotos(e.target.value)}
-                    
+
                 />
                 <button type="submit">Make a Product</button>
             </form>
@@ -140,11 +141,10 @@ const Products = (props) => {
                         <h2>{product.name}</h2>
                         <p>{product.description}</p>
                         <p>{product.price}</p>
-                        <h2><a id="viewProduct" href={`./product/${product.id}`}>View Product</a></h2>
-                        {product.photos === null ?
-                        <p>placeholder</p>
-                        : <img alt="Product Img" src={product.photos}></img>
-                        }
+                        <div className="productImage">
+                            {product.photos &&
+                                <img src={require(`../img/${product.photos}`)} alt={product.name} />
+                            }                </div>
                     </div>
                 )
             })}

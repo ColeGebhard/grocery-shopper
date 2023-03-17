@@ -60,22 +60,43 @@ code {
 }
 
 .productCard {
-  font-size: 1.5vw;
-  background-color: darkblue;
-  border-radius: 8%;
-  padding: 5px;
-  padding-top: 0px;
-  text-align: center;
+  width: 300px;
+  height: 400px;
+  border: 1px solid black;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
 
 .productCards {
   color: #eee;
-  display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  gap:20px
-
+  gap:20px;
+  display: flex;
 }
+
+.productCard h2 {
+  padding:0px;
+  text-align: center;
+  margin: 0;
+}
+
+.productCard p {
+  font-size: 1rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+}
+
+.categoryImage img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 
 /*Single view style*/
 

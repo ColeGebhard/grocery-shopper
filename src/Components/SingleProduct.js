@@ -33,24 +33,24 @@ const SingleProduct = (props) => {
 
     console.log(products.name)
 
-const handleAddToCart = async () => {
-  try {
-    const cartId = localStorage.getItem('cartId');
-    if (!cartId) {
-      console.error('Error: No cart found');
-      return;
-    }
+    const handleAddToCart = async () => {
+        try {
+            const cartId = localStorage.getItem('cartId');
+            if (!cartId) {
+                console.error('Error: No cart found');
+                return;
+            }
 
-    // Add the item to the cart
-    await createCartItem({ cartId, productId: products.id, quantity: quantity || 1 });
+            // Add the item to the cart
+            await createCartItem({ cartId, productId: products.id, quantity: quantity || 1 });
 
-    // Update the cart in state
-    const updatedCart = await getCart(cartId);
-    setCurrentCart(updatedCart);
-  } catch (error) {
-    console.error(error);
-  }
-};
+            // Update the cart in state
+            const updatedCart = await getCart(cartId);
+            setCurrentCart(updatedCart);
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     console.log(currentCart)
 
@@ -58,9 +58,9 @@ const handleAddToCart = async () => {
         products ?
             <div className="productView">
                 <div className="productImage">
-                {products.photos &&
-  <img src={require(`../img/${products.photos}`)} alt={products.name} />
-}                </div>
+                    {products.photos &&
+                        <img src={require(`../img/${products.photos}`)} alt={products.name} />
+                    }                </div>
                 <div className="productDetails">
                     <h2>{products.name}</h2>
                     <p className="productDescription">{products.description}</p>
