@@ -52,18 +52,15 @@ const handleAddToCart = async () => {
   }
 };
 
-
-
-
-
     console.log(currentCart)
 
     return (
         products ?
             <div className="productView">
                 <div className="productImage">
-                    <img src={products.photos} alt={products.name} />
-                </div>
+                {products.photos &&
+  <img src={require(`../img/${products.photos}`)} alt={products.name} />
+}                </div>
                 <div className="productDetails">
                     <h2>{products.name}</h2>
                     <p className="productDescription">{products.description}</p>
