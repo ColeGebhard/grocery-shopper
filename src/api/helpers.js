@@ -94,6 +94,12 @@ export async function createCategory(name) {
         name
       })
     });
+    
+    if (!response.ok) {
+      // Handle non-successful response
+      throw new Error('Failed to create category');
+    }
+
     const data = await response.json();
 
 

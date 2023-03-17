@@ -25,10 +25,10 @@ const Catagories = (props) => {
       });
   }, [setProducts])
 
-  console.log(products)
+  // console.log(products)
 
 
-  const productSubmit = async (e) => {
+  const categorySubmit = async (e) => {
     e.preventDefault();
     try {
       const result = await createCategory(name);
@@ -48,7 +48,7 @@ const Catagories = (props) => {
 
   return (
     <>
-      <form id="loginForm" onSubmit={productSubmit}>
+      <form id="loginForm" onSubmit={categorySubmit}>
         <input
           type="text"
           placeholder="Category"
@@ -58,8 +58,8 @@ const Catagories = (props) => {
         <button type="submit">Make Category</button>
       </form>
       <div className="mainProductPage">
+      <h1>Categories</h1>
         <span className="categoryCards">
-          <h1>Categories</h1>
           {categories.map((category) => {
             return (
               <div className="categoryLinks">
@@ -79,7 +79,7 @@ const Catagories = (props) => {
                     <p>{product.price}</p>
                   </div>
                   <div className="categoryImage">
-                    {product.photos && <img src={require(`../img/${product.photos}`)} alt={product.name} />}
+                    {product.photos && <img src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}  alt={product.name} />}
                   </div>
                 </a>
               )

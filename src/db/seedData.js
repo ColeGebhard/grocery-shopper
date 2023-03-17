@@ -162,7 +162,7 @@ async function createInitialProductCatagories() {
       { id:2, name: 'Veggies' },
       { id:3, name: 'Meat' },
       { id:4, name: 'Snacks' },
-      { id:5, name: 'Fruit' }
+      { id:5, name: 'Fruit' },
     ]
 
     const catagory = await Promise.all(catagoryToCreate.map(createCategory))

@@ -82,11 +82,6 @@ const App = () => {
     }
   };
   
-  
-  
-
-  console.log(currentCart)
-
   useEffect(() => {
     if (token) {
       isUser(token)
