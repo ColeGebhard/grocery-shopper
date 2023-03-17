@@ -27,28 +27,30 @@ const Catagories = (props) => {
 
   // console.log(products)
 
+//Uncomment for later
 
-  const categorySubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const result = await createCategory(name);
+  // const categorySubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const result = await createCategory(name);
 
-      console.log(result)
-      return result;
-    } catch (e) {
-      console.error(e);
-      throw e;
-    } finally {
+  //     console.log(result)
+  //     return result;
+  //   } catch (e) {
+  //     console.error(e);
+  //     throw e;
+  //   } finally {
 
-    }
-  }
+  //   }
+  // }
 
   console.log(categories)
 
 
   return (
     <>
-      <form id="loginForm" onSubmit={categorySubmit}>
+    {/* {'sorta stopped working dont thinkg we need and just seed'} */}
+      {/* <form id="loginForm" onSubmit={categorySubmit}>
         <input
           type="text"
           placeholder="Category"
@@ -56,7 +58,7 @@ const Catagories = (props) => {
           onChange={(e) => setName(e.target.value)}
         />
         <button type="submit">Make Category</button>
-      </form>
+      </form> */}
       <div className="mainProductPage">
       <h1>Categories</h1>
         <span className="categoryCards">
