@@ -43,6 +43,8 @@ const Catagories = (props) => {
     }
   }
 
+  console.log(categories)
+
 
   return (
     <>
@@ -56,8 +58,8 @@ const Catagories = (props) => {
         <button type="submit">Make Category</button>
       </form>
       <div className="mainProductPage">
-      <span className="categoryCards">
-      <h1>Categories</h1>
+        <span className="categoryCards">
+          <h1>Categories</h1>
           {categories.map((category) => {
             return (
               <div className="categoryLinks">
@@ -71,20 +73,20 @@ const Catagories = (props) => {
           <span className="productCards">
             {products.map((product) => {
               return (
-                <div className="productCard">
-                  <h2>{product.name}</h2>
-                  <p>{product.description}</p>
-                  <p>{product.price}</p>
-                  <h2><a id="viewProduct" href={`category/product/${product.id}`}>View Product</a></h2>
-                  {product.photos === null ?
-                    <p>placeholder</p>
-                    : <img alt="Stuff" src={product.photos.data}></img>
-                  }
-                </div>
+                <a href={`category/product/${product.id}`} className="productCard">
+                  <div>
+                    <h2>{product.name}</h2>
+                    <p>{product.price}</p>
+                  </div>
+                  <div className="categoryImage">
+                    {product.photos && <img src={require(`../img/${product.photos}`)} alt={product.name} />}
+                  </div>
+                </a>
               )
             })}
           </span>
         </span>
+
       </div>
     </>
   )
