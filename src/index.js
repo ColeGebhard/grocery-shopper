@@ -34,7 +34,7 @@ const App = () => {
   const [description, setDesciption] = useState("");
   const [price, setPrice] = useState(0);
   const [quanity, setQuanity] = useState(5);
-  const [currentCart, setCurrentCart] = useState(null)
+  const [currentCart, setCurrentCart] = useState([])
   const [allCarts, setAllCarts] = useState([]);
 
   //Worked for me but can change
@@ -75,8 +75,6 @@ const App = () => {
         }
   
         setCurrentCart(cart);
-      } else {
-        localStorage.setItem('cartId', 'guest');
       }
     } catch (e) {
       console.error(e);
