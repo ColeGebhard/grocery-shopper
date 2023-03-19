@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getAllProducts, createProducts, getAllCategories } from "../api/helpers";
+import { getAllProducts, createProducts, getAllCategories, deleteProduct } from "../api/helpers";
 
 const Products = (props) => {
     const { products, setProducts, categories, setCategories } = props;
@@ -72,8 +72,29 @@ const Products = (props) => {
         }
     }
 
+    const handleDelete = async (productId) => {
+        try {
+            const result = await deleteProduct(productId);
+
+            if (result) {
+                window.alert('Succesfully deleted')
+            }
+
+            console.log(productId)
+        } catch (e) {
+            console.error(e);
+            // Handle error
+        }
+    };
+
 
     const { categoryName } = useParams();
+
+    // useEffect(() => {
+    //     if (categoryName) {
+    //         setCategoryList(categoryName);
+    //     }
+    // }, [categoryName]);
 
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
     return (
@@ -127,20 +148,35 @@ const Products = (props) => {
             </form>
 
             <h1>{categoryName}</h1>
-            {filteredProducts.map((product) => {
+            <span className="productCards">
+                {filteredProducts.map((product) => {
 
-                return (
-                    <a href={`product/${product.id}`} className="productCard">
-                        <div>
-                            <h2>{product.name}</h2>
-                            <p>{product.price}</p>
-                        </div>
-                        <div className="categoryImage">
-                            {product.photos && <img src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)} alt={product.name} />}
-                        </div>
-                    </a>
-                )
-            })}
+                    return (
+                        <a key={product.id} href={`/category/product/${product.id}`} className="productCard">
+
+                            <div className="categoryImage">
+                                {product.photos ? (
+                                    <img
+                                        src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}
+                                        alt={product.name}
+                                    />
+                                ) : (
+                                    <img src={require(`../img/placeholder-image.png`)} alt="Placeholder" />
+                                )}
+                            </div>
+
+                            <div>
+                                <h2>{product.name}</h2>
+                                <p>${product.price.toFixed(2)}</p>
+                            </div>
+                            <button onClick={(e) => {
+                                e.preventDefault();
+                                handleDelete(product.id);
+                            }}>Delete</button>
+                        </a>
+                    )
+                })}
+            </span>
         </>
     )
 
