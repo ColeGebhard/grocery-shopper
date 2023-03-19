@@ -115,6 +115,19 @@ async function getAllProductsWithCategoryId() {
     }
 }
 
+async function deleteProduct(id) {
+  try {
+    await client.query(`
+    DELETE FROM
+    products
+    WHERE id =${id}
+    `);
+
+  } catch (error) {
+    throw Error('Failed to delete', error)
+  }
+}
+
 async function attachProductsToCategory(catagory) {
   try {
     const { rows: product } = await client.query(``)
@@ -128,5 +141,6 @@ module.exports = {
     createReview,
     getAllProducts,
     getAllProductsWithCategoryId,
-    getProductById
+    getProductById,
+    deleteProduct
 }

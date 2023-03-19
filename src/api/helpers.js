@@ -267,3 +267,20 @@ export async function createCartItem({
     throw Error(error);
   }
 }
+
+export const deleteProduct = async (productId) => {
+  try {
+    const response = await fetch(`http://localhost:8000/api/category/${productId}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete product with ID ${productId}`);
+    }
+
+    return true;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};

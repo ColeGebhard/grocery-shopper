@@ -7,7 +7,8 @@ const {
     getAllProducts,
     createProduct,
     getAllProductsWithCategoryId,
-    getProductById
+    getProductById,
+    deleteProduct
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -101,6 +102,21 @@ productsRouter.get('/:prodId', async (req, res, next) => {
 
     } catch (error) {
         next({error})
+    }
+})
+
+productsRouter.delete("/:id", async (req, res, next) => {
+    try {
+        const productId = req.params.id;
+        console.log(productId)
+        const deletedProduct = await deleteProduct(productId);
+        if(!deletedProduct) {
+            return res.send("Product not found");
+        }
+
+        return res.send(deletedProduct)
+    } catch (e) {
+        next({e})
     }
 })
 

@@ -27,7 +27,7 @@ const Catagories = (props) => {
 
   // console.log(products)
 
-//Uncomment for later
+  //Uncomment for later
 
   // const categorySubmit = async (e) => {
   //   e.preventDefault();
@@ -49,7 +49,7 @@ const Catagories = (props) => {
 
   return (
     <>
-    {/* {'sorta stopped working dont thinkg we need and just seed'} */}
+      {/* {'sorta stopped working dont thinkg we need and just seed'} */}
       {/* <form id="loginForm" onSubmit={categorySubmit}>
         <input
           type="text"
@@ -60,11 +60,11 @@ const Catagories = (props) => {
         <button type="submit">Make Category</button>
       </form> */}
       <div className="mainProductPage">
-      <h1>Categories</h1>
+        <h1>Categories</h1>
         <span className="categoryCards">
           {categories.map((category) => {
             return (
-              <div className="categoryLinks">
+              <div key={category.id} className="categoryLinks">
                 <h2><a id="catergoryClick" href={`category/${category.name}`}>{category.name}</a></h2>
               </div>
             )
@@ -75,17 +75,26 @@ const Catagories = (props) => {
           <span className="productCards">
             {products.map((product) => {
               return (
-                <a href={`category/product/${product.id}`} className="productCard">
+                <a key={product.id} href={`category/product/${product.id}`} className="productCard">
+
+                  <div className="categoryImage">
+                    {product.photos ? (
+                      <img
+                        src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}
+                        alt={product.name}
+                      />
+                    ) : (
+                      <img src={require(`../img/placeholder-image.png`)} alt="Placeholder" />
+                    )}
+                  </div>
                   <div>
                     <h2>{product.name}</h2>
-                    <p>{product.price}</p>
-                  </div>
-                  <div className="categoryImage">
-                    {product.photos && <img src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}  alt={product.name} />}
+                    <p>${product.price.toFixed(2)}</p>
                   </div>
                 </a>
               )
             })}
+
           </span>
         </span>
 
