@@ -37,11 +37,12 @@ const App = () => {
   //Worked for me but can change
 
   const logout = useCallback(() => {
-    const confirm = window.confirm('Are you sure you wis to logout?')
+    const confirm = window.confirm('Are you sure you wish to logout? All cart progress will be lost.')
     if (confirm) {
 
       localStorage.removeItem(TOKEN_STORAGE_KEY);
       localStorage.removeItem(token);
+      localStorage.removeItem('cartId');
 
 
       setToken('');

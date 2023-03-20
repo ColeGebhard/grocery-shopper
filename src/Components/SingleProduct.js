@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { redirect, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getSingleProduct, createCartItem, getCart } from "../api/helpers";
 
 
 const SingleProduct = (props) => {
+    const navigate = useNavigate();
+
     const { products, setProducts, currentCart, setCurrentCart, me } = props;
 
     const [quantity, setQuantity] = useState(1);
@@ -82,9 +85,10 @@ const SingleProduct = (props) => {
                         </button>
                         {products.price &&
                             <p>${products.price.toFixed(2)}</p>
-                        }
+                        }{me ?
                         <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
-                    </div>
+                    : <button className="headerButton" id="loginButton" onClick={() => {navigate('/login')}}>Sign in to add</button>
+                }</div>
                 </div>
             </div>
             : null
