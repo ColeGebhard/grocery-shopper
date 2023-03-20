@@ -234,14 +234,10 @@ const App = () => {
     )
   } else {
     return loading ? (
-      <div>
-        <div
-        className='loadingDiv'
-        >
-          <iframe title="loadingGif" src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" width="480" height="480" className="giphy-embed" allowFullScreen>
-          </iframe>
-        </div>
-      </div>
+      <span className="loader">
+        <span className="loader-inner">
+        </span>
+      </span>
     ) : (
       <BrowserRouter>
         <Routes>

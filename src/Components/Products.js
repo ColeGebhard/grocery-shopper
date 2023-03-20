@@ -168,10 +168,12 @@ const Products = (props) => {
                                 <h2>{product.name}</h2>
                                 <p>${product.price.toFixed(2)}</p>
                             </div>
-                            <button onClick={(e) => {
+                            {me.username === "Admin" ?
+                                <button onClick={(e) => {
                                 e.preventDefault();
                                 handleDelete(product.id);
-                            }}>Delete</button>
+                            }}>Delete</button>:
+                            null}
                         </a>
                     )
                 })}
