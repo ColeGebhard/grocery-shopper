@@ -1,0 +1,17 @@
+#fullCart {
+  display:flex;
+  width: 80%;
+  background-color: gray;
+  flex-flow: column;
+  padding-left: 1.5em;
+  justify-content: center;
+}
+
+.individualCartItem {
+  display:flex;
+  width: 80%;
+  flex-flow: column;
+  border: solid 1px gray;
+  background-color: white;
+  margin-bottom: 2em;
+}
