@@ -62,7 +62,9 @@ const SingleProduct = (props) => {
             <div className="productView">
                 <div className="productImage">
                     {products.photos &&
-                        <img src={require(`../img/${products.photos}`)} alt={products.name} />
+                        <img 
+                        src={products.photos.startsWith('http') || products.photos.startsWith('https') ? products.photos : require(`../img/${products.photos}`)}
+                        alt={products.name} />
                     }                </div>
                 <div className="productDetails">
                     <h2>{products.name}</h2>

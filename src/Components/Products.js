@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getAllProducts, createProducts, getAllCategories, deleteProduct } from "../api/helpers";
 
 const Products = (props) => {
-    const { products, setProducts, categories, setCategories } = props;
+    const { products, setProducts, categories, setCategories, me } = props;
 
     const [categoryList, setCategoryList] = useState('any');
     const [name, setName] = useState("");
@@ -91,13 +91,15 @@ const Products = (props) => {
         }
     };
 
+    console.log(me)
 
     const { categoryName } = useParams();
 
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
     return (
         <>
-            <form id="productForm" onSubmit={productSubmit}>
+            {me.username === "Admin" ?
+                <form id="productForm" onSubmit={productSubmit}>
 
                 <label htmlFor="category">Category:</label>
                 <select name="category" id="category" value={categoryList} onChange={handleChange}>
@@ -142,6 +144,7 @@ const Products = (props) => {
                 />
                 <button type="submit">Make a Product</button>
             </form>
+            : null}
 
             <h1>{categoryName}</h1>
             <span className="productCards">

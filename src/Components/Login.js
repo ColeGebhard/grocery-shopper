@@ -18,6 +18,7 @@ const Login = (props) => {
         localStorage.setItem(TOKEN_STORAGE_KEY, result.data.token)
         setToken(result.data.token)
         navigate("/")
+        window.location.reload();
       } else if (!result.data.success) {
         setUsername("");
         setPassword("");
