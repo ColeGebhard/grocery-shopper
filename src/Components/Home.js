@@ -29,7 +29,7 @@ const Home = (props) => {
         <button className="logout" onClick={logout}>Log Out</button>
         <h3 id="title">ACL Groceries</h3>
 
-        <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/login")}} className="cartImage"/>
+        <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/carts")}} className="cartImage"/>
         
       </div>
       </>
