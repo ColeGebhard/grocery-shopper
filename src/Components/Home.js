@@ -5,7 +5,7 @@ import { getAllProducts, getAllCategories } from "../api/helpers";
 
 const Home = (props) => {
 
-  const {token, setToken, username, products, setProducts} = props;
+  const {token, setToken, username, products, setProducts, logout} = props;
   const navigate = useNavigate();
 
   //Uncomment if want different
@@ -26,6 +26,7 @@ const Home = (props) => {
     return(
       <>
       <div id="header">
+        <button className="logout" onClick={logout}>Log Out</button>
         <h3 id="title">ACL Groceries</h3>
 
         <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/login")}} className="cartImage"/>

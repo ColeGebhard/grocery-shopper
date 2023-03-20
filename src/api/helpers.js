@@ -9,6 +9,7 @@ export const isUser = async (token) => {
       const data = await resp.json();
       if (data.username) {
           return {
+              id: data.id,
               username: data.username,
               isAdmin: data.isAdmin
           };
