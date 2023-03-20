@@ -114,9 +114,10 @@ const App = () => {
 
   if (token) {
     return loading ? (
-      <div>
-        <iframe title="myLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/thinking-l3nWhI38IWDofyDrW">via GIPHY</a></p>
-      </div>
+      <span className="loader">
+        <span className="loader-inner">
+        </span>
+      </span>
     ) : (
       <BrowserRouter>
         <Routes>
