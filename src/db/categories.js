@@ -32,7 +32,25 @@ async function getAllCategorys() {
   }
 }
 
+async function getCategoryByName(name) {
+  try {
+    const { rows } = await client.query(`
+      SELECT *
+      FROM product_category
+      WHERE name=$1;
+    `, [name]);
+
+    console.log('NAME',name)
+
+    return rows
+  } catch (error) {
+    throw new Error(`Failed to get category with name ${name}: ${error.message}`);
+  }
+}
+
+
 module.exports = {
     createCategory,
-    getAllCategorys
+    getAllCategorys,
+    getCategoryByName
 }

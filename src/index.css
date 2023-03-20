@@ -31,6 +31,7 @@ code {
   gap: 1px;
   padding: 0px;
   margin:0px;
+  flex-wrap:wrap;
 }
 
 #catergoryClick {
@@ -61,6 +62,7 @@ code {
   flex-direction: column;
   background-color: cadetblue;
   font-style: none;
+  flex-wrap: wrap;
 }
 
 .productCards {

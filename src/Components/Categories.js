@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { getAllCategories, createCategory, getAllProducts } from "../api/helpers";
 
-const Catagories = (props) => {
-  const { categories, setCategories, name, setName, products, setProducts } = props;
+const Categories = (props) => {
+  const { categories, setCategories, products, setProducts, me } = props;
 
+  const [name, setName] = useState("");
+
+console.log(me)
 
   useEffect(() => {
     getAllCategories()
@@ -25,24 +28,19 @@ const Catagories = (props) => {
       });
   }, [setProducts])
 
-  // console.log(products)
-
-  //Uncomment for later
-
-  // const categorySubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const result = await createCategory(name);
-
-  //     console.log(result)
-  //     return result;
-  //   } catch (e) {
-  //     console.error(e);
-  //     throw e;
-  //   } finally {
-
-  //   }
-  // }
+  const catSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const result = await createCategory(name);
+      console.log(result);
+      setCategories([...categories, result]);
+      setName("");
+      return result;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  };
 
   console.log(categories)
 
@@ -50,7 +48,8 @@ const Catagories = (props) => {
   return (
     <>
       {/* {'sorta stopped working dont thinkg we need and just seed'} */}
-      {/* <form id="loginForm" onSubmit={categorySubmit}>
+      {me.username === "Admin" ?
+        <form id="loginForm" onSubmit={catSubmit}>
         <input
           type="text"
           placeholder="Category"
@@ -58,7 +57,8 @@ const Catagories = (props) => {
           onChange={(e) => setName(e.target.value)}
         />
         <button type="submit">Make Category</button>
-      </form> */}
+      </form>:
+      null}
       <div className="mainProductPage">
         <h1>Categories</h1>
         <span className="categoryCards">
@@ -104,4 +104,4 @@ const Catagories = (props) => {
 
 }
 
-export default Catagories;
+export default Categories;

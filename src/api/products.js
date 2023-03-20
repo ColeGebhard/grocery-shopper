@@ -4,11 +4,11 @@ const productsRouter = express.Router();
 const {
     getAllCategorys,
     createCategory,
-    getAllProducts,
     createProduct,
     getAllProductsWithCategoryId,
     getProductById,
-    deleteProduct
+    deleteProduct,
+    getCategoryByName
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -49,14 +49,13 @@ productsRouter.get('/products', async (req, res, next) => {
 
 productsRouter.post('/', async (req, res, next) => {
     try {
-        if (req.isAdmin) {
             
             const { name } = req.body
 
             const category = await createCategory({ name })
 
             res.send(category)
-        }
+        
     } catch (error) {
         next(error)
     }
@@ -80,8 +79,6 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
             photos,
             quanity })
 
-            console.log(productToCategory)
-
         res.send(productToCategory)
     } catch ({name, message}) {
         next({ name, message})
@@ -98,6 +95,27 @@ productsRouter.get('/:prodId', async (req, res, next) => {
             res.send(singleProduct);
         } else {
             res.send({name:"No id", message:"Nothing to display"})
+        }
+
+    } catch (error) {
+        next({error})
+    }
+})
+
+productsRouter.get('/:categoryName', async (req, res, next) => {
+    try {
+        const { categoryName } = req.params
+
+        console.log(categoryName)
+
+        const singleCategory = await getCategoryByName(categoryName)
+
+        console.log(singleCategory)
+
+        if(singleCategory) {
+            res.send(singleCategory);
+        } else {
+            res.send({name:"No name", message:"Nothing to display"})
         }
 
     } catch (error) {

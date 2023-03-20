@@ -29,11 +29,7 @@ const App = () => {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [me, setMe] = useState('');
-  const [availible, setAvailible] = useState(true);
   const [name, setName] = useState("");
-  const [description, setDesciption] = useState("");
-  const [price, setPrice] = useState(0);
-  const [quanity, setQuanity] = useState(5);
   const [currentCart, setCurrentCart] = useState([])
   const [allCarts, setAllCarts] = useState([]);
 
@@ -95,23 +91,13 @@ const App = () => {
 
   }, [token]);
 
-  // useEffect((me) => {
-  //   if (me) {
-  //     createCart(me.id)
-  //       .then((currentCart) => {
-  //         setCurrentCart(currentCart);
-  //       })
-  //       .catch((e) => {
-  //         throw new Error(`Failed to make cart`);
-  //       });
-  //   }
-
-  // }, [me]);
-
   window.onload = function() {
     createCartFunction()
   };
-  
+
+  console.log(me)
+
+  if(token){ 
   return (
     <BrowserRouter>
       <Routes>
@@ -125,6 +111,7 @@ const App = () => {
               setToken={setToken}
               products={products}
               setProducts={setProducts}
+              me={me}
             />
             <Categories
             categories={categories}
@@ -132,7 +119,117 @@ const App = () => {
             name={name}
             setName={setName}
             products={products}
-            setProducts={setProducts} />
+            setProducts={setProducts}
+            me={me}
+            />
+            </>
+          }
+        />
+        <Route
+          exact path="/register"
+          element={
+            <Register
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              setToken={setToken}
+              email={email}
+              setEmail={setEmail}
+              firstName={firstName}
+              setFirstName={setFirstName}
+              lastName={lastName}
+              setLastName={setLastName}
+            />
+          }
+        />
+        <Route
+          exact path="/login"
+          element={
+            <Login
+              username={username}
+              setUsername={setUsername}
+              password={password}
+              setPassword={setPassword}
+              token={token}
+              setToken={setToken}
+            />
+          }
+        />
+        <Route
+          exact path="/category"
+          element={
+            <Categories
+              categories={categories}
+              setCategories={setCategories}
+              name={name}
+              setName={setName}
+              products={products}
+              setProducts={setProducts} />
+          }
+        />
+        <Route
+          path='/category/:categoryName'
+          element={
+            <Products
+              products={products}
+              setProducts={setProducts}
+              categories={categories}
+              setCategories={setCategories}
+            />
+          }
+        />
+        <Route
+          path='/category/product/:prodId'
+          element={
+            <SingleProduct
+              products={products}
+              setProducts={setProducts}
+              currentCart={currentCart}
+              setCurrentCart={setCurrentCart}
+              me={me}
+            />
+          }
+        />
+        <Route
+          path='/carts'
+          element={
+            <Carts
+              products={products}
+              categories={categories}
+              currentCart={currentCart}
+              setCurrentCart={setCurrentCart}
+              allCarts={allCarts}
+              setAllCarts={setAllCarts}
+            />
+          }
+        />
+      </Routes>
+    </BrowserRouter>
+  )} else { return(
+    <BrowserRouter>
+      <Routes>
+        <Route
+          exact path="/"
+          element={
+            <>
+            <Home
+              username={username}
+              token={token}
+              setToken={setToken}
+              products={products}
+              setProducts={setProducts}
+              me={me}
+            />
+            <Categories
+            categories={categories}
+            setCategories={setCategories}
+            name={name}
+            setName={setName}
+            products={products}
+            setProducts={setProducts}
+            me={me}
+            />
             </>
           }
         />
@@ -218,6 +315,7 @@ const App = () => {
       </Routes>
     </BrowserRouter>
   )
+  }
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

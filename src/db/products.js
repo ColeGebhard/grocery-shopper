@@ -120,19 +120,11 @@ async function deleteProduct(id) {
     await client.query(`
     DELETE FROM
     products
-    WHERE id =${id}
+    WHERE id = ${id}
     `);
 
   } catch (error) {
     throw Error('Failed to delete', error)
-  }
-}
-
-async function attachProductsToCategory(catagory) {
-  try {
-    const { rows: product } = await client.query(``)
-  } catch (error) {
-    throw Error(error)
   }
 }
 

@@ -39,21 +39,18 @@ const Products = (props) => {
 
     console.log(categories)
 
+    const handleChange = (e) => {
+        setCategoryList(e.target.value);
+        const filteredCategory = categories.find(category => category.name === e.target.value);
+        if (filteredCategory) {
+          setCategoryId(filteredCategory.id);
+        }
+      };
+      
+
     const productSubmit = async (e) => {
         e.preventDefault();
 
-        if (!categoryList || categoryList === 'any') {
-            window.alert('Please select a category');
-            return;
-        }
-
-        const filteredCategory = categories.find(category => category.name === categoryList);
-        if (!filteredCategory) {
-            window.alert('Invalid category');
-            return;
-        }
-
-        setCategoryId(filteredCategory.id);
 
         try {
             const result = await createProducts({
@@ -64,8 +61,14 @@ const Products = (props) => {
                 photos,
                 quanity,
             });
-            console.log(result)
-            return result;
+            if (result.error) {
+                window.alert(result.error)
+            }
+
+            if (result.id) {
+                window.alert(`Succesfully made product wiht ${result.name}`)
+            }
+            return result
         } catch (e) {
             console.error(e);
             throw e;
@@ -78,6 +81,7 @@ const Products = (props) => {
 
             if (result) {
                 window.alert('Succesfully deleted')
+                window.location.reload()
             }
 
             console.log(productId)
@@ -90,27 +94,19 @@ const Products = (props) => {
 
     const { categoryName } = useParams();
 
-    // useEffect(() => {
-    //     if (categoryName) {
-    //         setCategoryList(categoryName);
-    //     }
-    // }, [categoryName]);
-
     const filteredProducts = products.filter(product => product.categoryName === categoryName)
     return (
         <>
             <form id="productForm" onSubmit={productSubmit}>
 
-                <select name="categoryDrop" id="categoryDrop"
-                    value={categoryList}
-                    onChange={(e) => {
-                        setCategoryList(e.target.value)
-                    }}
-                >
-                    <option value="any">Select A Category</option>
-                    {categories.map((category) =>
-                        <option value={category.name} key={category.name}>{category.name}</option>
-                    )};
+                <label htmlFor="category">Category:</label>
+                <select name="category" id="category" value={categoryList} onChange={handleChange}>
+                    <option value="any">--Select Category--</option>
+                    {categories.map((category) => (
+                        <option key={category.id} value={category.name}>
+                            {category.name}
+                        </option>
+                    ))}
                 </select>
                 <input
                     type="text"
