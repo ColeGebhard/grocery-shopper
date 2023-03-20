@@ -6,7 +6,6 @@ import { getSingleProduct, createCartItem, getCart } from "../api/helpers";
 const SingleProduct = (props) => {
     const { products, setProducts, currentCart, setCurrentCart, me } = props;
 
-    const [cartItems, setCartItems] = useState([])
     const [quantity, setQuantity] = useState(1);
 
     const handleQuantityChange = (change) => {
@@ -53,6 +52,7 @@ const SingleProduct = (props) => {
     };
 
     console.log(currentCart)
+    console.log(products)
 
     return (
         products ?

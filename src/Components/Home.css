@@ -6,7 +6,9 @@
   display:flex;
   background-color: aqua;
   width:100%;
-
+  padding: 0px;
+  margin: 0px;
+  align-items: center;
 }
 
 #title {
@@ -21,6 +23,8 @@
   display:flex;
   justify-content:space-evenly;
   width:20%;
+  padding: 0px;
+  margin: 0px;
 }
 
 .headerButton {
@@ -33,3 +37,11 @@
 /* .individualProduct {
   Style that class here
 } */
+
+.cartImage {
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  padding: 0px;
+  margin: 0px;
+}

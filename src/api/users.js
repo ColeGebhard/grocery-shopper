@@ -11,7 +11,7 @@ usersRouter.get('/health', async (req, res, next) => {
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, password, firstName, lastName, email } = req.body;
+    const { username, password, firstName, lastName, email, isAdmin } = req.body;
 
     const queriedUser = await getUserByUsername(username);
     
@@ -37,7 +37,7 @@ usersRouter.post("/register", async (req, res, next) => {
       )
     } else {
       const user = await createUser({
-        username, password, firstName, lastName, email
+        username, password, firstName, lastName, email, isAdmin
       });
       if (!user) {
         res.status(401);
@@ -51,7 +51,7 @@ usersRouter.post("/register", async (req, res, next) => {
         );
       } else {
         const token = jwt.sign(
-          { id: user.id, username: user.username },
+          { id: user.id, username: user.username, admin: user.isAdmin },
           JWT_SECRET,
           {expiresIn: "1w" }
         ); 
@@ -60,7 +60,8 @@ usersRouter.post("/register", async (req, res, next) => {
           token: token,
           user: {
             id: user.id,
-            username: username
+            username: username,
+            admin: isAdmin
           },
           message: `Congratulations, ${username}, you have successfully registered!`
 
@@ -115,24 +116,27 @@ usersRouter.post("/login", async (req, res, next) => {
 
 usersRouter.get('/me', async (req, res) => {
   try {
-      if (req.headers.authorization) {
-          const userToken = req.headers.authorization
-          const token = userToken.split(' ');
-          const data = jwt.verify(token[1], JWT_SECRET);
-          res.send({
-              id: data.id, username: data.username
-          })
-      }
-      if (!req.headers.authorization) {
-          res.status(401).send({
-              error: "failed to getme",
-              message: "You must be logged in to perform this action",
-              name: "Please log in."
-          })
-      }
+    if (req.headers.authorization) {
+      const userToken = req.headers.authorization
+      const token = userToken.split(' ');
+      const data = jwt.verify(token[1], JWT_SECRET);
+      const { id, username, isAdmin } = data;
+      res.send({ id, username, isAdmin });
+    } else {
+      res.status(401).send({
+        error: "failed to getme",
+        message: "You must be logged in to perform this action",
+        name: "Please log in."
+      });
+    }
   } catch (error) {
-      throw Error('no user');
+    res.status(401).send({
+      error: "failed to getme",
+      message: "You must be logged in to perform this action",
+      name: "Please log in."
+    });
   }
-})
+});
+
 
 module.exports = usersRouter

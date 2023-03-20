@@ -23,7 +23,16 @@ const Home = (props) => {
   // }, [])
 
   if (token) {
-    // Remove the login/sign up buttons from display
+    return(
+      <>
+      <div id="header">
+        <h3 id="title">ACL Groceries</h3>
+
+        <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/login")}} className="cartImage"/>
+        
+      </div>
+      </>
+    )
   }
 
 

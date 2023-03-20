@@ -82,6 +82,31 @@ async function getUserByUsername(username) {
   }
 }
 
+async function getAdmin(userId) {
+  try {
+    const { rows } = await client.query(`
+      SELECT id, username, "firstName", "lastName", email, "isAdmin", "isActive"
+      FROM users
+      WHERE id=$1;
+    `, [userId]);
+
+    const user = rows[0];
+
+    if (user.isAdmin) {
+      return {
+        ...user,
+        adminData: "This is special data for admins only"
+      }
+    }
+
+    return user;
+
+  } catch (error) {
+    throw new Error(`Failed to get user with id ${userId}: ${error.message}`);
+  }
+}
+
+
 module.exports = {
   createUser,
   getUser,
