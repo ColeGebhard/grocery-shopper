@@ -178,3 +178,10 @@ code {
   background-color: #005ea8;
 }
 
+.loadingDiv {
+    width: 100%;
+    height:0;
+    padding-bottom:56%;
+    position: relative
+}
+

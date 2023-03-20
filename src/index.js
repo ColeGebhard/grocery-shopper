@@ -33,6 +33,15 @@ const App = () => {
   const [name, setName] = useState("");
   const [currentCart, setCurrentCart] = useState([])
   const [allCarts, setAllCarts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500); // Simulate a 1-second loading time
+  }, []);
+
+
 
   //Worked for me but can change
 
@@ -104,7 +113,11 @@ const App = () => {
   console.log(me)
 
   if (token) {
-    return (
+    return loading ? (
+      <div>
+        <iframe title="myLoading" src="https://giphy.com/embed/l3nWhI38IWDofyDrW" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/thinking-l3nWhI38IWDofyDrW">via GIPHY</a></p>
+      </div>
+    ) : (
       <BrowserRouter>
         <Routes>
           <Route
@@ -175,7 +188,8 @@ const App = () => {
                 name={name}
                 setName={setName}
                 products={products}
-                setProducts={setProducts} />
+                setProducts={setProducts}
+                me={me} />
             }
           />
           <Route
@@ -186,6 +200,7 @@ const App = () => {
                 setProducts={setProducts}
                 categories={categories}
                 setCategories={setCategories}
+                me={me}
               />
             }
           />
@@ -218,7 +233,16 @@ const App = () => {
       </BrowserRouter>
     )
   } else {
-    return (
+    return loading ? (
+      <div>
+        <div
+        className='loadingDiv'
+        >
+          <iframe title="loadingGif" src="https://giphy.com/embed/3oEjI6SIIHBdRxXI40" width="480" height="480" className="giphy-embed" allowFullScreen>
+          </iframe>
+        </div>
+      </div>
+    ) : (
       <BrowserRouter>
         <Routes>
           <Route
@@ -285,7 +309,8 @@ const App = () => {
                 name={name}
                 setName={setName}
                 products={products}
-                setProducts={setProducts} />
+                setProducts={setProducts}
+                me={me} />
             }
           />
           <Route
@@ -296,6 +321,7 @@ const App = () => {
                 setProducts={setProducts}
                 categories={categories}
                 setCategories={setCategories}
+                me={me}
               />
             }
           />
