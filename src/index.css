@@ -26,6 +26,7 @@ code {
   flex-direction: column;
   justify-content:space-between;
   align-items: center;
+  margin-top: 40px;
 }
 
 .categoryCards {
@@ -68,6 +69,14 @@ code {
   flex-wrap: wrap;
 }
 
+
+.productHeader {
+  font-size: 1.5em;
+  margin: 0;
+  color: #292828;
+  margin: 10px;
+}
+
 .productCards {
   color: #eee;
   justify-content: space-evenly;
@@ -79,7 +88,7 @@ code {
 }
 
 .productCard {
-  width: 100px;
+  width: 120px;
   height: 200px;
   background-color: white;
   border: 1px solid black;
@@ -92,11 +101,10 @@ code {
 }
 
 .productCard h2 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin-bottom: 0.5rem;
   color: black;
   text-decoration: underline;
-
 }
 
 .productCard p {
@@ -114,8 +122,8 @@ code {
 }
 
 .productCard .categoryImage img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
 }
 
 
@@ -126,21 +134,24 @@ code {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items:center;
+  align-content: center;
   margin-bottom: 2rem;
+  
 }
 
 .productImage {
   flex: 1;
   max-width: 50%;
-  margin-right: 2rem;
 }
 
 .productImage img {
   display: block;
-  max-width: 100%;
+  max-width: 70%;
   height: auto;
   border-radius: 10px;
+  border: 1px solid black;
+  margin: 0px;
 }
 
 .productDetails {
@@ -190,7 +201,7 @@ code {
   justify-content: flex-start;
   margin-top: 20px;
   font-size: 1.2em;
-  margin-right: 20px;
+  /* margin-right: 20px; */
 }
 
 .productNav a {

@@ -5,8 +5,13 @@ import { getAllProducts, getAllCategories } from "../api/helpers";
 
 const Home = (props) => {
 
-  const {token, setToken, username, products, setProducts, logout} = props;
+  const {token, logout, currentCart, me} = props;
   const navigate = useNavigate();
+
+  if(currentCart === null || undefined) {
+    return 0;
+  }
+
 
   //Uncomment if want different
 
@@ -22,15 +27,23 @@ const Home = (props) => {
   //   }
   // }, [])
 
+  console.log(currentCart)
+
   if (token) {
+
+    const totalItems = me && currentCart && currentCart.items ? currentCart.items.length : 0;
+    console.log(totalItems)
+
     return(
       <>
       <div id="header">
         <button className="logout" onClick={logout}>Log Out</button>
-        <h3 id="title" onClick={() => {navigate("/")}}>ACL Groceries</h3>
-
-        <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/carts")}} className="cartImage"/>
-        
+        <a id="title" href="/">ACL Groceries</a>
+        <div id="cartPlusCount">
+          <span className="cartCount">{totalItems}</span>
+          <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/carts")}} className="cartImage"/>
+          
+        </div>
       </div>
       </>
     )
@@ -42,7 +55,7 @@ const Home = (props) => {
   return (
     <>
       <div id="header">
-        <h3 id="title" onClick={() => {navigate("/")}}>ACL Groceries</h3>
+      <a id="title" href="/">ACL Groceries</a>
         <div id="buttonContainer">
           <button className="logout" id="loginButton" onClick={() => {navigate("/login")}}>Login</button>
         </div>

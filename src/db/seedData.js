@@ -84,7 +84,7 @@ async function createTables() {
       id SERIAL PRIMARY KEY,
       "cartId" INT REFERENCES carts ( id ),
       "productId" INT REFERENCES products ( id ),
-      name VARCHAR(255) UNIQUE NOT NULL,
+      name VARCHAR(255) NOT NULL,
       description VARCHAR(255) NOT NULL,
       price INTEGER NOT NULL,
       photos VARCHAR(255),

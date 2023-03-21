@@ -128,7 +128,8 @@ const App = () => {
           setProducts={setProducts}
           me={me}
           logout={logout}
-        />
+          currentCart={currentCart}
+                  />
 
         <Routes>
           <Route
