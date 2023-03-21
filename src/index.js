@@ -11,7 +11,8 @@ import {
   Products,
   Carts,
   Home,
-  SingleProduct
+  SingleProduct,
+  Checkout
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -109,8 +110,6 @@ const App = () => {
   window.onload = function () {
     createCartFunction()
   };
-
-  console.log(me)
 
   if (token) {
     return loading ? (
@@ -222,6 +221,22 @@ const App = () => {
             path='/carts'
             element={
               <Carts
+                products={products}
+                categories={categories}
+                currentCart={currentCart}
+                setCurrentCart={setCurrentCart}
+                allCarts={allCarts}
+                setAllCarts={setAllCarts}
+              />
+            }
+          />
+          <Route
+            path='/checkout'
+            element={
+              <Checkout
+                username={username}
+                firstName={firstName}
+                lastName={lastName}
                 products={products}
                 categories={categories}
                 currentCart={currentCart}

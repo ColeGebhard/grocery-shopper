@@ -109,6 +109,20 @@ async function getCartById(cartId) {
     }
   }
 
+  async function clearCartItemsByCartId(cartId) {
+    try {
+      const { rows: cartItems } = await client.query(`
+        DELETE *
+        FROM cart_items
+        WHERE "cartId" = $1
+      `, [cartId]);
+  
+      return cartItems;
+    } catch (error) {
+      throw Error(error);
+    }
+  }
+
 
 
 // Ignore the next two for now. Replace by getAllCartsWithItems
@@ -166,7 +180,8 @@ module.exports = {
     getAllCartsWithItems,
     getCartById,
     attachCartItemsToCart,
-    getCartItemsByCartId
+    getCartItemsByCartId,
+    clearCartItemsByCartId
 }
 
 // Cart work suspended until products finished

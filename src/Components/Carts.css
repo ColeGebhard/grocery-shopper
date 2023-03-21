@@ -10,7 +10,7 @@
   flex-flow: column;
   padding-left: 1.5em;
   justify-content: center;
-  border:solid blue 5px;
+  border:solid #dd673d 5px;
   margin-left:1.5em;
   padding-top:1.5em;
 }
@@ -31,6 +31,15 @@
 /* .cartImage {
   min-height: 100%;
 } */
+
+#bottomCartContainer {
+  display: flex;
+  flex-flow: row;
+}
+
+#checkoutButton {
+  margin-left: 2em;
+}
 
 #noItems {
   padding-bottom:1.2em;
