@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { getAllCartItems } from "../api/helpers";
-import "../index.css"
+// import "../index.css"
 import "./Carts.css"
 
 const Carts = (props) => {
@@ -8,36 +8,60 @@ const Carts = (props) => {
 
   console.log(currentCart.items)
 
-  // useEffect(() => {
-  //   try {
-  //     getAllCartItems()
-  //       .then((carts) => {
-  //           setAllCarts(carts);
-  //       });
-  //     } catch (e)  {
-  //           console.error('Failed to get all carts');
-  //           throw e;
-  //       };
-  //     }, [setAllCarts] );
-  // console.log("Carts with items:", allCarts);
-  // console.log("Cart items:", cartItems);
+  let currentCartQuantity = 0;
+  let currentCartTotal = 0;
+  if (currentCart.items) {
+    currentCart.items.forEach(item => currentCartQuantity += item.quantity);
+    currentCart.items.forEach(item => currentCartTotal += item.price*item.quantity)
+  }
+
+  const handleSubtraction = (e) => {
+    console.log(e.target.nextSibling.innerText)
+    // const newQuantity = this.quantity;
+    // this.quantity = newQuantity > 0 ? newQuantity : 0;
+};
+
+const handleAddition = (e) => {
+  console.log(e.target.previousSibling.innerText)
+  // const newQuantity = this.quantity;
+  // this.quantity = newQuantity > 0 ? newQuantity : 0;
+};
+
 
   return (
-    <>
+    <div id="cartBody">
       <div id="fullCart" >
-        <h2>Cart</h2>
-        {currentCart.items.map((item) => {
+        <h2>Cart ({currentCartQuantity} items)</h2>
+        {/* If the cart has items, display them.
+        Otherwise, give a "No items!" message */}
+        {currentCart.items ? currentCart.items.map((item) => {
           return (
-            <div key={item.id} className="individualCartItem" > {item.name}
-              <img alt={item.name} src={require(`../img/${item.photos}`)} ></img>
-              <div> Quantity: <span> {item.quantity} </span></div>
-              <div> Price: {item.price}</div>
+            <div key={item.id} className="individualCartItem" >
+              <img alt={item.name} src={require(`../img/${item.photos}`)} className="cartImage" />
+              <div className="cartItemTextContainer"> {item.name}
+                <p> Quantity:
+                  <button
+                    className="quantityButton"
+                    disabled={item.quantity < 1}
+                    onClick={(e) => handleSubtraction(e)}
+                          > - 
+                  </button>
+                  <span> {item.quantity} </span>
+                  <button
+                  className="quantityButton"
+                  disabled={item.quantity < 1}
+                  onClick={(e) => handleAddition(e)}
+                        > + 
+                </button>
+                </p>
+                <p> Price: ${item.price*item.quantity}</p>
+              </div>
             </div>
           )
-        })}
-        <div>Total: </div>
+        }) : <div id="noItems ">No items yet!</div>}
+        <div>Total: ${currentCartTotal}</div>
       </div>
-    </>
+    </div>
   )
 }
 
