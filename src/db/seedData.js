@@ -63,7 +63,7 @@ async function createTables() {
       description VARCHAR(255) NOT NULL,
       price INTEGER NOT NULL,
       photos VARCHAR(255),
-      quantity INT
+      quantity INT NOT NULL
     );
 
     CREATE TABLE reviews (
