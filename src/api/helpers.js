@@ -184,7 +184,7 @@ export async function createProducts({
   description,
   price,
   photos,
-  quanity,
+  quantity,
   categoryId
 }) {
   try {
@@ -199,7 +199,7 @@ export async function createProducts({
         description,
         price,
         photos,
-        quanity,
+        quantity,
         categoryId
       })
     });

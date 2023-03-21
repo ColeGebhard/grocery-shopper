@@ -10,7 +10,7 @@ const Products = (props) => {
     const [name, setName] = useState("");
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState();
-    const [quantity, setQuanity] = useState();
+    const [quantity, setQuanity] = useState(5);
     const [photos, setPhotos] = useState("");
     const [categoryId, setCategoryId] = useState();
 
