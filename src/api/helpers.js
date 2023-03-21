@@ -11,7 +11,6 @@ export const isUser = async (token) => {
           return {
               id: data.id,
               username: data.username,
-              isAdmin: data.isAdmin
           };
       }
       return false;
@@ -20,6 +19,20 @@ export const isUser = async (token) => {
   }
 };
 
+// export const checkUsername = async(username) => {
+//   try {
+//     const resp = await fetch(`http://localhost:8000/api/users/${username}`, {
+//         headers: {
+//             'Content-Type': 'application/json',
+//         },
+//     });
+//     const data = await resp.json();
+ 
+//     return data;
+// } catch (error) {
+//     console.error(error);
+// }
+// }
 
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {

@@ -27,7 +27,7 @@ const Home = (props) => {
       <>
       <div id="header">
         <button className="logout" onClick={logout}>Log Out</button>
-        <h3 id="title">ACL Groceries</h3>
+        <h3 id="title" onClick={() => {navigate("/")}}>ACL Groceries</h3>
 
         <input alt="cart" type="image" src={require(`../img/cart.jpg`)} onClick={() => {navigate("/carts")}} className="cartImage"/>
         
@@ -42,10 +42,9 @@ const Home = (props) => {
   return (
     <>
       <div id="header">
-        <h3 id="title">ACL Groceries</h3>
+        <h3 id="title" onClick={() => {navigate("/")}}>ACL Groceries</h3>
         <div id="buttonContainer">
-          <button className="headerButton" id="loginButton" onClick={() => {navigate("/login")}}>Login</button>
-          <button className="headerButton" id="registerButton" onClick={() => {navigate("/register")}}>Sign Up</button>
+          <button className="logout" id="loginButton" onClick={() => {navigate("/login")}}>Login</button>
         </div>
       </div>
       {/* {'I added the category page to home page, might be simple'} */}

@@ -106,7 +106,6 @@ const Products = (props) => {
             {me.username === "Admin" ?
                 <form id="productForm" onSubmit={productSubmit}>
 
-                <label htmlFor="category">Category:</label>
                 <select name="category" id="category" value={categoryList} onChange={handleChange}>
                     <option value="any">--Select Category--</option>
                     {categories.map((category) => (

@@ -120,20 +120,21 @@ const App = () => {
       </span>
     ) : (
       <BrowserRouter>
+        <Home
+          username={username}
+          token={token}
+          setToken={setToken}
+          products={products}
+          setProducts={setProducts}
+          me={me}
+          logout={logout}
+        />
+
         <Routes>
           <Route
             exact path="/"
             element={
               <>
-                <Home
-                  username={username}
-                  token={token}
-                  setToken={setToken}
-                  products={products}
-                  setProducts={setProducts}
-                  me={me}
-                  logout={logout}
-                />
                 <Categories
                   categories={categories}
                   setCategories={setCategories}
@@ -241,19 +242,20 @@ const App = () => {
       </span>
     ) : (
       <BrowserRouter>
+        <Home
+          username={username}
+          token={token}
+          setToken={setToken}
+          products={products}
+          setProducts={setProducts}
+          me={me}
+        />
         <Routes>
+
           <Route
             exact path="/"
             element={
               <>
-                <Home
-                  username={username}
-                  token={token}
-                  setToken={setToken}
-                  products={products}
-                  setProducts={setProducts}
-                  me={me}
-                />
                 <Categories
                   categories={categories}
                   setCategories={setCategories}
