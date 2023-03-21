@@ -51,10 +51,15 @@ const SingleProduct = (props) => {
     };
 
     console.log(currentCart)
+    console.log(products)
 
     return (
         products ?
             <div className="productView">
+                <div className="productNav">
+                    <a href="/">View All Products</a>
+                    <a href={'/category/' + products.categoryName}>{products.categoryName}</a>
+                </div>
                 <div className="productImage">
                     {products.photos &&
                         <img 
@@ -84,7 +89,7 @@ const SingleProduct = (props) => {
                             <p>${(products.price * quantity).toFixed(2)}</p>
                         }{me ?
                         <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
-                    : <button className="headerButton" id="loginButton" onClick={() => {navigate('/login')}}>Sign in to add</button>
+                    : <button className="productAddToCart" onClick={() => {navigate('/login')}}>Sign in to add</button>
                 }</div>
                 </div>
             </div>
