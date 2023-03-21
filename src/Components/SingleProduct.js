@@ -14,7 +14,7 @@ const SingleProduct = (props) => {
     const handleQuantityChange = (change) => {
         const newQuantity = quantity + change;
         setQuantity(newQuantity > 0 ? newQuantity : 1);
-    };
+      }; 
 
 
     const { prodId } = useParams()
@@ -30,10 +30,6 @@ const SingleProduct = (props) => {
                 console.error('Failed to get products')
             });
     }, [setProducts, prodId])
-
-    console.log(me)
-
-    console.log(products.name)
 
     const handleAddToCart = async () => {
         try {
@@ -55,7 +51,6 @@ const SingleProduct = (props) => {
     };
 
     console.log(currentCart)
-    console.log(products)
 
     return (
         products ?
@@ -86,7 +81,7 @@ const SingleProduct = (props) => {
                             +
                         </button>
                         {products.price &&
-                            <p>${products.price.toFixed(2)}</p>
+                            <p>${(products.price * quantity).toFixed(2)}</p>
                         }{me ?
                         <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
                     : <button className="headerButton" id="loginButton" onClick={() => {navigate('/login')}}>Sign in to add</button>
