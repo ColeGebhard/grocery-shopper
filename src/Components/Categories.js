@@ -49,7 +49,7 @@ console.log(me)
     <>
       {/* {'sorta stopped working dont thinkg we need and just seed'} */}
       {me.username === "Admin"  ?
-        <form id="loginForm" onSubmit={catSubmit}>
+        <form id="productForm" onSubmit={catSubmit}>
         <input
           type="text"
           placeholder="Category"

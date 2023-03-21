@@ -40,11 +40,15 @@ const SingleProduct = (props) => {
             }
 
             // Add the item to the cart
-            await createCartItem({ cartId, productId: products.id, quantity: quantity || 1 });
-
+            const cartItem = await createCartItem({ cartId, productId: products.id, quantity: quantity || 1 });
+            if(cartItem.error){
+                alert(`${products.name} already in cart`)
+            }
             // Update the cart in state
-            const updatedCart = await getCart(cartId);
+            if(!cartItem.error){const updatedCart = await getCart(cartId);
             setCurrentCart(updatedCart);
+
+            alert(`${quantity} ${products.name} has been added to cart`)}
         } catch (error) {
             console.error(error);
         }
@@ -57,8 +61,9 @@ const SingleProduct = (props) => {
         products ?
             <div className="productView">
                 <div className="productNav">
-                    <a href="/">View All Products</a>
-                    <a href={'/category/' + products.categoryName}>{products.categoryName}</a>
+                    <a id=""href="/">All Products |</a>
+                    <p></p>
+                    <a href={'/category/' + products.categoryName}>| {products.categoryName}</a>
                 </div>
                 <div className="productImage">
                     {products.photos &&

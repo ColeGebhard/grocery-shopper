@@ -73,6 +73,18 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 })
 
+// usersRouter.get("/:username", async (req, res, next) => {
+//   const { username } = req.params;
+
+//   try {
+//       const checkUser = await getUserByUsername(username)
+
+//       console.log(checkUser)
+//   } catch(error) {
+
+//   }
+// })
+
 usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
