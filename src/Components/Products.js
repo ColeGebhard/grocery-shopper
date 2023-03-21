@@ -10,7 +10,7 @@ const Products = (props) => {
     const [name, setName] = useState("");
     const [description, setDesciption] = useState("");
     const [price, setPrice] = useState();
-    const [quanity, setQuanity] = useState();
+    const [quantity, setQuanity] = useState(5);
     const [photos, setPhotos] = useState("");
     const [categoryId, setCategoryId] = useState();
 
@@ -54,7 +54,7 @@ const Products = (props) => {
     const productSubmit = async (e) => {
         e.preventDefault();
 
-
+        console.log(quantity)
         try {
             const result = await createProducts({
                 categoryId,
@@ -62,14 +62,17 @@ const Products = (props) => {
                 description,
                 price,
                 photos,
-                quanity,
+                quantity
             });
+
+            console.log(quantity)
             if (result.error) {
                 window.alert(result.error)
             }
 
             if (result.id) {
                 window.alert(`Succesfully made product with ${result.name}`)
+                window.location.reload()
             }
             return result
         } catch (e) {
@@ -138,7 +141,7 @@ const Products = (props) => {
                     <input
                         type="number"
                         placeholder="Quanity"
-                        value={quanity}
+                        value={quantity}
                         onChange={(e) => setQuanity(e.target.value)}
                     />
                     <input
@@ -163,6 +166,7 @@ const Products = (props) => {
                 {filteredProducts.map((product) => {
 
                     return (
+                        <>
                         <button key={product.id}
                             onClick={() => { navigate(`/category/product/${product.id}`) }}
                             className="productCard">
@@ -188,6 +192,7 @@ const Products = (props) => {
                                 }}>Delete</button> :
                                 null}
                         </button>
+                        </>
                     )
                 })}
             </span>

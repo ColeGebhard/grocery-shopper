@@ -68,7 +68,7 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
     description,
     price,
     photos,
-    quanity } = req.body;
+    quantity } = req.body;
 
     try {
         const productToCategory = await createProduct({ 
@@ -77,7 +77,9 @@ productsRouter.post('/:categoryId/products', async (req, res, next) => {
             description,
             price,
             photos,
-            quanity })
+            quantity })
+
+            console.log(quantity)
 
         res.send(productToCategory)
     } catch ({name, message}) {

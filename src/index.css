@@ -147,7 +147,7 @@ code {
 
 .productImage img {
   display: block;
-  max-width: 70%;
+  max-width: 20vw;
   height: auto;
   border-radius: 10px;
   border: 1px solid black;
