@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { getAllCartItems } from "../api/helpers";
-// import "../index.css"
+import { useNavigate } from "react-router-dom";
 import "./Carts.css"
 
 const Carts = (props) => {
   const {currentCart, setCurrentCart, allCarts, setAllCarts, products } = props;
 
-  console.log(currentCart.items)
+  const navigate = useNavigate();
 
   let currentCartQuantity = 0;
   let currentCartTotal = 0;
@@ -27,6 +27,7 @@ const handleAddition = (e) => {
   // this.quantity = newQuantity > 0 ? newQuantity : 0;
 };
 
+console.log(currentCart);
 
   return (
     <div id="cartBody">
@@ -59,7 +60,15 @@ const handleAddition = (e) => {
             </div>
           )
         }) : <div id="noItems ">No items yet!</div>}
-        <div>Total: ${currentCartTotal}</div>
+        <div id="bottomCartContainer">
+          <div>Total: ${currentCartTotal}</div>
+          <button 
+            id="checkoutButton" 
+            onClick={()=>navigate("/checkout")}
+            >
+              Proceed to checkout
+          </button>
+        </div>
       </div>
     </div>
   )

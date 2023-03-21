@@ -302,6 +302,23 @@ export async function createCartItem({
   }
 }
 
+export async function clearCartItems(
+  cartId,
+) {
+  try {
+    const response = await fetch(`http://localhost:8000/api/carts/${cartId}/items`, {
+      method: "DELETE"
+    });
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    throw Error(error);
+  }
+}
+
 export const deleteProduct = async (productId) => {
   try {
     const response = await fetch(`http://localhost:8000/api/category/${productId}`, {
