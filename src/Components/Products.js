@@ -95,7 +95,12 @@ const Products = (props) => {
 
     const { categoryName } = useParams();
 
-    const filteredProducts = products.filter(product => product.categoryName === categoryName)
+    console.log(products)
+
+    const filteredProducts = Array.isArray(products) && products.length > 0 ? products.filter(product => product.categoryName === categoryName) : [];
+
+    console.log(products)
+    console.log(filteredProducts)
     return (
         <>
             {me.username === "Admin" ?

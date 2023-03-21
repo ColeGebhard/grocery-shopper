@@ -45,10 +45,10 @@ console.log(me)
   console.log(categories)
 
 
-  return (
+  return products ?(
     <>
       {/* {'sorta stopped working dont thinkg we need and just seed'} */}
-      {me.username === "Admin" ?
+      {me.username === "Admin"  ?
         <form id="loginForm" onSubmit={catSubmit}>
         <input
           type="text"
@@ -73,7 +73,8 @@ console.log(me)
         <span>
           <h1>Products</h1>
           <span className="productCards">
-            {products.map((product) => {
+            {Array.isArray(products) && products.length > 0 ?
+            products.map((product) => {
               return (
                 <a key={product.id} href={`category/product/${product.id}`} className="productCard">
 
@@ -93,14 +94,14 @@ console.log(me)
                   </div>
                 </a>
               )
-            })}
+            }): <p>No product found</p>}
 
           </span>
         </span>
 
       </div>
     </>
-  )
+  ) : null
 
 }
 
