@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getAllCategories, createCategory, getAllProducts } from "../api/helpers";
+import { useNavigate } from "react-router";
 
 const Categories = (props) => {
   const { categories, setCategories, products, setProducts, me } = props;
 
   const [name, setName] = useState("");
+
+  const navigate = useNavigate();
+
 
 console.log(me)
 
@@ -60,23 +64,24 @@ console.log(me)
       </form>:
       null}
       <div className="mainProductPage">
-        <h1>Categories</h1>
         <span className="categoryCards">
           {categories.map((category) => {
             return (
               <div key={category.id} className="categoryLinks">
-                <h2><a id="catergoryClick" href={`category/${category.name}`}>{category.name}</a></h2>
+                <h2><button id="catergoryClick" onClick={() => {navigate(`category/${category.name}`)}}>{category.name}</button></h2>
               </div>
             )
           })}
         </span>
-        <span>
-          <h1>Products</h1>
+        <span className="productHeader">
+          <h1 className="productHeader">All Products</h1>
           <span className="productCards">
             {Array.isArray(products) && products.length > 0 ?
             products.map((product) => {
               return (
-                <a key={product.id} href={`category/product/${product.id}`} className="productCard">
+                <button key={product.id} 
+                onClick={() => {navigate(`category/product/${product.id}`)}}
+                className="productCard">
 
                   <div className="categoryImage">
                     {product.photos ? (
@@ -92,7 +97,7 @@ console.log(me)
                     <h2>{product.name}</h2>
                     <p>${product.price.toFixed(2)}</p>
                   </div>
-                </a>
+                </button>
               )
             }): <p>No product found</p>}
 

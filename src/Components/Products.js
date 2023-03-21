@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getAllProducts, createProducts, getAllCategories, deleteProduct } from "../api/helpers";
 
 const Products = (props) => {
@@ -14,6 +15,8 @@ const Products = (props) => {
     const [categoryId, setCategoryId] = useState();
 
     // console.log(photos)
+
+    const navigate = useNavigate()
 
 
 
@@ -43,10 +46,10 @@ const Products = (props) => {
         setCategoryList(e.target.value);
         const filteredCategory = categories.find(category => category.name === e.target.value);
         if (filteredCategory) {
-          setCategoryId(filteredCategory.id);
+            setCategoryId(filteredCategory.id);
         }
-      };
-      
+    };
+
 
     const productSubmit = async (e) => {
         e.preventDefault();
@@ -66,7 +69,7 @@ const Products = (props) => {
             }
 
             if (result.id) {
-                window.alert(`Succesfully made product wiht ${result.name}`)
+                window.alert(`Succesfully made product with ${result.name}`)
             }
             return result
         } catch (e) {
@@ -106,57 +109,63 @@ const Products = (props) => {
             {me.username === "Admin" ?
                 <form id="productForm" onSubmit={productSubmit}>
 
-                <select name="category" id="category" value={categoryList} onChange={handleChange}>
-                    <option value="any">--Select Category--</option>
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.name}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-                <input
-                    type="text"
-                    placeholder="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                    type="text"
-                    placeholder="Description"
-                    value={description}
-                    onChange={(e) => setDesciption(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Price"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                />
-                <input
-                    type="number"
-                    placeholder="Quanity"
-                    value={quanity}
-                    onChange={(e) => setQuanity(e.target.value)}
-                />
-                <input
-                    type="url"
-                    placeholder="imageURL"
-                    accept="image/*"
-                    value={photos}
-                    onChange={(e) => setPhotos(e.target.value)}
+                    <select name="category" id="category" value={categoryList} onChange={handleChange}>
+                        <option value="any">--Select Category--</option>
+                        {categories.map((category) => (
+                            <option key={category.id} value={category.name}>
+                                {category.name}
+                            </option>
+                        ))}
+                    </select>
+                    <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                    />
+                    <input
+                        type="text"
+                        placeholder="Description"
+                        value={description}
+                        onChange={(e) => setDesciption(e.target.value)}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Price"
+                        value={price}
+                        onChange={(e) => setPrice(e.target.value)}
+                    />
+                    <input
+                        type="number"
+                        placeholder="Quanity"
+                        value={quanity}
+                        onChange={(e) => setQuanity(e.target.value)}
+                    />
+                    <input
+                        type="url"
+                        placeholder="imageURL"
+                        accept="image/*"
+                        value={photos}
+                        onChange={(e) => setPhotos(e.target.value)}
 
-                />
-                <button type="submit">Make a Product</button>
-            </form>
-            : null}
+                    />
+                    <button type="submit">Make a Product</button>
+                </form>
+                : null}
 
-            <h1>{categoryName}</h1>
+            <h1 className="productHeader">{categoryName}</h1>
+
+            <div className="productNav">
+                <a href="/">All Products |</a>
+                <p></p>
+            </div>
             <span className="productCards">
                 {filteredProducts.map((product) => {
 
                     return (
-                        <a key={product.id} href={`/category/product/${product.id}`} className="productCard">
-
+                        <button key={product.id}
+                            onClick={() => { navigate(`/category/product/${product.id}`) }}
+                            className="productCard">
                             <div className="categoryImage">
                                 {product.photos ? (
                                     <img
@@ -174,11 +183,11 @@ const Products = (props) => {
                             </div>
                             {me.username === "Admin" ?
                                 <button onClick={(e) => {
-                                e.preventDefault();
-                                handleDelete(product.id);
-                            }}>Delete</button>:
-                            null}
-                        </a>
+                                    e.preventDefault();
+                                    handleDelete(product.id);
+                                }}>Delete</button> :
+                                null}
+                        </button>
                     )
                 })}
             </span>
