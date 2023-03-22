@@ -12,7 +12,8 @@ import {
   Carts,
   Home,
   SingleProduct,
-  Checkout
+  Checkout, 
+  CheckoutSuccess
 } from "./Components"
 
 export const TOKEN_STORAGE_KEY = "user-token";
@@ -235,6 +236,22 @@ const App = () => {
             path='/checkout'
             element={
               <Checkout
+                username={username}
+                firstName={firstName}
+                lastName={lastName}
+                products={products}
+                categories={categories}
+                currentCart={currentCart}
+                setCurrentCart={setCurrentCart}
+                allCarts={allCarts}
+                setAllCarts={setAllCarts}
+              />
+            }
+          />
+          <Route
+            path='/checkout/success'
+            element={
+              <CheckoutSuccess
                 username={username}
                 firstName={firstName}
                 lastName={lastName}
