@@ -85,12 +85,12 @@ const Products = (props) => {
         try {
             const result = await deleteProduct(productId);
 
-            if (result) {
+            
                 window.alert('Succesfully deleted')
                 window.location.reload()
-            }
+            
 
-            console.log(productId)
+            return result
         } catch (e) {
             console.error(e);
             // Handle error
@@ -166,33 +166,34 @@ const Products = (props) => {
                 {filteredProducts.map((product) => {
 
                     return (
-                        <>
-                        <button key={product.id}
-                            onClick={() => { navigate(`/category/product/${product.id}`) }}
-                            className="productCard">
-                            <div className="categoryImage">
-                                {product.photos ? (
-                                    <img
-                                        src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}
-                                        alt={product.name}
-                                    />
-                                ) : (
-                                    <img src={require(`../img/placeholder-image.png`)} alt="Placeholder" />
-                                )}
-                            </div>
+                        <div className="productCard">
+                            <button key={product.id}
+                                onClick={() => { navigate(`/category/product/${product.id}`) }}
+                                >
+                                <div className="categoryImage">
+                                    {product.photos ? (
+                                        <img
+                                            src={product.photos.startsWith('http') || product.photos.startsWith('https') ? product.photos : require(`../img/${product.photos}`)}
+                                            alt={product.name}
+                                        />
+                                    ) : (
+                                        <img src={require(`../img/placeholder-image.png`)} alt="Placeholder" />
+                                    )}
+                                </div>
 
-                            <div>
-                                <h2>{product.name}</h2>
-                                <p>${product.price.toFixed(2)}</p>
-                            </div>
+                                <div>
+                                    <h2>{product.name}</h2>
+                                    <p>${product.price.toFixed(2)}</p>
+                                </div>
+
+                            </button>
                             {me.username === "Admin" ?
                                 <button onClick={(e) => {
                                     e.preventDefault();
                                     handleDelete(product.id);
                                 }}>Delete</button> :
                                 null}
-                        </button>
-                        </>
+                        </div>
                     )
                 })}
             </span>
