@@ -1,7 +1,8 @@
 #cartBody {
-  background-color: lightgray;
+  background-color: #a8bab4;
   width:100%;
   height: 100%;
+  margin:5px
 }
 
 #fullCart {

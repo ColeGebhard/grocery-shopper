@@ -36,21 +36,22 @@ code {
   padding: 0px;
   margin:0px;
   flex-wrap:wrap;
+  font-size: 20px;
 }
 
 #catergoryClick {
     text-decoration: none;
     display: flex;
     flex-direction: column;
-    background-color: 	#cc4717;
+    background-color: 	#5e7cbd;
     color:#fff;
     transition: background-color 0.2s ease-in-out;
-    font-size: 4vw;
+    font-size: 2vw;
     padding: 10px;
 }
 
 #catergoryClick:hover {
-  background-color: 	#dd673d;
+  background-color: 	#2558c7;
   text-decoration: none;
 }
 
@@ -64,14 +65,14 @@ code {
   margin: 0px;
   padding: 0px;
   flex-direction: column;
-  background-color: 	#cc4717;
+  background-color: 	#2558c7;
   font-style: none;
   flex-wrap: wrap;
 }
 
 
 .productHeader {
-  font-size: 1.5em;
+  font-size: 1.3em;
   margin: 0;
   color: #292828;
   margin: 10px;
@@ -162,23 +163,29 @@ code {
 .productDetails h2 {
   font-size: 2rem;
   margin: 0 0 1rem;
+  color: #444;
+
 }
 
 .productDetails .productDescription {
   font-size: 1.2rem;
   margin: 0 0 1rem;
+  color: #444;
 }
 
 .productDetails .productInfo {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #444;
+
 }
 
 .productDetails .productPrice {
   font-size: 1.5rem;
   font-weight: bold;
   margin: 0;
+  color: #444;
 }
 
 .productDetails .productAddToCart {
