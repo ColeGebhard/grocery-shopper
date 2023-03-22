@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from "react-router-dom";
 import { clearCartItems } from '../api/helpers';
 
-const Checkout = (props) => {
+export const Checkout = (props) => {
   const { currentCart, setCurrentCart } = props;
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ const Checkout = (props) => {
       // const cartId = currentCart.id;
       // clearCartItems(cartId);
       console.log(currentCart);
+      navigate("/checkout/success")
       
       return (
         <div>
@@ -45,7 +46,7 @@ const Checkout = (props) => {
             your order is ready for pickup
           </div>
           <button
-            onClick={() => navigate("./")}
+            onClick={() => navigate("/")}
           >Home</button>
         </div>
       ) }
@@ -53,6 +54,7 @@ const Checkout = (props) => {
       console.error("Failure to checkout", e)
     }
   }
+
 
     return (
       <form> 
@@ -96,4 +98,23 @@ const Checkout = (props) => {
     )
 }
 
-export default Checkout;
+export const CheckoutSuccess = (props) => {
+  const navigate = useNavigate();
+
+  const navigateHome = () => {
+    navigate("/")
+  }
+
+  return (
+    <div>
+      <div>
+        Thank for for placing an order with us! 
+        We will send you a confirmation email when
+        your order is ready for pickup
+      </div>
+      <button
+        onClick={() => navigateHome()}
+      >Home</button>
+    </div>
+  )
+}
