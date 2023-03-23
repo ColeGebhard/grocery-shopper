@@ -24,6 +24,7 @@ const Register = (props) => {
   const registerSubmit = async (e) => {
     e.preventDefault();
 
+
     // if (password !== confirmPassword) {
     //   window.alert("Passwords do not match");
     //   return;
@@ -59,9 +60,12 @@ const Register = (props) => {
     } catch (e) {
       throw e;
     } finally {
-      setUsername("");
-      setPassword("");
-      setConfirmPassword("")
+      // setUsername("");
+      // setPassword("");
+      // setConfirmPassword("")
+      // setFirstName('')
+      // setLastName('')
+      // setEmail('')
     }
   }
 

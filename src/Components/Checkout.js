@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCallback } from 'react';
 import { useNavigate } from "react-router-dom";
 import { clearCartItems } from '../api/helpers';
 
@@ -28,6 +29,17 @@ export const Checkout = (props) => {
 //     console.error(error);
 // }
 // };
+
+// const clearCart = useCallback(() => {
+//   const confirm = window.confirm('Are you sure you wish to logout? All cart progress will be lost.')
+//   if (confirm) {
+//     localStorage.removeItem('cartId');
+
+//     window.location.replace('http://localhost:3000/#/');
+//     window.location.reload();
+//     window.alert('Log out success');
+//   }
+// }, []);
 
   const handleSubmission = (e) => {
     try {
@@ -105,6 +117,15 @@ export const CheckoutSuccess = (props) => {
     navigate("/")
   }
 
+  const clearCart = useCallback(() => {
+
+      localStorage.removeItem('cartId');
+  
+      navigate('/')
+      window.location.reload();
+    
+  }, []);
+
   return (
     <div>
       <div>
@@ -113,7 +134,7 @@ export const CheckoutSuccess = (props) => {
         your order is ready for pickup
       </div>
       <button
-        onClick={() => navigateHome()}
+        onClick={() => clearCart()}
       >Home</button>
     </div>
   )

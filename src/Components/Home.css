@@ -18,7 +18,7 @@ body {
 
 #title {
   font-family: 'Pacifico', cursive;
-  font-size: 1.5em;
+  font-size: 2em;
   margin: 0;
   cursor: pointer;
   color: #3d3d3d;
@@ -38,7 +38,7 @@ body {
   background-color: #fff;
   border: none;
   color: #e5ac5a;
-  font-size: .5em;
+  font-size: 1em;
   font-weight: bold;
   padding: 10px 15px;
   border-radius: 25px;

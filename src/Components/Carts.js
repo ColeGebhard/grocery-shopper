@@ -70,6 +70,7 @@ const Carts = (props) => {
           <div>Total: ${currentCartTotal}</div>
           <button
             id="checkoutButton"
+            
             onClick={() => navigate("/checkout")}
           >
             Proceed to checkout

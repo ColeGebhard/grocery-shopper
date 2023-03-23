@@ -54,6 +54,10 @@ const Products = (props) => {
     const productSubmit = async (e) => {
         e.preventDefault();
 
+        if(!price){
+            window.alert('Please set a price')
+        }
+
         console.log(quantity)
         try {
             const result = await createProducts({
@@ -66,8 +70,8 @@ const Products = (props) => {
             });
 
             console.log(quantity)
-            if (result.error) {
-                window.alert(result.error)
+            if (result.error === 'error: duplicate key value violates unique constraint "products_name_key"') {
+                window.alert(`${name} already exists`)
             }
 
             if (result.id) {
@@ -85,7 +89,7 @@ const Products = (props) => {
         try {
             const result = await deleteProduct(productId);
 
-            
+            console.log(result)
                 window.alert('Succesfully deleted')
                 window.location.reload()
             

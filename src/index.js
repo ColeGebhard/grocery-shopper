@@ -40,7 +40,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500); // Simulate a 1-second loading time
+    }, 5000); // Simulate a 1-second loading time
   }, []);
 
 
@@ -54,7 +54,6 @@ const App = () => {
       localStorage.removeItem(TOKEN_STORAGE_KEY);
       localStorage.removeItem(token);
       localStorage.removeItem('cartId');
-
 
       setToken('');
       setMe(null);
