@@ -1,6 +1,6 @@
 export const isUser = async (token) => {
   try {
-      const resp = await fetch(`http://localhost:8000/api/users/me`, {
+      const resp = await fetch(`https://acl-groceries.onrender.com/api/users/me`, {
           headers: {
               'Content-Type': 'application/json',
               'Authorization': `Bearer ${token}`
@@ -21,7 +21,7 @@ export const isUser = async (token) => {
 
 // export const checkUsername = async(username) => {
 //   try {
-//     const resp = await fetch(`http://localhost:8000/api/users/${username}`, {
+//     const resp = await fetch(`https://acl-groceries.onrender.com/api/users/${username}`, {
 //         headers: {
 //             'Content-Type': 'application/json',
 //         },
@@ -36,7 +36,7 @@ export const isUser = async (token) => {
 
 export async function fetchRegisterResults(username, password, firstName, lastName, email) {
   try {
-    const response = await fetch("http://localhost:8000/api/users/register", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/users/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -60,7 +60,7 @@ export async function fetchRegisterResults(username, password, firstName, lastNa
 
 export async function fetchLoginResults(username, password) {
   try {
-    const response = await fetch("http://localhost:8000/api/users/login", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/users/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -81,7 +81,7 @@ export async function fetchLoginResults(username, password) {
 
 export async function getAllCategories() {
   try {
-    const response = await fetch("http://localhost:8000/api/category", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/category", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -98,7 +98,7 @@ export async function getAllCategories() {
 
 export async function createCategory(name) {
   try {
-    const response = await fetch("http://localhost:8000/api/category", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/category", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -126,7 +126,7 @@ export async function createCategory(name) {
 
 export async function getAllProducts() {
   try {
-    const response = await fetch("http://localhost:8000/api/category/products", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/category/products", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -143,7 +143,7 @@ export async function getAllProducts() {
 
 export async function getSingleProduct(id) {
   try {
-    const response = await fetch(`http://localhost:8000/api/category/${id}`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -161,7 +161,7 @@ export async function getSingleProduct(id) {
 
 export async function getSingleCategory(name) {
   try {
-    const response = await fetch(`http://localhost:8000/api/category/${name}`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${name}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -188,7 +188,7 @@ export async function createProducts({
   categoryId
 }) {
   try {
-    const response = await fetch(`http://localhost:8000/api/category/${categoryId}/products`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${categoryId}/products`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -215,7 +215,7 @@ export async function createProducts({
 
 export async function getAllCarts() {
   try {
-    const response = await fetch("http://localhost:8000/api/carts", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/carts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -231,7 +231,7 @@ export async function getAllCarts() {
 
 export async function getAllCartItems() {
   try {
-    const response = await fetch("http://localhost:8000/api/carts/items", {
+    const response = await fetch("https://acl-groceries.onrender.com/api/carts/items", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -249,7 +249,7 @@ export const createCart = async (userId) => {
 
   try {
 
-      const resp = await fetch(`http://localhost:8000/api/carts/${userId}`, {
+      const resp = await fetch(`https://acl-groceries.onrender.com/api/carts/${userId}`, {
         method: "POST",
           headers: {
               'Content-Type': 'application/json',
@@ -268,7 +268,7 @@ export const createCart = async (userId) => {
 
 export const getCart = async (cartId) => {
   try {
-    const response = await fetch(`http://localhost:8000/api/carts/${cartId}`);
+    const response = await fetch(`https://acl-groceries.onrender.com/api/carts/${cartId}`);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -282,7 +282,7 @@ export async function createCartItem({
   quantity,
 }) {
   try {
-    const response = await fetch(`http://localhost:8000/api/carts/${cartId}/items`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/carts/${cartId}/items`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -306,7 +306,7 @@ export async function clearCartItems(
   cartId,
 ) {
   try {
-    const response = await fetch(`http://localhost:8000/api/carts/${cartId}/items`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/carts/${cartId}/items`, {
       method: "DELETE"
     });
     const data = await response.json();
@@ -321,7 +321,7 @@ export async function clearCartItems(
 
 export const deleteProduct = async (productId) => {
   try {
-    const response = await fetch(`http://localhost:8000/api/category/${productId}`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${productId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
