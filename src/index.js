@@ -57,7 +57,7 @@ const App = () => {
 
       setToken('');
       setMe(null);
-      window.location.replace('http://localhost:3000/#/');
+      window.location.replace('https://acl-grocery.onrender.com/');
       window.location.reload();
       window.alert('Log out success');
     }
