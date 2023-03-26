@@ -63,7 +63,7 @@ const SingleProduct = (props) => {
                 <div className="productNav">
                     <a id=""href="/">All Products |</a>
                     <p></p>
-                    <a href={'/category/' + products.categoryName}>| {products.categoryName}</a>
+                    {/* <a href={'/category/' + products.categoryName}>| {products.categoryName}</a> */}
                 </div>
                 <div className="productImage">
                     {products.photos &&
