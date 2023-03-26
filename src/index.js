@@ -40,7 +40,7 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 5000); // Simulate a 1-second loading time
+    }, 1000); // Simulate a 1-second loading time
   }, []);
 
 
