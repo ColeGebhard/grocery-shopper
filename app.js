@@ -20,6 +20,7 @@ app.get('/message', (req, res) => {
   res.json({ message: "Hello from server!" });
 });
 
+
 app.use((req, res, next) => {
   console.log("<____Body Logger START____>");
   console.log(req.body);
