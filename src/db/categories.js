@@ -48,9 +48,22 @@ async function getCategoryByName(name) {
   }
 }
 
+async function deleteCategory(id) {
+  try {
+    await client.query(`
+    DELETE FROM
+    product_category
+    WHERE id = ${id}
+    `);
+
+  } catch (error) {
+    throw Error('Failed to delete', error)
+  }
+}
 
 module.exports = {
     createCategory,
     getAllCategorys,
-    getCategoryByName
+    getCategoryByName,
+    deleteCategory
 }

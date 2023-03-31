@@ -321,7 +321,25 @@ export async function clearCartItems(
 
 export const deleteProduct = async (productId) => {
   try {
-    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${productId}`, {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/product/${productId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+        }
+    });
+
+    const data = await response.json()
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+};
+
+export const deleteCategory = async (categoryId) => {
+  try {
+    const response = await fetch(`https://acl-groceries.onrender.com/api/category/${categoryId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
