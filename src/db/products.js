@@ -100,21 +100,38 @@ async function getProductById(id) {
   }
 }
 
+// async function getAllProductsWithCategoryId() {
+//     try {
+//         const { rows } = await client.query(`
+//         SELECT products.*,
+//         product_category.name AS "categoryName"
+//         FROM products
+//         JOIN product_category ON products."categoryId" = product_category.id
+//         `)
+
+//         console.log(rows)
+
+//         return rows;
+//     } catch (error) {
+//         throw Error('Cannot get products')
+//     }
+// }
+
 async function getAllProductsWithCategoryId() {
-    try {
-        const { rows } = await client.query(`
-        SELECT products.*,
-        product_category.name AS "categoryName"
-        FROM products
-        JOIN product_category ON products."categoryId" = product_category.id
-        `)
+  try {
+      const { rows } = await client.query(`
+      SELECT products.*,
+      product_category.name AS "categoryName"
+      FROM product_category
+      JOIN products ON products."categoryId" = product_category.id
+      `)
 
-        console.log(rows)
+      console.log(rows)
 
-        return rows;
-    } catch (error) {
-        throw Error('Cannot get products')
-    }
+      return rows;
+  } catch (error) {
+      throw Error('Cannot get products')
+  }
 }
 
 async function deleteProduct(id) {
