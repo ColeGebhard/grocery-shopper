@@ -89,10 +89,12 @@ const Products = (props) => {
         try {
             const result = await deleteProduct(productId);
 
-            console.log(result)
-                window.alert('Succesfully deleted')
-                window.location.reload()
-            
+            if (result === false) {
+                window.alert('Successfully deleted');
+                window.location.reload();
+              } else {
+                window.alert('Cannot delete product as it is in cart')
+              }
 
             return result
         } catch (e) {

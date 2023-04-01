@@ -119,6 +119,8 @@ const App = () => {
       </span>
     ) : (
       <BrowserRouter>
+            <div className={`App ${loading ? 'loading' : ''}`}>
+        {loading && <div className="loader"></div>}
         <Home
           username={username}
           token={token}
@@ -264,6 +266,7 @@ const App = () => {
             }
           />
         </Routes>
+        </div>
       </BrowserRouter>
     )
   } else {

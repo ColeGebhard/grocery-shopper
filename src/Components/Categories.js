@@ -51,18 +51,23 @@ const Categories = (props) => {
   const handleDelete = async (categoryId) => {
     try {
       const result = await deleteCategory(categoryId);
-
-      console.log(result)
-      window.alert('Succesfully deleted')
-      // window.location.reload()
-
-
-      return result
+      // console.log(result)
+      if (result === false) {
+        window.alert('Successfully deleted');
+        window.location.reload();
+      } else {
+        window.alert('Cannot delete category because it contains products')
+      }
     } catch (e) {
-      console.error(e);
-      // Handle error
+      if (e.message === 'Cannot delete category because it contains products') {
+        window.alert('Cannot delete category because it contains products');
+      } else {
+        console.error(e);
+        // Handle other errors
+      }
     }
   };
+  
 
 
   return products ? (
