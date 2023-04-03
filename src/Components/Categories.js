@@ -67,11 +67,24 @@ const Categories = (props) => {
       }
     }
   };
-  
+
 
 
   return products ? (
     <>
+      <div className="banner-container">
+        <img className="banner" src={require(`../img/banner.jpg`)} alt="Placeholder" />
+        <div className="banner-summary">
+          <h1>Made For the Health of Our Community</h1>
+          <p>Discover our local, organic grocery store!
+             We offer fresh and healthy produce, meats, 
+             and pantry staples directly from local farms
+              and artisans. Shop with us for nourishing
+               foods that support local growers and promote
+                a sustainable community.
+          </p>
+        </div>
+      </div>
       {me.username === "Admin" ?
         <form id="productForm" onSubmit={catSubmit}>
           <input
@@ -89,7 +102,7 @@ const Categories = (props) => {
             return (
               <div key={category.id} className="categoryLinks">
                 <h2><button id="catergoryClick" onClick={() => { navigate(`category/${category.name}`) }}>{category.name}</button></h2>
-                {me.username === "Admin" ? 
+                {me.username === "Admin" ?
                   <button id="deleteCategoryButton" onClick={() => { handleDelete(category.id) }}>
                     Delete
                   </button> :

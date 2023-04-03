@@ -17,7 +17,8 @@ body {
 }
 
 #title {
-  font-family: 'Pacifico', cursive;
+  /* font-family: 'Pacifico', cursive; */
+  font-weight: 800;
   font-size: 2em;
   margin: 0;
   cursor: pointer;
@@ -31,7 +32,9 @@ body {
 }
 
 #title:active {
-  text-decoration: none;
+  text-decoration: none;  
+  color: #8f8b8b;
+
 }
 
 .logout {
