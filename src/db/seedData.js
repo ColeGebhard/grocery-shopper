@@ -158,11 +158,11 @@ async function createInitialProductCatagories() {
   console.log('Starting to create test catagory...');
   try {
     const catagoryToCreate = [
-      { id:1, name: 'Dairy' },
-      { id:2, name: 'Veggies' },
-      { id:3, name: 'Meat' },
-      { id:4, name: 'Snacks' },
-      { id:5, name: 'Fruit' },
+      { id: 1, name: 'Dairy' },
+      { id: 2, name: 'Veggies' },
+      { id: 3, name: 'Meat' },
+      { id: 4, name: 'Snacks' },
+      { id: 5, name: 'Fruit' },
     ]
 
     const catagory = await Promise.all(catagoryToCreate.map(createCategory))
@@ -179,235 +179,235 @@ async function createInitialProducts() {
   console.log("starting to create products...")
 
   try {
-  const productsToCreate = [
-    //fruit
-    {
-      categoryId: 5,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Apple",
-      description: "Plucked from the orchards down the road.",
-      price: 1,
-      photos: 'apple.jpg',
-      quantity: 5,
-    },
-    {
-      categoryId: 5,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Mango",
-      description: "Fresh from mexico.",
-      price: 1,
-      photos: 'mango.jpg',
-      quantity: 5,
-    },
-    {
-      categoryId: 5,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Banana",
-      description: "Certain to make your pet monkey jealous.",
-      price: 3,
-      photos: 'bananan.jpg',
-      quantity: 5,
-    },
-    {
-      categoryId: 5,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Blueberries",
-      description: "A delectable and tasty item for any fridge.",
-      price: 1,
-      photos: 'blueberry.jpg',
-      quantity: 5,
-    },
-    //veggies
-    {
-      categoryId: 2,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Broccolli",
-      description: 'Earthy and green.',
-      price: 2,
-      photos: "broccolli.jpg",
-      quantity: 5,
-    },
-    {
-      categoryId: 2,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Cucumber",
-      description: 'Fantastic for a summer greek salad.',
-      price: 3,
-      photos: "cucumber.jpg",
-      quantity: 5,
-    },
-    {
-      categoryId: 2,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Kale",
-      description: "You hate it but it's healthy.",
-      price: 5,
-      photos: "kale.jpg",
-      quantity: 5,
-    },
-    {
-      categoryId: 2,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Peppers",
-      description: 'A wide variety of colors to make plenty of dishes with.',
-      price: 4,
-      photos: "peppers.jpg",
-      quantity: 5,
-    },
-    {
-      categoryId: 2,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Lettuce",
-      description: 'A great base for tons of things, like salad.',
-      price: 1,
-      photos: "lettuce.jpg",
-      quantity: 5,
-    },
-    //dairy
-    {
-      categoryId: 1,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Milk",
-      description: "Locally sourced milk from fantastic Scottish Highland Cows",
-      photos: 'milk.jpg',
-      price: 3,
-      quantity: 5,
-    },
-    {
-      categoryId: 1,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Cheese",
-      description: "Locally made and churned by my grandmother",
-      photos:"cheese.jpg",
-      price: 2,
-      quantity: 5,
-    },
-    {
-      categoryId: 1,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Cream",
-      description: "An amazing addition to a fresh cup of coffee",
-      photos:"cream.jpg",
-      price: 4,
-      quantity: 5,
-    },
-    //snakcs
-    {
-      categoryId: 4,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Chips",
-      description: "Great for snacking",
-      photos: 'chips.jpg',
-      price: 3,
-      quantity: 5,
-    },
-    {
-      categoryId: 4,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Tortilla Chips",
-      description: "Get your sieste on, great for salsa.",
-      photos: 'tortillachips.jpg',
-      price: 3,
-      quantity: 5,
-    },
-    {
-      categoryId: 4,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Fruit Snacks",
-      description: "Easy to take on the go",
-      photos: 'fruitsnacks.jpg',
-      price: 4,
-      quantity: 5,
-    },
-    {
-      categoryId: 4,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Cereal",
-      description: "Corn flakes are good for the heart",
-      photos: 'cereal.jpg',
-      price: 5,
-      quantity: 5,
-    },
-    //Meat
-    {
-      categoryId: 3,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Ground Beef",
-      description: "Season it how you want, a great item to have around. *Price by lb",
-      photos: 'beef.jpg',
-      price: 6,
-      quantity: 5,
-    },
-    {
-      categoryId: 3,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Steak",
-      description: "Step up your dinner with this fantastic cut of meat. *Price by lb",
-      photos: 'steak.jpg',
-      price: 13,
-      quantity: 5,
-    },
-    {
-      categoryId: 3,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Chicken",
-      description: "Lean but full of flavour. *Price by lb",
-      photos: 'chicken.jpg',
-      price: 8,
-      quantity: 5,
-    },
-    {
-      categoryId: 3,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Tofu",
-      description: "Availible for the healthy family member. *Price by lb",
-      photos: 'tofu.jpg',
-      price: 10,
-      quantity: 5,
-    },
-    {
-      categoryId: 3,
-      creatorId: 1,
-      isAvailible: true,
-      name: "Bacon",
-      description: "Get some man meat. *Price by package",
-      photos: 'bacon.jpg',
-      price: 9,
-      quantity: 5,
-    },
+    const productsToCreate = [
+      //dairy
+      {
+        categoryId: 1,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Milk",
+        description: "Locally sourced milk from fantastic Scottish Highland Cows",
+        photos: 'milk.jpg',
+        price: 3,
+        quantity: 5,
+      },
+      {
+        categoryId: 1,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Cheese",
+        description: "Locally made and churned by my grandmother",
+        photos: "cheese.jpg",
+        price: 2,
+        quantity: 5,
+      },
+      {
+        categoryId: 1,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Cream",
+        description: "An amazing addition to a fresh cup of coffee",
+        photos: "cream.jpg",
+        price: 4,
+        quantity: 5,
+      },
+      //veggies
+      {
+        categoryId: 2,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Broccolli",
+        description: 'Earthy and green.',
+        price: 2,
+        photos: "broccolli.jpg",
+        quantity: 5,
+      },
+      {
+        categoryId: 2,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Cucumber",
+        description: 'Fantastic for a summer greek salad.',
+        price: 3,
+        photos: "cucumber.jpg",
+        quantity: 5,
+      },
+      {
+        categoryId: 2,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Kale",
+        description: "You hate it but it's healthy.",
+        price: 5,
+        photos: "kale.jpg",
+        quantity: 5,
+      },
+      {
+        categoryId: 2,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Peppers",
+        description: 'A wide variety of colors to make plenty of dishes with.',
+        price: 4,
+        photos: "peppers.jpg",
+        quantity: 5,
+      },
+      {
+        categoryId: 2,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Lettuce",
+        description: 'A great base for tons of things, like salad.',
+        price: 1,
+        photos: "lettuce.jpg",
+        quantity: 5,
+      },
+      //Meat
+      {
+        categoryId: 3,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Ground Beef",
+        description: "Season it how you want, a great item to have around. *Price by lb",
+        photos: 'beef.jpg',
+        price: 6,
+        quantity: 5,
+      },
+      {
+        categoryId: 3,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Steak",
+        description: "Step up your dinner with this fantastic cut of meat. *Price by lb",
+        photos: 'steak.jpg',
+        price: 13,
+        quantity: 5,
+      },
+      {
+        categoryId: 3,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Chicken",
+        description: "Lean but full of flavour. *Price by lb",
+        photos: 'chicken.jpg',
+        price: 8,
+        quantity: 5,
+      },
+      {
+        categoryId: 3,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Tofu",
+        description: "Availible for the healthy family member. *Price by lb",
+        photos: 'tofu.jpg',
+        price: 10,
+        quantity: 5,
+      },
+      {
+        categoryId: 3,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Bacon",
+        description: "Get some man meat. *Price by package",
+        photos: 'bacon.jpg',
+        price: 9,
+        quantity: 5,
+      },
+      //snakcs
+      {
+        categoryId: 4,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Chips",
+        description: "Great for snacking",
+        photos: 'chips.jpg',
+        price: 3,
+        quantity: 5,
+      },
+      {
+        categoryId: 4,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Tortilla Chips",
+        description: "Get your sieste on, great for salsa.",
+        photos: 'tortillachips.jpg',
+        price: 3,
+        quantity: 5,
+      },
+      {
+        categoryId: 4,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Fruit Snacks",
+        description: "Easy to take on the go",
+        photos: 'fruitsnacks.jpg',
+        price: 4,
+        quantity: 5,
+      },
+      {
+        categoryId: 4,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Cereal",
+        description: "Corn flakes are good for the heart",
+        photos: 'cereal.jpg',
+        price: 5,
+        quantity: 5,
+      },
+      //fruit
+      {
+        categoryId: 5,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Apple",
+        description: "Plucked from the orchards down the road.",
+        price: 1,
+        photos: 'apple.jpg',
+        quantity: 5,
+      },
+      {
+        categoryId: 5,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Mango",
+        description: "Fresh from mexico.",
+        price: 1,
+        photos: 'mango.jpg',
+        quantity: 5,
+      },
+      {
+        categoryId: 5,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Banana",
+        description: "Certain to make your pet monkey jealous.",
+        price: 3,
+        photos: 'bananan.jpg',
+        quantity: 5,
+      },
+      {
+        categoryId: 5,
+        creatorId: 1,
+        isAvailible: true,
+        name: "Blueberries",
+        description: "A delectable and tasty item for any fridge.",
+        price: 1,
+        photos: 'blueberry.jpg',
+        quantity: 5,
+      },
 
-  ]
+    ]
 
-  const products = await Promise.all(
-    productsToCreate.map((product) => createProduct(product))
-  )
+    const products = await Promise.all(
+      productsToCreate.map((product) => createProduct(product))
+    )
 
-  console.log("Products Created: ", products)
-  console.log("Finished creating products.")
-} catch (e) {
-  console.error("Error creating products");
-  throw e;
-}
+    console.log("Products Created: ", products)
+    console.log("Finished creating products.")
+  } catch (e) {
+    console.error("Error creating products");
+    throw e;
+  }
 }
 
 async function filterByCategory() {
@@ -420,19 +420,19 @@ async function createInitialReviews() {
   console.log('Starting to create test reviews...');
   try {
     const reviewsToCreate = [
-      { 
+      {
         productId: 3,
         userId: 1,
         reviewRating: 4,
         description: "Kinda moldy"
       },
-      { 
+      {
         productId: 2,
         userId: 1,
         reviewRating: 1,
         description: "Horrendus"
       },
-      { 
+      {
         productId: 1,
         userId: 1,
         reviewRating: 5,
@@ -454,15 +454,15 @@ async function createInitialCarts() {
   console.log('Starting to create test cart...');
   try {
     const cartsToCreate = [
-      { 
+      {
         userId: 1,
         status: 2,
       },
-      { 
+      {
         userId: 2,
         status: 0,
-      }, 
-      { 
+      },
+      {
         userId: 3,
         status: 1,
       }
@@ -484,28 +484,28 @@ async function createInitialCartItems() {
   console.log('Starting to create test cart items...');
   try {
     const cartItemsToCreate = [
-      { 
+      {
         cartId: 1,
         productId: 2,
         quantity: 3,
         price: 40,
         isActive: true
       },
-      { 
+      {
         cartId: 2,
         productId: 4,
         quantity: 4,
         price: 20,
         isActive: true
       },
-      { 
+      {
         cartId: 3,
         productId: 1,
         quantity: 3,
         price: 25,
         isActive: true
-      },     
-      { 
+      },
+      {
         cartId: 3,
         productId: 2,
         quantity: 2,
@@ -530,7 +530,7 @@ async function createInitialOrders() {
   console.log('Starting to create test orders...');
   try {
     const ordersToCreate = [
-      { 
+      {
         userId: 2,
         status: 2,
       }
@@ -552,7 +552,7 @@ async function createInitialOrderItems() {
   console.log('Starting to create test order items...');
   try {
     const orderItemsToCreate = [
-      { 
+      {
         orderId: 1,
         productId: 2,
         quantity: 3

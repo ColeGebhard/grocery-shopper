@@ -51,22 +51,40 @@ const Categories = (props) => {
   const handleDelete = async (categoryId) => {
     try {
       const result = await deleteCategory(categoryId);
-
-      console.log(result)
-      window.alert('Succesfully deleted')
-      // window.location.reload()
-
-
-      return result
+      // console.log(result)
+      if (result === false) {
+        window.alert('Successfully deleted');
+        window.location.reload();
+      } else {
+        window.alert('Cannot delete category because it contains products')
+      }
     } catch (e) {
-      console.error(e);
-      // Handle error
+      if (e.message === 'Cannot delete category because it contains products') {
+        window.alert('Cannot delete category because it contains products');
+      } else {
+        console.error(e);
+        // Handle other errors
+      }
     }
   };
 
 
+
   return products ? (
     <>
+      <div className="banner-container">
+        <img className="banner" src={require(`../img/banner.jpg`)} alt="Placeholder" />
+        <div className="banner-summary">
+          <h1>Made For the Health of Our Community</h1>
+          <p>Discover our local, organic grocery store!
+             We offer fresh and healthy produce, meats, 
+             and pantry staples directly from local farms
+              and artisans. Shop with us for nourishing
+               foods that support local growers and promote
+                a sustainable community.
+          </p>
+        </div>
+      </div>
       {me.username === "Admin" ?
         <form id="productForm" onSubmit={catSubmit}>
           <input
@@ -84,7 +102,7 @@ const Categories = (props) => {
             return (
               <div key={category.id} className="categoryLinks">
                 <h2><button id="catergoryClick" onClick={() => { navigate(`category/${category.name}`) }}>{category.name}</button></h2>
-                {me.username === "Admin" ? 
+                {me.username === "Admin" ?
                   <button id="deleteCategoryButton" onClick={() => { handleDelete(category.id) }}>
                     Delete
                   </button> :
