@@ -42,7 +42,6 @@ body {
   /* transform: translate(-50%, -50%); */
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  border-radius: 5px;
   color: white;
 }
 
@@ -75,7 +74,6 @@ body {
   transform: translate(-50%, -50%); */
   background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
-  border-radius: 5px;
   color: white;
 }
 
@@ -216,7 +214,8 @@ body {
   font-size: 1.3em;
   margin: 0;
   color: #292828;
-  margin: 10px;
+  margin:0px;
+  padding-top: 3em;
 }
 
 .productCards {
@@ -358,7 +357,7 @@ body {
   justify-content: flex-start;
   margin-top: 20px;
   font-size: 1.2em;
-  /* margin-right: 20px; */
+  /* margin-top: 2; */
 }
 
 .productNav a {

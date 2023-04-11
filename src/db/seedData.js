@@ -51,7 +51,8 @@ async function createTables() {
 
     CREATE TABLE product_category (
       id SERIAL PRIMARY KEY,
-      name VARCHAR(255) UNIQUE NOT NULL
+      name VARCHAR(255) UNIQUE NOT NULL,
+      photos VARCHAR(255)
     );
 
     CREATE TABLE products (
@@ -158,11 +159,32 @@ async function createInitialProductCatagories() {
   console.log('Starting to create test catagory...');
   try {
     const catagoryToCreate = [
-      { id: 1, name: 'Dairy' },
-      { id: 2, name: 'Veggies' },
-      { id: 3, name: 'Meat' },
-      { id: 4, name: 'Snacks' },
-      { id: 5, name: 'Fruit' },
+      {
+        id: 1,
+        name: 'Dairy',
+        photos:'dairy.jpg'
+      },
+      {
+        id: 2,
+        name: 'Veggies',
+        photos:'veggies.jpg'
+      },
+      {
+        id: 3,
+        name: 'Meat',
+        photos:'meat.jpg'
+
+      },
+      {
+        id: 4,
+        name: 'Snacks',
+        photos:'dairy.jpg'
+      },
+      {
+        id: 5,
+        name: 'Fruit',
+        photos:'fruit.jpg'
+      },
     ]
 
     const catagory = await Promise.all(catagoryToCreate.map(createCategory))
