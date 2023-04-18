@@ -5,6 +5,10 @@ const app = require("./app")
 const PORT =  8000
 const server = http.createServer(app)
 
+fetch('https://acl-groceries.onrender.com/api/users/me', { mode: 'cors' })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
 
 server.listen(PORT, () => {
   console.log(

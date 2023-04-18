@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import ReactDOM from 'react-dom/client';
-import { useEffect, useState, useCallback } from 'react';
 import { Route, Routes, BrowserRouter, Link } from 'react-router-dom';
 import { isUser, createCart, getAllCarts, getCart } from './api/helpers';
 
@@ -389,6 +388,13 @@ const App = () => {
     )
   }
 }
+
+// main.js
+fetch('https://acl-groceries.onrender.com/api/users/me', { mode: 'cors' })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
