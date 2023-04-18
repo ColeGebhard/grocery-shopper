@@ -25,11 +25,11 @@ async function createCategory({ name, photos }) {
 
 
 async function getAllCategorys() {
-
   try {
     const { rows } = await client.query(`
-    SELECT *
-    FROM product_category;
+      SELECT *
+      FROM product_category
+      ORDER BY id ASC;
     `);
 
     return rows;
@@ -37,6 +37,7 @@ async function getAllCategorys() {
     throw Error('Cannot get categories')
   }
 }
+
 
 async function getCategoryByName(name) {
   try {
