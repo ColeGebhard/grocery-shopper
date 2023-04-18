@@ -389,13 +389,6 @@ const App = () => {
   }
 }
 
-// main.js
-fetch('https://acl-groceries.onrender.com/api/users/me', { mode: 'cors' })
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error(error));
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
