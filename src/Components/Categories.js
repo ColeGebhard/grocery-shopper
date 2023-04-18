@@ -6,11 +6,15 @@ const Categories = (props) => {
   const { categories, setCategories, products, setProducts, me } = props;
 
   const [name, setName] = useState("");
+  const [photos, setPhotos] = useState("");
+
 
   const navigate = useNavigate();
 
 
   console.log(me)
+
+  console.log(products)
 
   useEffect(() => {
     getAllCategories()
@@ -35,7 +39,7 @@ const Categories = (props) => {
   const catSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await createCategory(name);
+      const result = await createCategory({name, photos});
       console.log(result);
       setCategories([...categories, result]);
       setName("");
@@ -73,7 +77,7 @@ const Categories = (props) => {
   return products ? (
     <>
       <div className="banner-container">
-        <img className="banner" src={require(`../img/banner.jpg`)} alt="Placeholder" />
+        <img className="banner" src={require(`../img/food-groups.png`)} alt="Placeholder" />
         <div className="banner-summary">
           <h1>Made For the Health of Our Community</h1>
           <p>Discover our local, organic grocery store!

@@ -35,10 +35,12 @@ productsRouter.get('/', async (req, res, next) => {
     }
 })
 
-productsRouter.get('/products', async (req, res, next) => {
+productsRouter.get('/products/:categoryId', async (req, res, next) => {
+
+    const {categoryId} = req.body
 
     try {
-        const products = await getAllProductsWithCategoryId()
+        const products = await getAllProductsWithCategoryId(categoryId)
 
         res.send(
             products
@@ -49,11 +51,19 @@ productsRouter.get('/products', async (req, res, next) => {
 })
 
 productsRouter.post('/', async (req, res, next) => {
-    try {
-            
-            const { name } = req.body
+    const {
+        name, 
+        photos } = req.body
 
-            const category = await createCategory({ name })
+    try {
+            console.log('FIND', photos)
+
+
+            const category = await createCategory({ 
+                name, 
+                photos })
+
+            console.log('FIND', photos)
 
             res.send(category)
         

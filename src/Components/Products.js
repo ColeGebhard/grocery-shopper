@@ -18,7 +18,15 @@ const Products = (props) => {
 
     const navigate = useNavigate()
 
-
+    useEffect(() => {
+        getAllCategories()
+            .then((categories) => {
+                setCategories(categories);
+            })
+            .catch((e) => {
+                console.error('Failed to get category')
+            });
+    }, [setCategories])
 
     useEffect(() => {
         getAllProducts()
@@ -30,15 +38,6 @@ const Products = (props) => {
             });
     }, [setProducts])
 
-    useEffect(() => {
-        getAllCategories()
-            .then((categories) => {
-                setCategories(categories);
-            })
-            .catch((e) => {
-                console.error('Failed to get category')
-            });
-    }, [setCategories])
 
     console.log(categories)
 

@@ -161,7 +161,7 @@ async function createInitialProductCatagories() {
     const catagoryToCreate = [
       {
         id: 1,
-        name: 'Dairy',
+        name: 'Dairyyyy',
         photos:'dairy.jpg'
       },
       {

@@ -1,22 +1,28 @@
 const client = require("./client");
 
-async function createCategory({name}) {
-    try {
-      const {
-        rows: [category]
-      } = await client.query(`
-        INSERT INTO product_category (name)
-        VALUES ($1)
-        ON CONFLICT DO NOTHING
-        RETURNING *
-      `, [name]);
+async function createCategory({ name, photos }) {
+  try {
+    console.log('name:', name);
+    console.log('photos:', photos);
 
-      return category;
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
+    const { rows: [category] } = await client.query(
+      `
+      INSERT INTO product_category (name, photos)
+      VALUES ($1, $2)
+      RETURNING *
+      `,
+      [name, photos]
+    );
+
+    console.log('category:', category);
+
+    return category;
+  } catch (e) {
+    console.error(e);
+    throw e;
   }
+}
+
 
 async function getAllCategorys() {
 

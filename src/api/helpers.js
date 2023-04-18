@@ -96,26 +96,23 @@ export async function getAllCategories() {
   }
 }
 
-export async function createCategory(name) {
+export async function createCategory({name, photos}) {
   try {
-    const response = await fetch("https://acl-groceries.onrender.com/api/category", {
+    const response = await fetch("https://localhost:8000/api/category", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        name
+        name,
+        photos
       })
     });
     console.log(response)
-    // if (!response.ok) {
-    //   // Handle non-successful response
-    //   throw new Error('Failed to create category');
-    // }
 
     const data = await response.json();
 
-    console.log(data)
+    console.log('FIND', data)
 
 
     return data
