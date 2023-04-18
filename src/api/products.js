@@ -36,19 +36,16 @@ productsRouter.get('/', async (req, res, next) => {
 })
 
 productsRouter.get('/products/:categoryId', async (req, res, next) => {
-
-    const {categoryId} = req.body
+    const { categoryId } = req.params;
 
     try {
-        const products = await getAllProductsWithCategoryId(categoryId)
-
-        res.send(
-            products
-        )
+        const products = await getAllProductsWithCategoryId(categoryId);
+        res.send(products);
     } catch (error) {
         next(error);
     }
-})
+});
+
 
 productsRouter.post('/', async (req, res, next) => {
     const {

@@ -117,13 +117,13 @@ async function getProductById(id) {
 //     }
 // }
 
-async function getAllProductsWithCategoryId() {
+async function getAllProductsWithCategoryId(id) {
   try {
       const { rows } = await client.query(`
       SELECT products.*,
       product_category.name AS "categoryName"
       FROM product_category
-      JOIN products ON products."categoryId" = product_category.id
+      JOIN products ON products."categoryId" = product_category.${id}
       `)
 
       console.log(rows)
