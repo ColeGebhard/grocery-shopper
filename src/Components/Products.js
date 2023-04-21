@@ -104,26 +104,26 @@ const Products = (props) => {
 
     console.log(me)
 
-    const { categoryName } = useParams();
+    const {categoryName} = useParams();
+    console.log(categoryName)
+
 
     console.log(products)
 
-    const filteredCat = async (categoryName) => {
-        try {
-            const category = await getSingleCategory(categoryName);
-            console.log(categoryName)
+    // const filteredCat = async (categoryName) => {
+    //     try {
+    //         const category = await getSingleCategory(categoryName);
+    //         console.log(categoryName)
 
-            return category
-        } catch(error) {
-            console.error(error)
-        }
-    }
+    //         return category
+    //     } catch(error) {
+    //         console.error(error)
+    //     }
+    // }
+
     
-    console.log(filteredCat(categoryName))
-
-    // const filteredProducts = Array.isArray(products) && products.length > 0 ? products.filter(product => product.categoryName === categoryName) : [];
-    const filteredProducts = products
-    console.log(categoryName)
+    const filteredProducts = Array.isArray(products) && products.length > 0 ? products.filter(product => product.categoryId == categoryName) : [];
+    // const filteredProducts = products
     console.log(filteredProducts)
     return (
         <>
@@ -174,7 +174,7 @@ const Products = (props) => {
                 </form>
                 : null}
 
-            <h1 className="productHeader">{categoryName}</h1>
+            {/* <h1 className="productHeader">{categoryName}</h1> */}
 
             <div className="productNav">
                 <a href="/">All Products |</a>

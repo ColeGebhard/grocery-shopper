@@ -34,12 +34,12 @@ const Categories = (props) => {
         console.error('Failed to get products')
       });
   }, [setProducts])
-  
+
 
   const catSubmit = async (e) => {
     e.preventDefault();
     try {
-      const result = await createCategory({name, photos});
+      const result = await createCategory({ name, photos });
       console.log(result);
       setCategories([...categories, result]);
       setName("");
@@ -83,11 +83,11 @@ const Categories = (props) => {
         <div className="banner-summary">
           <h1>Made For the Health of Our Community</h1>
           <p>Discover our local, organic grocery store!
-             We offer fresh and healthy produce, meats, 
-             and pantry staples directly from local farms
-              and artisans. Shop with us for nourishing
-               foods that support local growers and promote
-                a sustainable community.
+            We offer fresh and healthy produce, meats,
+            and pantry staples directly from local farms
+            and artisans. Shop with us for nourishing
+            foods that support local growers and promote
+            a sustainable community.
           </p>
         </div>
       </div>
@@ -107,7 +107,10 @@ const Categories = (props) => {
           {categories.map((category) => {
             return (
               <div key={category.id} className="categoryLinks">
-                <h2><button id="catergoryClick" onClick={() => { navigate(`category/${category.name}`) }}>{category.name}</button></h2>
+                <h2>
+                  <button id="catergoryClick" onClick={() => { navigate(`category/${category.id}`) }}>{category.name}</button>
+                </h2>
+                <img className="categoryImg"src={require(`../img/${category.photos}`)} alt={category.name} />
                 {me.username === "Admin" ?
                   <button id="deleteCategoryButton" onClick={() => { handleDelete(category.id) }}>
                     Delete
@@ -115,6 +118,7 @@ const Categories = (props) => {
                   null
                 }
               </div>
+
             )
           })}
         </span>

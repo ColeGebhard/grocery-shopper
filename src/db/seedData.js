@@ -178,7 +178,7 @@ async function createInitialProductCatagories() {
       {
         id: 4,
         name: 'Snacks',
-        photos:'dairy.jpg'
+        photos:'snacks.jpg'
       },
       {
         id: 5,
