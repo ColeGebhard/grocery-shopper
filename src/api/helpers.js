@@ -130,13 +130,14 @@ export async function getAllProducts() {
       },
     });
     const data = await response.json();
-
-
-    return data
+    console.log(data)
+    return data;
   } catch (error) {
-    throw Error(error);
+    console.error(error);
+    throw new Error('Cannot get products');
   }
 }
+
 
 export async function getSingleProduct(id) {
   try {

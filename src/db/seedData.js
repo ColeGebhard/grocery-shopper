@@ -161,7 +161,7 @@ async function createInitialProductCatagories() {
     const catagoryToCreate = [
       {
         id: 1,
-        name: 'Dairyyyy',
+        name: 'Dairy',
         photos:'dairy.jpg'
       },
       {
@@ -424,7 +424,7 @@ async function createInitialProducts() {
       productsToCreate.map((product) => createProduct(product))
     )
 
-    console.log("Products Created: ", products)
+    // console.log("Products Created: ", products)
     console.log("Finished creating products.")
   } catch (e) {
     console.error("Error creating products");
@@ -432,11 +432,11 @@ async function createInitialProducts() {
   }
 }
 
-async function filterByCategory() {
-  const filteredProduct = await getAllProductsWithCategoryId(1)
+// async function filterByCategory() {
+//   const filteredProduct = await getAllProductsWithCategoryId(1)
 
-  console.log(filteredProduct)
-}
+//   console.log('FIND',filteredProduct)
+// }
 
 async function createInitialReviews() {
   console.log('Starting to create test reviews...');
@@ -464,7 +464,7 @@ async function createInitialReviews() {
 
     const review = await Promise.all(reviewsToCreate.map(createReview))
 
-    console.log('Reviews created:', review);
+    // console.log('Reviews created:', review);
     console.log('Finished creating reviews!');
   } catch (e) {
     console.error("Error creating reviews");
@@ -600,7 +600,7 @@ async function rebuildDB() {
     await createInitialUsers();
     await createInitialProductCatagories();
     await createInitialProducts();
-    await filterByCategory();
+    // await filterByCategory();
     // await createInitialReviews();
     // await createInitialCarts();
     // await createInitialCartItems();

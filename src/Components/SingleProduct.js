@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { redirect, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getSingleProduct, createCartItem, getCart } from "../api/helpers";
+import { getSingleProduct, createCartItem, getCart, getAllProducts } from "../api/helpers";
 
 
 const SingleProduct = (props) => {
@@ -19,17 +19,31 @@ const SingleProduct = (props) => {
 
     const { prodId } = useParams()
 
+    console.log(prodId)
 
+    console.log(products)
 
     useEffect(() => {
-        getSingleProduct(prodId)
-            .then((products) => {
-                setProducts(products);
-            })
-            .catch((e) => {
-                console.error('Failed to get products')
-            });
-    }, [setProducts, prodId])
+        getAllProducts()
+          .then((products) => {
+            console.log(products); // log the received products
+            setProducts(products);
+          })
+          .catch((e) => {
+            console.error('Failed to get products')
+          });
+      }, [setProducts])
+
+
+    // useEffect(() => {
+    //     getSingleProduct(prodId)
+    //         .then((products) => {
+    //             setProducts(products);
+    //         })
+    //         .catch((e) => {
+    //             console.error('Failed to get products')
+    //         });
+    // }, [setProducts, prodId])
 
     const handleAddToCart = async () => {
         try {
@@ -56,9 +70,16 @@ const SingleProduct = (props) => {
 
     console.log(currentCart)
     console.log(products)
+    const filteredProduct = Array.isArray(products) && products.length > 0 ? products.filter(product => product.id == prodId) : [];
+
+    console.log(filteredProduct[0])
+
+    const filtProduct = filteredProduct[0]
+
+    console.log(filtProduct)
 
     return (
-        products ?
+        filtProduct ?
             <div className="productView">
                 <div className="productNav">
                     <a id=""href="/">All Products |</a>
@@ -66,18 +87,21 @@ const SingleProduct = (props) => {
                     {/* <a href={'/category/' + products.categoryName}>| {products.categoryName}</a> */}
                 </div>
                 <div className="productImage">
-                    {products.photos &&
+                    {filtProduct.photos &&
                         <img 
-                        src={products.photos.startsWith('http') || products.photos.startsWith('https') ? products.photos : require(`../img/${products.photos}`)}
-                        alt={products.name} />
+                        src={
+                            filtProduct.photos.startsWith('http') || filtProduct.photos.startsWith('https')
+                              ? filtProduct.photos
+                              : require(`../img/${filtProduct.photos}`)
+                          }                        alt={filtProduct.name} />
                     }                </div>
                 <div className="productDetails">
-                    <h2>{products.name}</h2>
-                    <p className="productDescription">{products.description}</p>
+                    <h2>{filtProduct.name}</h2>
+                    <p className="productDescription">{filtProduct.description}</p>
                     <div className="productInfo">
                         <button
                             className="quantityButton"
-                            disabled={products.quantity <= 1}
+                            disabled={filtProduct.quantity <= 1}
                             onClick={() => handleQuantityChange(-1)}
                         >
                             -
@@ -85,13 +109,13 @@ const SingleProduct = (props) => {
                         <span className="productQuantity">{quantity}</span>
                         <button
                             className="quantityButton"
-                            disabled={products.quantity <= 0}
+                            disabled={filtProduct.quantity <= 0}
                             onClick={() => handleQuantityChange(1)}
                         >
                             +
                         </button>
-                        {products.price &&
-                            <p>${(products.price * quantity).toFixed(2)}</p>
+                        {filtProduct.price &&
+                            <p>${(filtProduct.price * quantity).toFixed(2)}</p>
                         }{me ?
                         <button className="productAddToCart" onClick={handleAddToCart}>Add to Cart</button>
                     : <button className="productAddToCart" onClick={() => {navigate('/login')}}>Sign in to add</button>

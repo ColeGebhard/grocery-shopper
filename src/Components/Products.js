@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { getAllProducts, createProducts, getAllCategories, deleteProduct } from "../api/helpers";
+import { getAllProducts, createProducts, getAllCategories, deleteProduct, getSingleCategory } from "../api/helpers";
 
 const Products = (props) => {
     const { products, setProducts, categories, setCategories, me } = props;
@@ -108,9 +108,22 @@ const Products = (props) => {
 
     console.log(products)
 
-    const filteredProducts = Array.isArray(products) && products.length > 0 ? products.filter(product => product.categoryName === categoryName) : [];
+    const filteredCat = async (categoryName) => {
+        try {
+            const category = await getSingleCategory(categoryName);
+            console.log(categoryName)
 
-    console.log(products)
+            return category
+        } catch(error) {
+            console.error(error)
+        }
+    }
+    
+    console.log(filteredCat(categoryName))
+
+    // const filteredProducts = Array.isArray(products) && products.length > 0 ? products.filter(product => product.categoryName === categoryName) : [];
+    const filteredProducts = products
+    console.log(categoryName)
     console.log(filteredProducts)
     return (
         <>

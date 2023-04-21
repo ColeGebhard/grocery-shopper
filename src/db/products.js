@@ -66,18 +66,22 @@ async function createReview({ productId, userId, reviewRating, description}) {
 
 
 async function getAllProducts() {
-
   try {
     const { rows } = await client.query(`
-    SELECT *
-    FROM products;
+      SELECT *
+      FROM products;
     `);
+
+    console.log('PRODUCTS:', rows);
+
 
     return rows;
   } catch (error) {
-    throw Error('Cannot get products')
+    console.error(error);
+    throw new Error('Cannot get products');
   }
 }
+
 
 async function getProductById(id) {
 

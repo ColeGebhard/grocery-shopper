@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 #header {
@@ -13,8 +14,8 @@ body {
   box-sizing: border-box;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  position: fixed;
-  z-index:1;
+  /* position: fixed;
+  z-index:1; */
 }
 
 #title {
@@ -101,8 +102,8 @@ body {
     box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    position: fixed;
-    z-index:1;
+    /* position: fixed;
+    z-index:1; */
   }
   
   #title {
@@ -192,9 +193,9 @@ body {
     box-sizing: border-box;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    position: fixed;
+    /* position: fixed;
     z-index:1;
-    top: 0;
+    top: 0; */
   }
   
   

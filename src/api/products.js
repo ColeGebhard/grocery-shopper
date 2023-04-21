@@ -1,4 +1,5 @@
 const express = require('express');
+const { useParams } = require('react-router');
 const productsRouter = express.Router();
 
 const {
@@ -9,7 +10,8 @@ const {
     getProductById,
     deleteProduct,
     getCategoryByName,
-    deleteCategory
+    deleteCategory,
+    getAllProducts
 } = require('../db')
 
 productsRouter.use((req, res, next) => {
@@ -35,11 +37,35 @@ productsRouter.get('/', async (req, res, next) => {
     }
 })
 
+productsRouter.get('/:categoryName', async (req, res, next) => {
+        const { categoryName } = req.params
+
+        console.log(categoryName)
+
+        try {
+            const category = await getCategoryByName(categoryName)
+
+            res.send(category)
+        } catch(error) {
+            next(error);
+        }
+})
+
 productsRouter.get('/products/:categoryId', async (req, res, next) => {
     const { categoryId } = req.params;
 
     try {
         const products = await getAllProductsWithCategoryId(categoryId);
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+});
+
+productsRouter.get('/products', async (req, res, next) => {
+    try {
+        const products = await getAllProducts();
+        console.log(products)
         res.send(products);
     } catch (error) {
         next(error);

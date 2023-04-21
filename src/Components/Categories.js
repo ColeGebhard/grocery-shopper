@@ -14,8 +14,6 @@ const Categories = (props) => {
 
   console.log(me)
 
-  console.log(products)
-
   useEffect(() => {
     getAllCategories()
       .then((categories) => {
@@ -29,12 +27,14 @@ const Categories = (props) => {
   useEffect(() => {
     getAllProducts()
       .then((products) => {
+        console.log(products); // log the received products
         setProducts(products);
       })
       .catch((e) => {
         console.error('Failed to get products')
       });
   }, [setProducts])
+  
 
   const catSubmit = async (e) => {
     e.preventDefault();
@@ -51,6 +51,8 @@ const Categories = (props) => {
   };
 
   console.log(categories)
+  console.log(products)
+
 
   const handleDelete = async (categoryId) => {
     try {
