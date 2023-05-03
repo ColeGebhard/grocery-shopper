@@ -110,7 +110,9 @@ const Categories = (props) => {
                 <h2>
                   <button id="catergoryClick" onClick={() => { navigate(`category/${category.id}`) }}>{category.name}</button>
                 </h2>
-                <img className="categoryImg"src={require(`../img/${category.photos}`)} alt={category.name} />
+                {category.photos ? 
+                  <img className="categoryImg"src={require(`../img/${category.photos}`)} alt={category.name} />
+                : null}
                 {me.username === "Admin" ?
                   <button id="deleteCategoryButton" onClick={() => { handleDelete(category.id) }}>
                     Delete

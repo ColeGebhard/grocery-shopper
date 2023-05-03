@@ -424,7 +424,7 @@ async function createInitialProducts() {
       productsToCreate.map((product) => createProduct(product))
     )
 
-    // console.log("Products Created: ", products)
+    console.log("Products Created: ", products)
     console.log("Finished creating products.")
   } catch (e) {
     console.error("Error creating products");

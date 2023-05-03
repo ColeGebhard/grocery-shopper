@@ -46,27 +46,40 @@ const SingleProduct = (props) => {
     // }, [setProducts, prodId])
 
     const handleAddToCart = async () => {
+
+        console.log(filtProduct)
         try {
             const cartId = localStorage.getItem('cartId');
             if (!cartId) {
                 console.error('Error: No cart found');
                 return;
             }
-
+    
+            console.log('Cart ID:', cartId);
+            console.log('Product ID:', filtProduct.id);
+            console.log('Quantity:', quantity || 1);
+    
             // Add the item to the cart
-            const cartItem = await createCartItem({ cartId, productId: products.id, quantity: quantity || 1 });
-            if(cartItem.error){
-                alert(`${products.name} already in cart`)
+            const cartItem = await createCartItem({ cartId, productId: filtProduct.id, quantity: quantity || 1 });
+            console.log('Cart Item:', cartItem);
+    
+            if (cartItem.error) {
+                alert(`${filtProduct.name} already in cart`);
             }
+    
             // Update the cart in state
-            if(!cartItem.error){const updatedCart = await getCart(cartId);
-            setCurrentCart(updatedCart);
-
-            alert(`${quantity} ${products.name} has been added to cart`)}
+            if (!cartItem.error) {
+                const updatedCart = await getCart(cartId);
+                console.log('Updated Cart:', updatedCart);
+                setCurrentCart(updatedCart);
+    
+                alert(`${quantity} ${filtProduct.name} has been added to cart`);
+            }
         } catch (error) {
             console.error(error);
         }
     };
+    
 
     console.log(currentCart)
     console.log(products)
