@@ -37,6 +37,16 @@ productsRouter.get('/', async (req, res, next) => {
     }
 })
 
+productsRouter.get('/products', async (req, res, next) => {
+    try {
+        const products = await getAllProducts();
+        console.log(products)
+        res.send(products);
+    } catch (error) {
+        next(error);
+    }
+});
+
 productsRouter.get('/:categoryName', async (req, res, next) => {
         const { categoryName } = req.params
 
@@ -56,16 +66,6 @@ productsRouter.get('/products/:categoryId', async (req, res, next) => {
 
     try {
         const products = await getAllProductsWithCategoryId(categoryId);
-        res.send(products);
-    } catch (error) {
-        next(error);
-    }
-});
-
-productsRouter.get('/products', async (req, res, next) => {
-    try {
-        const products = await getAllProducts();
-        console.log(products)
         res.send(products);
     } catch (error) {
         next(error);

@@ -69,7 +69,7 @@ async function getAllProducts() {
   try {
     const { rows } = await client.query(`
       SELECT *
-      FROM products;
+      FROM products
     `);
 
     console.log('PRODUCTS:', rows);

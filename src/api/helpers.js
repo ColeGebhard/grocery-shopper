@@ -79,22 +79,22 @@ export async function fetchLoginResults(username, password) {
   }
 }
 
-export async function getAllCategories() {
-  try {
-    const response = await fetch("/api/category", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-    });
-    const data = await response.json();
+// export async function getAllCategories() {
+//   try {
+//     const response = await fetch("/api/category", {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//     });
+//     const data = await response.json();
 
 
-    return data
-  } catch (error) {
-    throw Error(error);
-  }
-}
+//     return data
+//   } catch (error) {
+//     throw Error(error);
+//   }
+// }
 
 export async function createCategory({name, photos}) {
   try {
@@ -135,6 +135,23 @@ export async function getAllProducts() {
   } catch (error) {
     console.error(error);
     throw new Error('Cannot get products');
+  }
+}
+
+export async function getAllCategories() {
+  try {
+    const response = await fetch("/api/category", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    });
+    const data = await response.json();
+
+
+    return data
+  } catch (error) {
+    throw Error(error);
   }
 }
 

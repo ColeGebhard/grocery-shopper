@@ -29,7 +29,6 @@ async function getAllCategorys() {
     const { rows } = await client.query(`
       SELECT *
       FROM product_category
-      ORDER BY id ASC;
     `);
 
     return rows;
