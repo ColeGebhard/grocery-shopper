@@ -8,6 +8,254 @@ const Categories = (props) => {
   const [name, setName] = useState("");
   const [photos, setPhotos] = useState("");
 
+  const productsToCreate = [
+    //dairy
+    {
+      categoryId: 1,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Milk",
+      description: "Locally sourced milk from fantastic Scottish Highland Cows",
+      photos: 'milk.jpg',
+      price: 3,
+      quantity: 5,
+    },
+    {
+      categoryId: 1,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Cheese",
+      description: "Locally made and churned by my grandmother",
+      photos: "cheese.jpg",
+      price: 2,
+      quantity: 5,
+    },
+    {
+      categoryId: 1,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Cream",
+      description: "An amazing addition to a fresh cup of coffee",
+      photos: "cream.jpg",
+      price: 4,
+      quantity: 5,
+    },
+    //veggies
+    {
+      categoryId: 2,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Broccolli",
+      description: 'Earthy and green.',
+      price: 2,
+      photos: "broccolli.jpg",
+      quantity: 5,
+    },
+    {
+      categoryId: 2,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Cucumber",
+      description: 'Fantastic for a summer greek salad.',
+      price: 3,
+      photos: "cucumber.jpg",
+      quantity: 5,
+    },
+    {
+      categoryId: 2,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Kale",
+      description: "You hate it but it's healthy.",
+      price: 5,
+      photos: "kale.jpg",
+      quantity: 5,
+    },
+    {
+      categoryId: 2,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Peppers",
+      description: 'A wide variety of colors to make plenty of dishes with.',
+      price: 4,
+      photos: "peppers.jpg",
+      quantity: 5,
+    },
+    {
+      categoryId: 2,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Lettuce",
+      description: 'A great base for tons of things, like salad.',
+      price: 1,
+      photos: "lettuce.jpg",
+      quantity: 5,
+    },
+    //Meat
+    {
+      categoryId: 3,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Ground Beef",
+      description: "Season it how you want, a great item to have around. *Price by lb",
+      photos: 'beef.jpg',
+      price: 6,
+      quantity: 5,
+    },
+    {
+      categoryId: 3,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Steak",
+      description: "Step up your dinner with this fantastic cut of meat. *Price by lb",
+      photos: 'steak.jpg',
+      price: 13,
+      quantity: 5,
+    },
+    {
+      categoryId: 3,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Chicken",
+      description: "Lean but full of flavour. *Price by lb",
+      photos: 'chicken.jpg',
+      price: 8,
+      quantity: 5,
+    },
+    {
+      categoryId: 3,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Tofu",
+      description: "Availible for the healthy family member. *Price by lb",
+      photos: 'tofu.jpg',
+      price: 10,
+      quantity: 5,
+    },
+    {
+      categoryId: 3,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Bacon",
+      description: "Get some man meat. *Price by package",
+      photos: 'bacon.jpg',
+      price: 9,
+      quantity: 5,
+    },
+    //snakcs
+    {
+      categoryId: 4,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Chips",
+      description: "Great for snacking",
+      photos: 'chips.jpg',
+      price: 3,
+      quantity: 5,
+    },
+    {
+      categoryId: 4,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Tortilla Chips",
+      description: "Get your sieste on, great for salsa.",
+      photos: 'tortillachips.jpg',
+      price: 3,
+      quantity: 5,
+    },
+    {
+      categoryId: 4,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Fruit Snacks",
+      description: "Easy to take on the go",
+      photos: 'fruitsnacks.jpg',
+      price: 4,
+      quantity: 5,
+    },
+    {
+      categoryId: 4,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Cereal",
+      description: "Corn flakes are good for the heart",
+      photos: 'cereal.jpg',
+      price: 5,
+      quantity: 5,
+    },
+    //fruit
+    {
+      categoryId: 5,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Apple",
+      description: "Plucked from the orchards down the road.",
+      price: 1,
+      photos: 'apple.jpg',
+      quantity: 5,
+    },
+    {
+      categoryId: 5,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Mango",
+      description: "Fresh from mexico.",
+      price: 1,
+      photos: 'mango.jpg',
+      quantity: 5,
+    },
+    {
+      categoryId: 5,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Banana",
+      description: "Certain to make your pet monkey jealous.",
+      price: 3,
+      photos: 'bananan.jpg',
+      quantity: 5,
+    },
+    {
+      categoryId: 5,
+      creatorId: 1,
+      isAvailible: true,
+      name: "Blueberries",
+      description: "A delectable and tasty item for any fridge.",
+      price: 1,
+      photos: 'blueberry.jpg',
+      quantity: 5,
+    },
+
+  ]
+
+  const catagoryToCreate = [
+    {
+      id: 1,
+      name: 'Dairy',
+      photos:'dairy.jpg'
+    },
+    {
+      id: 2,
+      name: 'Veggies',
+      photos:'veggies.jpg'
+    },
+    {
+      id: 3,
+      name: 'Meat',
+      photos:'meat.jpg'
+
+    },
+    {
+      id: 4,
+      name: 'Snacks',
+      photos:'snacks.jpg'
+    },
+    {
+      id: 5,
+      name: 'Fruit',
+      photos:'fruit.jpg'
+    },
+  ]
+
 
   const navigate = useNavigate();
 
@@ -104,7 +352,7 @@ const Categories = (props) => {
         null} */}
       <div className="mainProductPage">
         <span className="categoryCards">
-          {categories.map((category) => {
+          {catagoryToCreate.map((category) => {
             return (
               <div key={category.id} className="categoryLinks">
                 <h2>
@@ -127,8 +375,8 @@ const Categories = (props) => {
         <span className="productHeader">
           <h1 className="productHeader">All Products</h1>
           <span className="productCards">
-            {Array.isArray(products) && products.length > 0 ?
-              products.map((product) => {
+            {Array.isArray(productsToCreate) && productsToCreate.length > 0 ?
+              productsToCreate.map((product) => {
                 return (
                   <button key={product.id}
                     onClick={() => { navigate(`category/product/${product.id}`) }}
