@@ -91,7 +91,7 @@ const Categories = (props) => {
           </p>
         </div>
       </div>
-      {me.username === "Admin" ?
+      {/* {me.username === "Admin" ?
         <form id="productForm" onSubmit={catSubmit}>
           <input
             type="text"
@@ -101,7 +101,7 @@ const Categories = (props) => {
           />
           <button type="submit">Make Category</button>
         </form> :
-        null}
+        null} */}
       <div className="mainProductPage">
         <span className="categoryCards">
           {categories.map((category) => {
@@ -113,12 +113,12 @@ const Categories = (props) => {
                 {category.photos ? 
                   <img className="categoryImg"src={require(`../img/${category.photos}`)} alt={category.name} />
                 : null}
-                {me.username === "Admin" ?
+                {/* {me.username === "Admin" ?
                   <button id="deleteCategoryButton" onClick={() => { handleDelete(category.id) }}>
                     Delete
                   </button> :
                   null
-                }
+                } */}
               </div>
 
             )
