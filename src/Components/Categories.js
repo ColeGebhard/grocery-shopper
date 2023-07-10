@@ -11,6 +11,7 @@ const Categories = (props) => {
   const productsToCreate = [
     //dairy
     {
+      id: 1,
       categoryId: 1,
       creatorId: 1,
       isAvailible: true,
@@ -21,6 +22,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 2,
       categoryId: 1,
       creatorId: 1,
       isAvailible: true,
@@ -31,6 +33,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 3,
       categoryId: 1,
       creatorId: 1,
       isAvailible: true,
@@ -42,6 +45,7 @@ const Categories = (props) => {
     },
     //veggies
     {
+      id: 4,
       categoryId: 2,
       creatorId: 1,
       isAvailible: true,
@@ -52,6 +56,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 5,
       categoryId: 2,
       creatorId: 1,
       isAvailible: true,
@@ -62,6 +67,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 6,
       categoryId: 2,
       creatorId: 1,
       isAvailible: true,
@@ -72,6 +78,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 7,
       categoryId: 2,
       creatorId: 1,
       isAvailible: true,
@@ -82,6 +89,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 8,
       categoryId: 2,
       creatorId: 1,
       isAvailible: true,
@@ -93,6 +101,7 @@ const Categories = (props) => {
     },
     //Meat
     {
+      id: 9,
       categoryId: 3,
       creatorId: 1,
       isAvailible: true,
@@ -103,6 +112,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 10,
       categoryId: 3,
       creatorId: 1,
       isAvailible: true,
@@ -113,6 +123,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 11,
       categoryId: 3,
       creatorId: 1,
       isAvailible: true,
@@ -123,6 +134,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 12,
       categoryId: 3,
       creatorId: 1,
       isAvailible: true,
@@ -133,6 +145,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 13,
       categoryId: 3,
       creatorId: 1,
       isAvailible: true,
@@ -142,8 +155,9 @@ const Categories = (props) => {
       price: 9,
       quantity: 5,
     },
-    //snakcs
+    //snacks
     {
+      id: 14,
       categoryId: 4,
       creatorId: 1,
       isAvailible: true,
@@ -154,16 +168,18 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 15,
       categoryId: 4,
       creatorId: 1,
       isAvailible: true,
       name: "Tortilla Chips",
-      description: "Get your sieste on, great for salsa.",
+      description: "Get your siesta on, great for salsa.",
       photos: 'tortillachips.jpg',
       price: 3,
       quantity: 5,
     },
     {
+      id: 16,
       categoryId: 4,
       creatorId: 1,
       isAvailible: true,
@@ -174,6 +190,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 17,
       categoryId: 4,
       creatorId: 1,
       isAvailible: true,
@@ -185,6 +202,7 @@ const Categories = (props) => {
     },
     //fruit
     {
+      id: 18,
       categoryId: 5,
       creatorId: 1,
       isAvailible: true,
@@ -195,16 +213,18 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 19,
       categoryId: 5,
       creatorId: 1,
       isAvailible: true,
       name: "Mango",
-      description: "Fresh from mexico.",
+      description: "Fresh from Mexico.",
       price: 1,
       photos: 'mango.jpg',
       quantity: 5,
     },
     {
+      id: 20,
       categoryId: 5,
       creatorId: 1,
       isAvailible: true,
@@ -215,6 +235,7 @@ const Categories = (props) => {
       quantity: 5,
     },
     {
+      id: 21,
       categoryId: 5,
       creatorId: 1,
       isAvailible: true,
@@ -224,9 +245,10 @@ const Categories = (props) => {
       photos: 'blueberry.jpg',
       quantity: 5,
     },
-
-  ]
-
+  ];
+  
+  // You can now use the `productsToCreate` array in your code as needed.
+  
   const catagoryToCreate = [
     {
       id: 1,
@@ -299,7 +321,7 @@ const Categories = (props) => {
   };
 
   console.log(categories)
-  console.log(products)
+  console.log(productsToCreate)
 
 
   const handleDelete = async (categoryId) => {
